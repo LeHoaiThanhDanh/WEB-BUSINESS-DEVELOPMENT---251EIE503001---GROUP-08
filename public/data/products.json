@@ -1,0 +1,467 @@
+[
+  {
+    "id": 1,
+    "name": "Trà Ô Long Mộc Hương",
+    "image": "/assets/images/products/tra-o-long-moc-huong.png",
+    "price": 19000,
+    "oldPrice": 22000,
+    "rating":3,
+    "tag": "Giảm 3K",
+    "category":"Loại Thuần Trà"
+  },
+  {
+    "id": 2,
+    "name": "Hồng Trà Bí Đao",
+    "image": "/assets/images/products/hong-tra-bi-dao.jpg",
+    "price": 19000,
+    "oldPrice": null,
+    "tag": "Giảm 3K",
+    "category":"Loại Thuần Trà"
+  },
+  {
+    "id": 3,
+    "name": "Trà Xanh Bí Đao",
+    "image": "/assets/images/products/tra-xanh-bi-dao.jpg",
+    "price": 19000,
+    "oldPrice": null,
+    "category":"Loại Thuần Trà",
+    "tag": "Giảm 3K"
+  },
+  {
+    "id": 4,
+    "name": "Trà Xanh Hoa Nhài",
+    "image": "/assets/images/products/tra-xanh-hoa-nhai.jpg",
+    "price": 19000,
+    "oldPrice": null,
+    "category":"Loại Thuần Trà",
+    "tag": "Giảm 3K"
+  },
+  {
+    "id": 5,
+    "name": "Hồng Trà Vải Thiều",
+    "image": "/assets/images/products/hong-tra-vai-thieu.jpg",
+    "price": 19000,
+    "oldPrice": null,
+    "category":"Loại Thuần Trà",
+    "tag": "Giảm 3K"
+  },
+  {
+    "id": 6,
+    "name": "Trà Bí Đao Ngô Gia",
+    "image": "/assets/images/products/tra-bi-dao-ngo-gia.jpg",
+    "price": 19000,
+    "oldPrice": null,
+    "category":"Loại Thuần Trà",
+    "tag": "Giảm 3K"
+  },
+  {
+    "id": 7,
+    "name": "Hồng Trà Đài Loan",
+    "image": "/assets/images/products/hong-tra-dai-loan.jpg",
+    "price": 16000,
+    "oldPrice": null,
+    "category":"Loại Thuần Trà",
+    "tag": "Giảm 3K"
+  },
+  {
+    "id": 8,
+    "name": "Trà Sữa Uyên Ương",
+    "image": "/assets/images/products/tra-sua-uyen-uong.png",
+    "price": 21000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 9,
+    "name": "Trà Sữa Ô Long",
+    "image": "/assets/images/products/tra-sua-o-long.png",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 10,
+    "name": "Trà Sữa Socola",
+    "image": "/assets/images/products/tra-sua-socola.png",
+    "price": 28000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Best Seller",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 11,
+    "name": "Trà Sữa Trân Châu Đường Đen",
+    "image": "/assets/images/products/tra-sua-tran-chau-duong-den.jpg",
+    "price": 26000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Hot",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 12,
+    "name": "Trà Xanh Sữa",
+    "image": "/assets/images/products/tra-xanh-sua.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 13,
+    "name": "Trà Sữa Vải Thiều",
+    "image": "/assets/images/products/tra-sua-vai-thieu.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 14,
+    "name": "Trà Sữa Bí Đao",
+    "image": "/assets/images/products/tra-sua-bi-dao.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 15,
+    "name": "Trà Sữa Đài Loan",
+    "image": "/assets/images/products/tra-sua-dai-loan.jpg",
+    "price": 21000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Sữa"
+  },
+  {
+    "id": 16,
+    "name": "Sữa Tươi Khoai Môn Nghiền",
+    "image": "/assets/images/products/sua-tuoi-khoai-mon-nghien.png",
+    "price": 41000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Mới",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 17,
+    "name": "Ô Long Latte",
+    "image": "/assets/images/products/o-long-latte.png",
+    "price": 31000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 18,
+    "name": "Sữa Tươi Trân Châu Đường Đen",
+    "image": "/assets/images/products/sua-tuoi-tran-chau-duong-den.png",
+    "price": 44000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Hot",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 19,
+    "name": "Trân Châu Đường Đen Latte",
+    "image": "/assets/images/products/tran-chau-duong-den-latte.jpg",
+    "price": 33000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 20,
+    "name": "Trà Xanh Latte",
+    "image": "/assets/images/products/tra-xanh-latte.jpg",
+    "price": 31000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 21,
+    "name": "Hồng Trà Latte Vải Thiều",
+    "image": "/assets/images/products/hong-tra-latte-vai-thieu.jpg",
+    "price": 31000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 22,
+    "name": "Bí Đao Latte",
+    "image": "/assets/images/products/bi-dao-latte.jpg",
+    "price": 31000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+  {
+    "id": 23,
+    "name": "Hồng Trà Latte Đài Loan",
+    "image": "/assets/images/products/hong-tra-latte-dai-loan.jpg",
+    "price": 28000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Latte"
+  },
+    {
+    "id": 24,
+    "name": "Ô Long Nho",
+    "image": "/assets/images/products/o-long-nho.png",
+    "price": 30000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "Mới",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 25,
+    "name": "Trà Ô Long Đào",
+    "image": "/assets/images/products/tra-o-long-dao.png",
+    "price": 29000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 26,
+    "name": "Màu Hồng Lãng Mạn",
+    "image": "/assets/images/products/mau-hong-lang-man.png",
+    "price": 29000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 27,
+    "name": "Trà Xanh Đào Ngô Gia",
+    "image": "/assets/images/products/tra-xanh-dao-ngo-gia.png",
+    "price": 29000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 28,
+    "name": "Hồng Trà Đào Ngô Gia",
+    "image": "/assets/images/products/hong-tra-dao-ngo-gia.png",
+    "price": 29000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 29,
+    "name": "Trà Xanh Chanh",
+    "image": "/assets/images/products/tra-xanh-chanh.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 30,
+    "name": "Hồng Trà Chanh Vải Thiều",
+    "image": "/assets/images/products/hong-tra-chanh-vai-thieu.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 31,
+    "name": "Bí Đao Chanh",
+    "image": "/assets/images/products/tra-bi-dao-chanh.jpg",
+    "price": 24000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },
+  {
+    "id": 32,
+    "name": "Hồng Trà Chanh Đài Loan",
+    "image": "/assets/images/products/hong-tra-chanh-dai-loan.png",
+    "price": 21000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Loại Trà Trái Cây"
+  },{
+    "id": 32,
+    "name": "Hồng Trà Trứng Khủng Long",
+    "image": "/assets/images/products/hong-tra-trung-khung-long.png",
+    "price": 26000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 33,
+    "name": "Trà Sữa Long Châu",
+    "image": "/assets/images/products/tra-sua-long-chau.png",
+    "price": 29000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "Hot",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 34,
+    "name": "Ô Long Ô Mai Chanh Dây",
+    "image": "/assets/images/products/o-long-o-mai-chanh-day.png",
+    "price": 27000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 35,
+    "name": "Trà Xanh Ô Mai Chanh Dây",
+    "image": "/assets/images/products/tra-xanh-o-mai-chanh-day.png",
+    "price": 27000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 36,
+    "name": "Trà Sữa Ô Long Khoai Môn Nghiền",
+    "image": "/assets/images/products/tra-sua-o-long-khoai-mon-nghien.png",
+    "price": 33000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "Mới",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 37,
+    "name": "Trà Sữa Khoai Môn Nghiền",
+    "image": "/assets/images/products/tra-sua-khoai-mon-nghien.png",
+    "price": 30000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 38,
+    "name": "Trà Ô Long Bí Đao",
+    "image": "/assets/images/products/tra-o-long-bi-dao.png",
+    "price": 22000,
+    "oldPrice": null,
+    "rating": 3,
+    "tag": "Giảm giá",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 39,
+    "name": "Bát Bảo Ngô Gia (Ngọt)",
+    "image": "/assets/images/products/bat-bao-ngo-gia-ngot.png",
+    "price": 28000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Đặc biệt",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 40,
+    "name": "Hồng Trà Kem Tươi",
+    "image": "/assets/images/products/bat-bao-ngo-gia-ngot.png",
+    "price": 23000,
+    "oldPrice": null,
+    "rating": 5,
+    "tag": "Đặc biệt",
+    "category": "Thức Uống Hot"
+  },
+  {
+    "id": 40,
+    "name": "Ô Long Kem Cheese",
+    "image": "/assets/images/products/o-long-kem-cheese.png",
+    "price": 26000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "Hot",
+    "category": "Thức Uống Mới"
+  },
+  {
+    "id": 41,
+    "name": "Trà Xanh Kem Cheese",
+    "image": "/assets/images/products/tra-xanh-kem-cheese.png",
+    "price": 26000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Thức Uống Mới"
+  },
+  {
+    "id": 42,
+    "name": "Hồng Trà Kem Cheese",
+    "image": "/assets/images/products/hong-tra-kem-cheese.png",
+    "price": 23000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Thức Uống Mới"
+  },
+  {
+    "id": 43,
+    "name": "Trà Xí Muội Ô Long",
+    "image": "/assets/images/products/tra-xi-muoi-o-long.png",
+    "price": 23000,
+    "oldPrice": null,
+    "rating": 3,
+    "tag": "",
+    "category": "Thức Uống Mới"
+  },
+  {
+    "id": 44,
+    "name": "Trà Xí Muội Bí Đao",
+    "image": "/assets/images/products/tra-xi-muoi-bi-dao.png",
+    "price": 23000,
+    "oldPrice": null,
+    "rating": 4,
+    "tag": "",
+    "category": "Thức Uống Mới"
+  },
+  {
+    "id": 45,
+    "name": "Trà Xí Muội Ngô Gia",
+    "image": "/assets/images/products/tra-xi-muoi-ngo-gia.png",
+    "price": 20000,
+    "oldPrice": 25000,
+    "rating": 5,
+    "tag": "Giảm 5K",
+    "category": "Thức Uống Mới"
+  }
+
+
+]

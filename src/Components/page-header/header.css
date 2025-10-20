@@ -1,0 +1,195 @@
+/* ========== RESET & FONT ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.shop-header {
+  font-family: "Inter", sans-serif;
+  background-color: #f2f9fe;
+  border-radius: 12px;
+  padding: 12px 60px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ========== PHẦN TRÊN: LOGO + NÚT ========== */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e6eef9;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand .logo {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ========== CÁC NÚT BÊN PHẢI ========== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.cart-btn {
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cart-btn img {
+  width: 34px;
+  height: 34px;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: #0a7ecf;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.btn {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid #0088ff;
+  transition: 0.2s;
+  min-width: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background-color: #f3f7ff;
+}
+
+.signup-btn {
+  background-color: #0088ff;
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ========== NAVIGATION BAR ========== */
+.nav-bar {
+  display: flex;
+  flex-direction: row;  
+  justify-content: center;
+  align-items: center;
+  gap: 60px;             
+  flex-wrap: nowrap;    
+  white-space: nowrap;  
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+
+/* NAV ITEM */
+.nav-bar a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  padding: 8px 6px 20px 10px;
+  transition: color 0.25s ease;
+}
+
+/* ICON */
+.nav-bar a img {
+  width: 34px;
+  height: 36px;
+  object-fit: contain;
+  transition: filter 0.25s ease;
+  position: relative;
+}
+
+/* GẠCH DƯỚI ICON & TEXT */
+.nav-bar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 0;
+  height: 3px;
+  background-color: #0088ff;
+  border-radius: 6px;
+  transition: width 0.25s ease;
+}
+
+/* Khi hover hoặc active */
+.nav-bar a:hover::after,
+.nav-bar a.active::after {
+  width: 100%;
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+  color: #0088ff;
+}
+
+.nav-bar a:hover img,
+.nav-bar a.active img {
+  filter: brightness(0) saturate(100%) invert(33%) sepia(93%) saturate(3487%) hue-rotate(198deg) brightness(96%) contrast(101%);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+  .shop-header {
+    padding: 10px 20px;
+  }
+
+  .header-top {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .nav-bar {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .brand .logo {
+    width: 70px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 5px 14px;
+    min-width: auto; /* trên màn nhỏ linh hoạt */
+  }
+
+  .nav-bar {
+    gap: 14px;
+  }
+
+  .nav-bar a {
+    font-size: 13px;
+  }
+}

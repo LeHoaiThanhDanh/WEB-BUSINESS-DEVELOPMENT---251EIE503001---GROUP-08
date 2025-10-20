@@ -1,0 +1,45 @@
+<header class="shop-header logged">
+  <div class="header-top">
+    <div class="brand">
+      <img src="/assets/images/logo ngo gia.png" alt="Hồng Trà Ngô Gia" class="logo" />
+    </div>
+
+    <div class="actions">
+      <a class="cart-link" href="/cart/">
+        <img src="/assets/icons/Cart.png" alt="Giỏ hàng">
+        <div class="cart-meta">
+          <span class="label">Giỏ hàng</span>
+          <span class="total" id="cart-total">0đ</span>
+        </div>
+        <span class="caret">▾</span>
+      </a>
+
+      <div class="user" id="user-box">
+        <button class="user-btn" id="user-btn" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="user-menu">
+          <img class="avatar" id="user-avatar" src="/assets/icons/user.png" alt="User">
+          <span class="name" id="user-name">Tài khoản</span>
+          <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="menu" id="user-menu" role="menu" hidden>
+          <a role="menuitem" href="/src/Pages/Profile/profile.html">Hồ sơ</a>
+          <a role="menuitem" href="/orders">Đơn hàng</a>
+          <button role="menuitem" id="btn-logout" type="button">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <a href="/" class="nav-item active"><img src="/assets/icons/Home.png"> Trang chủ</a>
+    <a href="#"><img src="/assets/icons/info.png">Về chúng tôi</a>
+    <a href="/menu/" class="nav-item"><img src="/assets/icons/menu.png">Menu thức uống</a>
+    <a href="#"><img src="/assets/icons/lien_he.png">Liên hệ</a>
+    <a href="#"><img src="/assets/icons/dien_dan.png">Diễn đàn</a>
+    <a href="#"><img src="/assets/icons/chi_nhanh.png">Chi nhánh</a>
+  </nav>
+</header>
+
+<link rel="stylesheet" href="/src/Components/page-header/header2.css" />
+<script src="/src/Components/page-header/header2.js?v=2" defer></script>
+
