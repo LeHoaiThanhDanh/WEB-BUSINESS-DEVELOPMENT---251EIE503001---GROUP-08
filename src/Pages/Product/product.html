@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chi tiết sản phẩm</title>
+  <script>
+    (function(){
+      var p = location.pathname.replace(/\\+/g,'/');
+      if (p.indexOf('/src/Pages/Product/product.html') === 0) {
+        location.replace('/product/' + (location.search || ''));
+      }
+    })();
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'Pages/Product/product.css' %}">
+  <script src="{% static 'Pages/Cart/cart.js' %}" defer></script>
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="container">
+      <div class="page-head">
+        <h1 id="page-title">Chi tiết sản phẩm</h1>
+        <div class="crumb"><a href="/">Trang chủ</a> / <span>Menu thức uống</span> / <span id="breadcrumb-current">Sản phẩm</span></div>
+      </div>
+
+      <section class="product-detail" id="product-detail" aria-live="polite">
+        <div class="detail-card">
+          <div>
+            <div class="media-frame">
+              <button class="nav-arrow nav-prev" aria-label="Ảnh trước">‹</button>
+              <img class="main-img" src="" alt="Ảnh sản phẩm">
+              <button class="nav-arrow nav-next" aria-label="Ảnh kế">›</button>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="" alt="thumb 1">
+              <img class="thumb" src="" alt="thumb 2">
+              <img class="thumb" src="" alt="thumb 3">
+              <img class="thumb" src="" alt="thumb 4">
+            </div>
+          </div>
+          <div class="info">
+            <div class="cat" id="prod-cat">&nbsp;</div>
+            <h2 class="name" id="prod-name">Tên sản phẩm</h2>
+            <div class="stars"><span class="fill" style="width:0%"></span></div>
+            <span class="rating-text" id="prod-rating-text">0.0 (0 lượt đánh giá)</span>
+
+            <div class="promo">
+              <div class="title">Ưu đãi đặc biệt</div>
+              <ul>
+                <li>Mua 5 tặng 1</li>
+                <li>Mua 1 ly size L hoặc 2 ly size M được 1 dấu tích điểm, 8 dấu = 1 ly nước trị giá 16.000đ</li>
+              </ul>
+            </div>
+
+            <div class="price-table">
+              <div class="price-row">
+                <span class="size-badge">M</span>
+                <span class="price-value" id="price-m">0</span>
+                <span class="size-badge">L</span>
+                <span class="price-value" id="price-l">0</span>
+              </div>
+              <div class="vip-row">
+                <span class="size-badge vip">VIP</span>
+                <span class="price-value" id="price-vip-m">0</span>
+                <span class="size-badge vip">VIP</span>
+                <span class="price-value" id="price-vip-l">0</span>
+              </div>
+            </div>
+
+            <p class="desc" id="prod-desc">Sự kết hợp giữa trà ủ đậm và trái cây tạo nên hương vị hài hòa, phù hợp với nhiều sở thích. Thức uống mang đến cảm giác thanh mát nhưng đậm đà, hậu vị ngọt dịu.</p>
+
+            <div class="product-note">
+              <button class="note-toggle" type="button" aria-expanded="false" aria-controls="product-note">
+                <span>Chú thích sản phẩm tại đây</span>
+                <span class="note-icon" aria-hidden="true"></span>
+              </button>
+              <div class="note-content" id="product-note">
+                <p id="note-text">Tùy chọn ghi chú cho từng sản phẩm sẽ được hiển thị tại đây.</p>
+                <section class="custom-options" aria-label="Tùy chọn đồ uống">
+                  <div class="option-group">
+                    <div class="group-title">Chọn kích cỡ</div>
+                    <div class="pill-group" role="group" aria-label="Chọn kích cỡ">
+                      <button class="pill active" type="button" data-size="M">
+                        <span class="pill-label">M</span>
+                        <span class="pill-sub" id="size-pill-m">19.000đ</span>
+                      </button>
+                      <button class="pill" type="button" data-size="L">
+                        <span class="pill-label">L</span>
+                        <span class="pill-sub" id="size-pill-l">22.000đ</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="option-group">
+                    <div class="group-title">Độ ngọt</div>
+                    <div class="pill-group" role="group" aria-label="Chọn độ ngọt" data-field="Ngọt">
+                      <button class="pill active" type="button">Ít</button>
+                      <button class="pill" type="button">Vừa</button>
+                      <button class="pill" type="button">Nhiều</button>
+                    </div>
+                  </div>
+
+                  <div class="option-group">
+                    <div class="group-title">Đá</div>
+                    <div class="pill-group" role="group" aria-label="Chọn lượng đá" data-field="Đá">
+                      <button class="pill active" type="button">Ít</button>
+                      <button class="pill" type="button">Vừa</button>
+                      <button class="pill" type="button">Nhiều</button>
+                    </div>
+                  </div>
+
+                  <div class="option-group topping-group">
+                    <div class="group-title">Chọn topping</div>
+                    <ul class="topping-list">
+                      <li class="topping-row" data-price="3000">
+                        <div class="topping-info">
+                          <span class="topping-name">Sương sáo</span>
+                          <span class="topping-price">3.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="suong-sao">
+                          <button type="button" class="qty-minus" aria-label="Bớt Sương sáo">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Sương sáo">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="3000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch dừa nguyên vị</span>
+                          <span class="topping-price">3.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-dua">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch dừa nguyên vị">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch dừa nguyên vị">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="3000">
+                        <div class="topping-info">
+                          <span class="topping-name">Hạt é</span>
+                          <span class="topping-price">3.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="hat-e">
+                          <button type="button" class="qty-minus" aria-label="Bớt Hạt é">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Hạt é">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch dứa hương đào</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-dua-dao">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch dứa hương đào">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch dứa hương đào">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch aiyu</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-aiyu">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch aiyu">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch aiyu">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch sợi lá dứa</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-soi-la-dua">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch sợi lá dứa">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch sợi lá dứa">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch sương sáo viên (8)</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-suong-sao-vien">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch sương sáo viên">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch sương sáo viên">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Trân châu hoàng kim</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="tran-chau-hoang-kim">
+                          <button type="button" class="qty-minus" aria-label="Bớt Trân châu hoàng kim">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Trân châu hoàng kim">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Trân châu đường đen</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="tran-chau-duong-den">
+                          <button type="button" class="qty-minus" aria-label="Bớt Trân châu đường đen">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Trân châu đường đen">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Trân châu 3Q trắng/đen</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="tran-chau-3q">
+                          <button type="button" class="qty-minus" aria-label="Bớt Trân châu 3Q">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Trân châu 3Q">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Trân châu khoai môn</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="tran-chau-khoai-mon">
+                          <button type="button" class="qty-minus" aria-label="Bớt Trân châu khoai môn">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Trân châu khoai môn">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Hạt thủy tinh củ năng</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="hat-thuy-tinh-cu-nang">
+                          <button type="button" class="qty-minus" aria-label="Bớt Hạt thủy tinh củ năng">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Hạt thủy tinh củ năng">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Hạt thủy tinh lúa mạch</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="hat-thuy-tinh-lua-mach">
+                          <button type="button" class="qty-minus" aria-label="Bớt Hạt thủy tinh lúa mạch">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Hạt thủy tinh lúa mạch">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Đào miếng</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="dao-mieng">
+                          <button type="button" class="qty-minus" aria-label="Bớt Đào miếng">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Đào miếng">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="5000">
+                        <div class="topping-info">
+                          <span class="topping-name">Khoai môn nghiền</span>
+                          <span class="topping-price">5.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="khoai-mon-nghien">
+                          <button type="button" class="qty-minus" aria-label="Bớt Khoai môn nghiền">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Khoai môn nghiền">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="7000">
+                        <div class="topping-info">
+                          <span class="topping-name">Hạt sen</span>
+                          <span class="topping-price">7.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="hat-sen">
+                          <button type="button" class="qty-minus" aria-label="Bớt Hạt sen">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Hạt sen">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="7000">
+                        <div class="topping-info">
+                          <span class="topping-name">Kem tươi vani</span>
+                          <span class="topping-price">7.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="kem-tuoi-vani">
+                          <button type="button" class="qty-minus" aria-label="Bớt Kem tươi vani">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Kem tươi vani">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="7000">
+                        <div class="topping-info">
+                          <span class="topping-name">Kem cheese</span>
+                          <span class="topping-price">7.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="kem-cheese">
+                          <button type="button" class="qty-minus" aria-label="Bớt Kem cheese">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Kem cheese">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="7000">
+                        <div class="topping-info">
+                          <span class="topping-name">Pudding trứng</span>
+                          <span class="topping-price">7.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="pudding-trung">
+                          <button type="button" class="qty-minus" aria-label="Bớt Pudding trứng">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Pudding trứng">+</button>
+                        </div>
+                      </li>
+                      <li class="topping-row" data-price="7000">
+                        <div class="topping-info">
+                          <span class="topping-name">Thạch sữa viên (8)</span>
+                          <span class="topping-price">7.000đ</span>
+                        </div>
+                        <div class="topping-qty" data-topping="thach-sua-vien">
+                          <button type="button" class="qty-minus" aria-label="Bớt Thạch sữa viên">-</button>
+                          <span class="qty-value" aria-live="polite">0</span>
+                          <button type="button" class="qty-plus" aria-label="Thêm Thạch sữa viên">+</button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <div class="actions">
+
+            <div class="actions">
+              <div class="qty" aria-label="Số lượng">
+                <button type="button" id="qty-minus">-</button>
+                <input id="qty-input" inputmode="numeric" pattern="[0-9]*" value="1" aria-label="Số lượng">
+                <button type="button" id="qty-plus">+</button>
+              </div>
+              <button class="btn btn-outline" id="btn-add-cart" type="button">Thêm vào giỏ</button>
+              <a class="btn btn-primary" id="btn-buy-now" href="#">Mua ngay</a>
+            </div>
+
+            
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button type="button" class="tab active" data-target="desc">Mô tả sản phẩm</button>
+          <button type="button" class="tab" data-target="review">Đánh giá</button>
+          <button type="button" class="tab" data-target="commit">Cam kết</button>
+        </div>
+
+        <section class="product-info-card tab-pane active" id="desc">
+          <div class="info-header">
+            <span class="info-icon">i</span>
+            <span class="info-title">Thông tin chi tiết</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-row"><span class="label">Tên sản phẩm:</span> <span id="info-name">Đang cập nhật</span></div>
+            <div class="info-row"><span class="label">Bảo quản:</span> <span id="info-storage">1-2 ngày ở ngăn mát tủ lạnh</span></div>
+            <div class="info-row"><span class="label">Trọng lượng:</span> <span id="info-weight">700ml (size M) / 1000ml (size L)</span></div>
+            <div class="info-row"><span class="label">Xuất xứ:</span> <span id="info-origin">Việt Nam</span></div>
+            <div class="info-row full"><span class="label">Topping nên dùng kèm:</span> <span id="info-topping">Thạch dừa nguyên vị, hạt nổ củ năng</span></div>
+          </div>
+        </section>
+
+        <section class="review-block tab-pane" id="review">
+          <div class="grid-2">
+            <div class="col-left">
+              <div class="score" id="score-value">5.0 <span class="unit">out of 5</span></div>
+              <div class="stars" aria-label="Đánh giá" style="margin-top:6px"><span class="fill" id="score-stars" style="width:100%"></span></div>
+              <div class="count" id="score-count">(0 lượt đánh giá)</div>
+            </div>
+            <div class="col-right">
+              <div class="bar-row"><span>5 sao</span><div class="bar"><span style="--val:80%"></span></div></div>
+              <div class="bar-row"><span>4 sao</span><div class="bar"><span style="--val:70%"></span></div></div>
+              <div class="bar-row"><span>3 sao</span><div class="bar"><span style="--val:35%"></span></div></div>
+              <div class="bar-row"><span>2 sao</span><div class="bar"><span style="--val:15%"></span></div></div>
+              <div class="bar-row"><span>1 sao</span><div class="bar"><span style="--val:5%"></span></div></div>
+            </div>
+          </div>
+
+          <section class="review-section" aria-labelledby="reviews-title">
+            <div class="review-header">
+              <h3 class="reviews-title" id="reviews-title">Đánh giá sản phẩm</h3>
+            </div>
+            <div class="review">
+              <img class="avatar" src="/assets/icons/user.png" alt="avatar">
+              <div>
+                <div class="name">Hương Hạnh <span class="stars"><span class="fill" style="width:100%"></span></span></div>
+                <div class="title">Tải yêu HTVT!!!!!!!</div>
+                <div class="content">HTVT là thức uống ngon nhất, tôi có thể uống mỗi ngày!</div>
+                <div class="review-actions">
+                  <button type="button" class="review-like" aria-label="Thích đánh giá của Hương Hạnh">
+                    <span class="icon" aria-hidden="true">♡</span>
+                    Thích
+                  </button>
+                  <div class="review-stars-inline" aria-label="Đánh giá 5 trên 5">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                </div>
+              </div>
+              <div class="time">2 ngày trước</div>
+            </div>
+            <div class="review">
+              <img class="avatar" src="/assets/icons/user.png" alt="avatar">
+              <div>
+                <div class="name">Thành Danh <span class="stars"><span class="fill" style="width:100%"></span></span></div>
+                <div class="title">So good, so yummy</div>
+                <div class="content">HTVT rất ngon, tuyệt vời!</div>
+                <div class="review-actions">
+                  <button type="button" class="review-like" aria-label="Thích đánh giá của Thành Danh">
+                    <span class="icon" aria-hidden="true">♡</span>
+                    Thích
+                  </button>
+                  <div class="review-stars-inline" aria-label="Đánh giá 5 trên 5">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                </div>
+              </div>
+              <div class="time">3 ngày trước</div>
+            </div>
+            <div class="review-pagination" role="navigation" aria-label="Trang đánh giá">
+              <button type="button" class="page-btn icon-btn" aria-label="Trang trước">‹</button>
+              <button type="button" class="page-btn active">1</button>
+              <button type="button" class="page-btn">2</button>
+              <button type="button" class="page-btn">3</button>
+              <button type="button" class="page-btn">4</button>
+              <span class="page-dots" aria-hidden="true">...</span>
+              <button type="button" class="page-btn">10</button>
+              <button type="button" class="page-btn icon-btn" aria-label="Trang sau">›</button>
+            </div>
+            <form class="review-form" action="#" method="post" aria-label="Gửi đánh giá sản phẩm">
+              <div class="rating-field">
+                <span class="label">Chất lượng sản phẩm:</span>
+              </div>
+              <textarea name="note" rows="3" placeholder="Hãy để lại nhận xét cho sản phẩm này bạn nhé! Ngô Gia xin chân thành cảm ơn."></textarea>
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary submit-review">Đánh giá</button>
+              </div>
+            </form>
+          </section>
+        </section>
+
+        <section class="commitment tab-pane" id="commit" aria-label="Cam kết">
+          <h3>Cam kết chất lượng</h3>
+          <ul class="commit-list">
+            <li>
+              <span class="commit-icon" aria-hidden="true"></span>
+              Lá trà được chọn lọc kỹ lưỡng từ vùng núi cao,<strong>không phẩm màu – không hương liệu tổng hợp</strong>, giữ trọn vị trà nguyên bản.
+            </li>
+            <li>
+              <span class="commit-icon" aria-hidden="true"></span>
+              Mỗi mẻ trà đều được sao, ủ và lên hương theo<strong>bí quyết gia truyền</strong>, đảm bảo hương thơm đậm đà, vị hậu ngọt tinh tế.
+            </li>
+            <li>
+              <span class="commit-icon" aria-hidden="true"></span>
+              Mọi sản phẩm được<strong>đóng gói kín, bảo quản đúng chuẩn</strong>, đảm bảo hương vị luôn tươi mới khi đến tay khách hàng.
+            </li>
+            <li>
+              <span class="commit-icon" aria-hidden="true"></span>
+              Hồng Trà Ngô Gia luôn lắng nghe phản hồi và<strong>đổi trả nếu sản phẩm không đạt chất lượng cam kết</strong>, mang đến trải nghiệm đáng tin cậy.
+            </li>
+          </ul>
+        </section>
+      
+
+        <section class="related-section" id="related">
+          <h3 class="related-title">Có thể bạn sẽ thích</h3>
+          <div class="related-grid" id="related-list"></div>
+        </section>
+</section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="{% static 'Pages/Product/product.js' %}" defer></script>
+</body>
+</html>
