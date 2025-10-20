@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">ÄÄƒng nháº­p - Há»“ng TrÃ  NgÃ´ Gia</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'Pages/Login/LoginAdmin.css' %}">
+  <base href="/" />
+</head>
+<body>
+  <section class="auth">
+    <!-- BÃªn trÃ¡i -->
+    <aside class="side-left">
+      <div class="inner">
+        <div class="brand">
+          <a class="brand-link" href="/" aria-label="Về trang chủ">
+            <img src="/assets/images/logo ngo gia.png" alt="NgA' Gia Logo" onerror="this.style.display='none'">
+          </a>
+        </div>
+        <p class="desc" data-i18n="left.desc">
+          ÄÄƒng nháº­p Ä‘á»ƒ Ä‘áº·t mÃ³n nhanh hÆ¡n, lÆ°u Ä‘á»‹a chá»‰ giao hÃ ng vÃ  theo dÃµi Ä‘Æ¡n cá»§a báº¡n.
+        </p>
+      </div>
+    </aside>
+
+    <!-- BÃªn pháº£i -->
+    <main class="side-right">
+      <div class="form-wrap">
+        <!-- Chuyá»ƒn ngÃ´n ngá»¯ -->
+        <div class="lang-bar" role="group" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="vi" aria-pressed="true">VI</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <div class="welcome-header">
+          <h2 data-i18n="welcome.title">NgÃ´ Gia xin chÃ o</h2>
+          <p data-i18n="welcome.subtitle">ÄÄƒng nháº­p tÃ i khoáº£n cá»§a báº¡n</p>
+        </div>
+
+        <h3 class="form-title" data-i18n="manager">ÄÄƒng nháº­p Quáº£n lÃ½</h3>
+
+        <div class="form-group">
+          <label class="label" data-i18n="label.username">TÃªn Ä‘Äƒng nháº­p <span class="req">*</span></label>
+          <div class="control">
+            <input type="text" class="input"
+                   data-i18n-placeholder="ph.username"
+                   placeholder="Nháº­p tÃªn Ä‘Äƒng nháº­p cá»§a báº¡n" autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label" data-i18n="label.password">Máº­t kháº©u <span class="req">*</span></label>
+          <div class="control">
+            <input type="password" id="pwd" class="input"
+                   data-i18n-placeholder="ph.password"
+                   placeholder="Nháº­p máº­t kháº©u cá»§a báº¡n" autocomplete="current-password">
+            <button class="toggle-eye" id="btnEye" aria-label="Hiá»‡n/áº©n máº­t kháº©u">
+              <svg id="icEyeOff" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.29 20.29 0 0 1 5.08-6.23"/>
+                <path d="M1 1l22 22"/>
+                <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24"/>
+                <path d="M10.73 5.08A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a20.29 20.29 0 0 1-4.18 5.17"/>
+              </svg>
+              <svg id="icEyeOn" style="display:none" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-inline">
+          <label class="remember"><input type="checkbox"> <span data-i18n="remember">Ghi nhá»›?</span></label>
+          <a href="#" class="link" data-i18n="forgot">QuÃªn máº­t kháº©u?</a>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" data-i18n="btn.login">ÄÄƒng nháº­p</button>
+        </div>
+
+        <div class="divider" data-i18n="divider">Hoáº·c</div>
+        <a class="link-block" href="/register/" data-i18n="create">Táº¡o tÃ i khoáº£n má»›i</a>
+        <a class="link-muted" href="/login-customer/" data-i18n="form.title">ÄÄƒng nháº­p khÃ¡ch hÃ ng</a>
+      </div>
+    </main>
+  </section>
+
+  <!-- Script i18n -->
+  <script src="{% static 'assets/js/i18n.js' %}" defer></script>
+  <!-- Admin login handler -->
+  <script src="{% static 'Pages/Login/login-admin.js' %}" defer></script>
+</body>
+</html>

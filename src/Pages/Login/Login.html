@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">Đăng nhập - Hồng Trà Ngô Gia</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Đường dẫn CSS -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'Pages/Login/Login.css' %}">
+
+  <!-- Thêm base để định nghĩa đường dẫn tuyệt đối -->
+  <base href="/src/Pages/Homepage/Home.html" />
+</head>
+<body>
+  <section class="auth">
+    <!-- BÊN TRÁI -->
+    <aside class="side-left">
+      <div class="inner">
+        <div class="brand">
+          <a class="brand-link" href="/" aria-label="Về trang chủ">
+            <img src="/assets/images/logo ngo gia.png" alt="Ngô Gia Logo"
+                 onerror="this.style.display='none'">
+          </a>
+        </div>
+        <p class="desc" data-i18n="left.desc">
+          Đăng nhập để đặt món nhanh hơn, lưu địa chỉ giao hàng và theo dõi đơn của bạn.
+        </p>
+      </div>
+    </aside>
+
+    <!-- BÊN PHẢI -->
+    <main class="side-right">
+      <div class="form-wrap">
+        <!-- Nút chuyển ngôn ngữ -->
+        <div class="lang-bar" role="group" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="vi" aria-pressed="true">VI</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <div class="welcome-header">
+          <h2 data-i18n="welcome.title">Ngô Gia xin chào</h2>
+          <p data-i18n="welcome.subtitle">Đăng nhập tài khoản của bạn</p>
+        </div>
+
+        <h3 class="form-title" data-i18n="form.title">Đăng nhập Khách hàng</h3>
+
+        <div class="form-group">
+          <label class="label" data-i18n="label.username">Tên đăng nhập <span class="req">*</span></label>
+          <div class="control">
+            <input type="text" class="input"
+                   data-i18n-placeholder="ph.username"
+                   placeholder="Nhập tên đăng nhập của bạn" autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label" data-i18n="label.password">Mật khẩu <span class="req">*</span></label>
+          <div class="control">
+            <input type="password" id="pwd" class="input"
+                   data-i18n-placeholder="ph.password"
+                   placeholder="Nhập mật khẩu của bạn" autocomplete="current-password">
+            <button class="toggle-eye" id="btnEye" aria-label="Hiện/ẩn mật khẩu">
+              <svg id="icEyeOff" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.29 20.29 0 0 1 5.08-6.23"/>
+                <path d="M1 1l22 22"/>
+                <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24"/>
+                <path d="M10.73 5.08A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a20.29 20.29 0 0 1-4.18 5.17"/>
+              </svg>
+              <svg id="icEyeOn" style="display:none" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-inline">
+          <label class="remember"><input type="checkbox"> <span data-i18n="remember">Ghi nhớ?</span></label>
+          <a href="#" class="link" data-i18n="forgot">Quên mật khẩu?</a>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" data-i18n="btn.login">Đăng nhập</button>
+        </div>
+
+        <div class="divider" data-i18n="divider">Hoặc</div>
+        <a class="link-block" href="/register/" data-i18n="create">Tạo tài khoản mới</a>
+        <a class="link-muted" href="/login-admin/" data-i18n="manager">Đăng nhập cho quản lý</a>
+      </div>
+    </main>
+  </section>
+
+  <!-- Script i18n và toggle mật -->
+  <script src="{% static 'assets/js/i18n.js' %}" defer></script>
+  <script src="{% static 'Pages/Login/login.js' %}" defer></script>
+</body>
+</html>
