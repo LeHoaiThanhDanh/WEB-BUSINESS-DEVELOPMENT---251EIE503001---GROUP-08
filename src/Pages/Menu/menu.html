@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu thức uống - Hồng Trà Ngô Gia</title>
+  <link rel="stylesheet" href="{% static 'Pages/Menu/menu.css' %}" />
+  <script src="{% static 'Pages/Cart/cart.js' %}" defer></script>
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="menu-page">
+    <section class="menu-hero">
+      <div class="hero-content">
+        <p class="eyebrow">Menu thức uống</p>
+        <h1>Thoải mái chọn món yêu thích của bạn</h1>
+        <p class="tagline">Từ trà truyền thống, trà sữa đến những công thức mới lạ – mọi hương vị đều được pha chế tươi mới mỗi ngày.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="{% static 'assets/images/tra-sua.png' %}" alt="" />
+      </div>
+    </section>
+
+    <section class="menu-toolbar">
+      <div class="search">
+        <span class="icon" aria-hidden="true">🔍</span>
+        <input type="search" id="menu-search" placeholder="Tìm thức uống bạn muốn..." aria-label="Tìm kiếm thức uống" />
+        <div class="sorter">
+          <label for="menu-sort">Sắp xếp:</label>
+          <select id="menu-sort" aria-label="Sắp xếp kết quả">
+            <option value="featured">Nổi bật</option>
+            <option value="name-asc">Tên A → Z</option>
+            <option value="name-desc">Tên Z → A</option>
+            <option value="price-asc">Giá thấp → cao</option>
+            <option value="price-desc">Giá cao → thấp</option>
+          </select>
+        </div>
+      </div>
+      <div class="filters">
+        <button class="filter-chip active" data-cat="all">Tất cả</button>
+        <div id="category-filters" class="chip-list" role="list"></div>
+      </div>
+    </section>
+
+    <section class="menu-section" aria-live="polite">
+      <header class="section-head">
+        <div>
+          <h2 id="section-title">Tất cả thức uống</h2>
+          <p id="section-subtitle">Danh sách đầy đủ các món tại Hồng Trà Ngô Gia.</p>
+        </div>
+        <div class="result-count">
+          <span id="result-count">0</span> sản phẩm
+        </div>
+      </header>
+      <div class="menu-grid" id="menu-grid"></div>
+      <div class="empty-state" id="empty-state">
+        <img src="{% static 'assets/icons/menu.png' %}" alt="" aria-hidden="true" />
+        <p>Không tìm thấy thức uống phù hợp, hãy thử từ khóa hoặc bộ lọc khác nhé!</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="{% static 'Pages/Menu/menu.js' %}" defer></script>
+</body>
+</html>
