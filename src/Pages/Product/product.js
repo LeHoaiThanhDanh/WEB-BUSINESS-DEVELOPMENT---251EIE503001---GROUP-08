@@ -361,8 +361,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             options.push(`${label}: ${active.textContent.trim()}`);
           }
         });
+        const toppings = [];
+        document.querySelectorAll('.topping-qty').forEach((wrapper) => {
+          const qtyEl = wrapper.querySelector('.qty-value');
+          const qtyValue = Number(qtyEl ? qtyEl.textContent : 0) || 0;
+          if (!qtyValue) return;
+          const row = wrapper.closest('.topping-row');
+          const nameEl = row ? row.querySelector('.topping-name') : null;
+          const toppingName = nameEl ? nameEl.textContent.trim() : '';
+          const toppingPrice = Number(row ? row.dataset.price : 0) || 0;
+          toppings.push({ name: toppingName, qty: qtyValue, price: toppingPrice });
+        });
+        if (toppings.length) {
+          const desc = toppings.map(item => `${item.name} x${item.qty}`).join(', ');
+          options.push(`Topping: ${desc}`);
+        }
         const basePrice = Number(product.price) || 0;
-        const price = size === 'L' ? basePrice + 3000 : basePrice;
+        const toppingTotal = toppings.reduce((sum, item) => sum + item.qty * item.price, 0);
+        const price = (size === 'L' ? basePrice + 3000 : basePrice) + toppingTotal;
         window.NGCart.addItem({
           id: product.id,
           name: product.name,

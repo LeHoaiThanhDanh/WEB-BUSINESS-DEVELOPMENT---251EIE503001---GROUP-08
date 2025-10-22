@@ -166,7 +166,7 @@ html, body {
 .price-value {
   font-size: 18px;
   font-weight: 700;
-  color: #d63;
+  color: #000;
 }
 .vip-row {
   display: grid;
