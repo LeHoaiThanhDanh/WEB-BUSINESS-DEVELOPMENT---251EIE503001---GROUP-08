@@ -15,13 +15,13 @@ body {
 }
 
 .cart-page {
-  padding: 32px 0 92px;
+  padding: 0px 0 92px;
   display: grid;
   gap: 36px;
 }
 
 .page-hero {
-  background: linear-gradient(180deg, rgba(13, 110, 253, 0.12) 0%, rgba(13, 110, 253, 0.04) 100%);
+  background: #e6f0ff;
   border-bottom: 1px solid rgba(13, 110, 253, 0.18);
   padding: 36px 6vw 30px;
   display: flex;
