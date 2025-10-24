@@ -1,0 +1,183 @@
+.account-page{
+  background:#f2f9fe;
+  color:#0b1320;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.account-breadcrumb {
+  background: #e8f2ff;
+  border-bottom: 1px solid #dbe8ff;
+  margin-bottom: 6px;
+  text-align: center;
+  padding-top:20px
+}
+.account-breadcrumb-container {             
+  margin-top: 16px;
+  margin-bottom: 26px;
+}
+.account-breadcrumb h2 {
+  margin: 0;
+  font-weight: 700;
+}
+.account-breadcrumb p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* BÊN TRÁI */
+.contact-card {
+  flex: 0 0 400px; 
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  background-color: #fff;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card__body {
+  position: relative;
+  z-index: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-card__title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-card__desc {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-card__line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.contact-card__line i {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+/* BÊN PHẢI */
+.contact-form {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e6eef8;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(10, 80, 180, 0.08);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* LƯỚI FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 28px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-weight: 600;
+  color: #0088ff;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: none;
+  border-bottom:1px solid #d9d9d9;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+  margin-top: 14px;
+}
+
+.textarea{border: 1px solid #d9d9d9 !important;}
+.input:focus,
+.textarea:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+
+.textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* NÚT GỬI */
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background: #0a75ff;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: #0668e8;
+}
+.radio{
+  margin-right:30px;
+  color: #000;
+}
+.radio-row{
+  margin-top: 14px;
+  font-weight: 500 !important;
+}
+.icons{height: 24px; width: 24px;}
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-card {
+    flex: none;
+    height: 380px;
+  }
+}

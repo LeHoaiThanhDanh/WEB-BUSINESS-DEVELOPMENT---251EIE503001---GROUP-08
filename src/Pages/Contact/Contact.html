@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liên Hệ</title>
+  <link rel="stylesheet" href="{% static 'Pages/Contact/Contact.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <main class="account-page">
+    <!-- breadcrumb light bar -->
+    <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Liên Hệ</h2>
+        <p>Liên Hệ</p>
+      </div>
+    </div>
+    <div class="contact-container">
+        <!-- LEFT FORM -->
+        <aside class="contact-card">
+            <div class="contact-card__body">
+                <h3 class="contact-card__title">Thông tin liên hệ:</h3>
+                <p class="contact-card__desc">
+                    Hồng Trà Ngô Gia luôn mong muốn nhận được những phản hồi quý giá của quý khách
+                    hàng để có cơ hội hoàn thiện sản phẩm, dịch vụ hơn nữa. Những đóng góp của quý
+                    khách hàng luôn là tài sản vô giá đối với chúng tôi.
+                </p>
+                <div class="contact-card__line">
+                    <img src="{% static 'assets/icons/Phone2.png' %}" alt="sđt" class="icons">
+                    <span>0999.888.777</span>
+                </div>
+
+                <div class="contact-card__line">
+                    <img src="{% static 'assets/icons/Mail2.png' %}" alt="email" class="icons">
+                    <a><u>ngogiahotro@gmail.com</u></a>
+                </div>
+            </div>
+        </aside>
+        <style>
+            .contact-card{
+            background: url("{% static 'assets/icons/Rectangle2.png' %}") center/cover no-repeat;
+            }
+        </style>
+        <!-- RIGHT FORM -->
+        <div class="contact-form">
+            <form id="supportForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Họ và tên<span class="req">*</span></label>
+                        <input class="input" type="text" name="fullname" placeholder="Nguyễn Ba Dù" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email<span class="req">*</span></label>
+                        <input class="input" type="email" name="email" placeholder="badudepttrai@gmail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại<span class="req">*</span></label>
+                        <input class="input" type="tel" name="phone" placeholder="0123456789" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chi nhánh phản hồi<span class="req">*</span></label>
+                        <select class="input select" name="branch" required>
+                            <option value="">— Chọn chi nhánh —</option>
+                            <option>Đường số 8, Linh Xuân, Thủ Đức</option>
+                            <option>20 Nguyễn An Ninh, KP Nhị Đồng 2, Dĩ An</option>
+                            <option>3-24 Lý Thường Kiệt, TX Dĩ An</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Vấn đề phản hồi<span class="req">*</span></label>
+                        <div class="radio-row">
+                            <label class="radio"><input type="radio" name="topic" value="complain" required> <i class="fa-regular fa-frown"></i> Than phiền</label>
+                            <label class="radio"><input type="radio" name="topic" value="praise"> <i class="fa-regular fa-smile"></i> Khen ngợi</label>
+                            <label class="radio"><input type="radio" name="topic" value="issued"> <i class="fa-solid fa-box"></i> Đã xuất</label>
+                            <label class="radio"><input type="radio" name="topic" value="other"> <i class="fa-solid fa-ellipsis"></i> Vấn đề khác</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Nội dung phản hồi<span class="req">*</span></label>
+                        <textarea class="textarea" name="content" rows="7"
+                            placeholder="Mô tả chi tiết nội dung bạn muốn phản hồi..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa-solid fa-paper-plane me-1"></i> GỬI
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/Contact/Contact.js' %}" defer></script>
+</body>
+</html>
+
