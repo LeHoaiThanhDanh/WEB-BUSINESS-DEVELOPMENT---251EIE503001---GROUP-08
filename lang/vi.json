@@ -1,0 +1,17 @@
+{
+  "title": "Đăng nhập - Hồng Trà Ngô Gia",
+  "left.desc": "Đăng nhập để đặt món nhanh hơn, lưu địa chỉ giao hàng và theo dõi đơn của bạn.",
+  "welcome.title": "Ngô Gia xin chào",
+  "welcome.subtitle": "Đăng nhập tài khoản của bạn",
+  "form.title": "Đăng nhập Khách hàng",
+  "label.username": "Tên đăng nhập <span class='req'>*</span>",
+  "label.password": "Mật khẩu <span class='req'>*</span>",
+  "ph.username": "Nhập tên đăng nhập của bạn",
+  "ph.password": "Nhập mật khẩu của bạn",
+  "remember": "Ghi nhớ?",
+  "forgot": "Quên mật khẩu?",
+  "btn.login": "Đăng nhập",
+  "divider": "Hoặc",
+  "create": "Tạo tài khoản mới",
+  "manager": "Đăng nhập cho Quản lý"
+}

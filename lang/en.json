@@ -1,0 +1,17 @@
+{
+  "title": "Sign in - Hong Tra Ngo Gia",
+  "left.desc": "Sign in to order faster, save your delivery address, and track your orders.",
+  "welcome.title": "Welcome to Ngo Gia",
+  "welcome.subtitle": "Sign in to your account",
+  "form.title": "Customer Sign In",
+  "label.username": "Username <span class='req'>*</span>",
+  "label.password": "Password <span class='req'>*</span>",
+  "ph.username": "Enter your username",
+  "ph.password": "Enter your password",
+  "remember": "Remember me?",
+  "forgot": "Forgot password?",
+  "btn.login": "Sign in",
+  "divider": "Or",
+  "create": "Create a new account",
+  "manager": "Sign in for Manager"
+}
