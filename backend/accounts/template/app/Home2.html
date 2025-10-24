@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hồng Trà Ngô Gia – Trang chủ (đã đăng nhập)</title>
+  <link rel="stylesheet" href="./Home.css"/>
+  <link rel="stylesheet" href="./Style.css"/>
+</head>
+
+<body>
+  <!-- Header component sẽ được chèn vào đây (header2) -->
+  <div id="app-header"></div>
+
+  <!-- Nội dung trang: tái sử dụng Home.html -->
+  <main>
+    <div class="container">
+      <section class="hero">
+        <div class="hero-top">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="/assets/images/banner1.png" alt="Banner 1">
+              </div>
+              <div class="swiper-slide">
+                <img src="assets/banner2.jpg" alt="Banner 2">
+              </div>
+              <div class="swiper-slide">
+                <img src="assets/banner3.jpg" alt="Banner 3">
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="hero-bottom">
+          <section class="drink-section">
+            <h2 class="drink-title">CÁC LOẠI THỨC UỐNG CỦA CHÚNG TÔI</h2>
+            <div class="underline"></div>
+            <div class="drink-list">
+              <div class="drink-item js-open-drinks" data-cat="Loại Thuần Trà">
+                <img src="/assets/images/tra-dai-loan.png" alt="Thuần Trà">
+                <p>Loại Thuần Trà</p>
+              </div>
+              <div class="drink-item js-open-drinks" data-cat="Loại Trà Sữa">
+                <img src="/assets/images/tra-sua.png" alt="Trà Sữa">
+                <p>Loại Trà Sữa</p>
+              </div>
+              <div class="drink-item js-open-drinks" data-cat="Loại Trà Latte">
+                <img src="/assets/images/tra-latte.png" alt="Trà Latte">
+                <p>Loại Trà Latte</p>
+              </div>
+              <div class="drink-item js-open-drinks" data-cat="Thức Uống Hot">
+                <img src="/assets/images/cac-mon-hot.png" alt="Hot">
+                <p>Thức Uống Hot</p>
+              </div>
+              <div class="drink-item js-open-drinks" data-cat="Thức Uống Mới">
+                <img src="/assets/images/thuc-uong-moi.png" alt="Mới">
+                <p>Thức Uống Mới</p>
+              </div>
+              <div class="drink-item js-open-drinks" data-cat="Loại trà trái cây">
+                <img src="/assets/images/tra-yakult.png" alt="Trà Trái Cây">
+                <p>Loại Trà Trái Cây</p>
+              </div>
+              <p class="drink-desc">
+                Các dòng thức uống đặc biệt kết hợp giữa trà nguyên chất với sữa béo cùng vị mặn nhẹ đặc trưng, 
+                    mang đến điểm nhấn sáng tạo cho một thức uống quen thuộc.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- Hot menu được render ngẫu nhiên 4 món từ 'mon-moi' -->
+      <section class="hot-menu" id="hot-menu">
+        <div class="container">
+          <h2 class="hot-title">THỬ NGAY MÓN MỚI TẠI ĐÂY</h2>
+          <div class="product-grid"></div>
+          <div class="promo-banner">
+            <img src="/assets/images/banner_monmoi.png" alt="Khuyến mãi Ngô Gia" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Top 9 -->
+      <section class="top-hot" id="top-hot">
+        <div class="container">
+          <h2 class="top-hot-title">TOP 9 BÁN CHẠY NHẤT</h2>
+          <div class="product-grid" id="top-hot-grid"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal đồ uống -->
+  <div class="drinks-modal" id="drinks-modal" aria-hidden="true">
+    <div class="drinks-backdrop" id="drinks-backdrop"></div>
+    <div class="drinks-card" role="dialog" aria-modal="true">
+      <button class="drinks-close" id="drinks-close" aria-label="Đóng">×</button>
+      <div class="drinks-left">
+        <img data-cat="thuan-tra" src="/assets/images/tra-dai-loan.png" hidden>
+        <img data-cat="tra-latte" src="/assets/images/tra-latte.png" hidden>
+        <img data-cat="tra-sua" src="/assets/images/tra-sua.png" hidden>
+        <img data-cat="mon-moi" src="/assets/images/thuc-uong-moi.png" hidden>
+        <img data-cat="mon-hot" src="/assets/images/cac-mon-hot.png" hidden>
+        <img data-cat="tra-trai-cay" src="/assets/images/tra-yakult.png" hidden>
+      </div>
+      <div class="drinks-right">
+        <div class="swiper-button-prev drinks-nav"></div>
+        <div class="swiper drinks-swiper">
+          <div class="swiper-wrapper" id="drinks-swiper-wrapper"></div>
+        </div>
+        <div class="swiper-button-next drinks-nav"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="app-footer"></div>
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./Home2.js" defer></script>
+</body>
+</html>
+

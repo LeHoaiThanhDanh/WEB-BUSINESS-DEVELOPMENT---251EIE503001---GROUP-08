@@ -549,7 +549,13 @@ main { flex: 1; }
   text-decoration: none !important;
   color: inherit;
 }
-
+a.btn, 
+button.btn,
+.header a.btn,
+.nav a.btn {
+  text-decoration: none !important;
+  color: inherit !important;
+}
 /* Responsive */
 @media (max-width: 1024px) {
   .product-grid { grid-template-columns: repeat(3, 1fr); }

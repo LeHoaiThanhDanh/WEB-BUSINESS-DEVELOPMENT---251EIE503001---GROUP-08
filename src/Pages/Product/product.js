@@ -297,7 +297,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       Object.values(sections).forEach(node => {
         if (node) node.classList.toggle('active', node.id === target);
       });
-      sections[target].scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     tabs.forEach(tab => {

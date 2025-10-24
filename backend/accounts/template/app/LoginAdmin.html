@@ -1,26 +1,26 @@
-﻿<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="title">Đăng nhập - Hồng Trà Ngô Gia</title>
 
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="stylesheet" href="{% static 'Pages/Login/LoginAdmin.css' %}">
+  <!-- Đường dẫn CSS -->
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="./LoginAdmin.css">
   <base href="/" />
 </head>
 <body>
   <section class="auth">
-    <!-- Bên trái -->
+    <!-- BÊN TRÁI -->
     <aside class="side-left">
       <div class="inner">
         <div class="brand">
-          <a class="brand-link" href="/" aria-label="Về trang chủ">
-            <img src="/assets/images/logo ngo gia.png" alt="Ngô Gia Logo" onerror="this.style.display='none'">
-          </a>
+          <img src="/assets/images/logo ngo gia.png" alt="Ngô Gia Logo"
+               onerror="this.style.display='none'">
         </div>
         <p class="desc" data-i18n="left.desc">
           Đăng nhập để đặt món nhanh hơn, lưu địa chỉ giao hàng và theo dõi đơn của bạn.
@@ -28,10 +28,10 @@
       </div>
     </aside>
 
-    <!-- Bên phải -->
+    <!-- BÊN PHẢI -->
     <main class="side-right">
       <div class="form-wrap">
-        <!-- Chuyển ngôn ngữ -->
+        <!-- Nút chuyển ngôn ngữ -->
         <div class="lang-bar" role="group" aria-label="Language switcher">
           <button class="lang-btn" data-lang="vi" aria-pressed="true">VI</button>
           <button class="lang-btn" data-lang="en">EN</button>
@@ -42,7 +42,7 @@
           <p data-i18n="welcome.subtitle">Đăng nhập tài khoản của bạn</p>
         </div>
 
-        <h3 class="form-title" data-i18n="manager">Đăng nhập Quản lý</h3>
+        <h3 class="form-title" data-i18n="manager">Đăng nhập Quản Lý</h3>
 
         <div class="form-group">
           <label class="label" data-i18n="label.username">Tên đăng nhập <span class="req">*</span></label>
@@ -86,15 +86,13 @@
         </div>
 
         <div class="divider" data-i18n="divider">Hoặc</div>
-        <a class="link-block" href="/register/" data-i18n="create">Tạo tài khoản mới</a>
+        <a class="link-block" href="/src/Pages/Register/Register.html" data-i18n="create">Tạo tài khoản mới</a>
         <a class="link-muted" href="/login-customer/" data-i18n="form.title">Đăng nhập khách hàng</a>
       </div>
     </main>
   </section>
 
-  <!-- Script i18n -->
-  <script src="{% static 'assets/js/i18n.js' %}" defer></script>
-  <!-- Admin login handler -->
-  <script src="{% static 'Pages/Login/login-admin.js' %}" defer></script>
+  <!-- Script i18n và toggle mắt -->
+  <script src="/assets/js/i18n.js" defer></script>
 </body>
 </html>

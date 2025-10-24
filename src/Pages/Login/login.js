@@ -59,7 +59,7 @@
         return;
       }
       localStorage.setItem('ngogia_user', JSON.stringify(data.user||{username}));
-      location.href = '/home2/';
+      location.href = '/home/';
     }catch(e){
       showErrorModal('Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng nhập lại chính xác.');
     }

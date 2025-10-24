@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chi tiết sản phẩm</title>
+  <link rel="stylesheet" href="./product.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <div class="container">
+      <div class="page-head">
+        <h1 id="page-title">Chi tiết sản phẩm</h1>
+        <div class="crumb"><a href="/src/Pages/Homepage/Home.html">Trang chủ</a> / <span>Menu thức uống</span> / <span id="breadcrumb-current">Sản phẩm</span></div>
+      </div>
+
+      <section class="product-detail" id="product-detail" aria-live="polite">
+        <div class="detail-card">
+          <div>
+            <div class="media-frame">
+              <button class="nav-arrow nav-prev" aria-label="Ảnh trước">‹</button>
+              <img class="main-img" src="" alt="Ảnh sản phẩm">
+              <button class="nav-arrow nav-next" aria-label="Ảnh kế">›</button>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="" alt="thumb 1">
+              <img class="thumb" src="" alt="thumb 2">
+              <img class="thumb" src="" alt="thumb 3">
+              <img class="thumb" src="" alt="thumb 4">
+            </div>
+          </div>
+          <div class="info">
+            <div class="cat" id="prod-cat">&nbsp;</div>
+            <h2 class="name" id="prod-name">Tên sản phẩm</h2>
+            <div class="stars"><span class="fill" style="width:0%"></span></div>
+            <span class="rating-text" id="prod-rating-text">0.0 (0 lượt đánh giá)</span>
+
+            <div class="price-table">
+              <div class="price-row">
+                <span class="size-badge">M</span>
+                <span class="price-value" id="price-m">0₫</span>
+                <span class="size-badge">L</span>
+                <span class="price-value" id="price-l">0₫</span>
+              </div>
+              <div class="vip-row">
+                <span class="size-badge vip">VIP</span>
+                <span class="price-value" id="price-vip-m">0₫</span>
+                <span class="size-badge vip">VIP</span>
+                <span class="price-value" id="price-vip-l">0₫</span>
+              </div>
+            </div>
+
+            <p class="desc" id="prod-desc">Sự kết hợp giữa trà đậm vị và trái cây tạo nên hương vị hài hòa, phù hợp với nhiều sở thích. Thức uống mang đến cảm giác thanh nhẹ nhưng đậm đà, hậu vị ngọt dịu.</p>
+
+            <div class="actions">
+              <div class="qty" aria-label="Số lượng">
+                <button type="button" id="qty-minus">-</button>
+                <input id="qty-input" inputmode="numeric" pattern="[0-9]*" value="1" aria-label="Số lượng">
+                <button type="button" id="qty-plus">+</button>
+              </div>
+              <button class="btn btn-outline" id="btn-add-cart" type="button">Thêm vào giỏ</button>
+              <a class="btn btn-primary" id="btn-buy-now" href="#">Mua ngay</a>
+            </div>
+
+            <div class="promo">
+              <div class="title">Ưu đãi đặc biệt</div>
+              <ul>
+                <li>Mua 5 tặng 1</li>
+                <li>Mua 1 ly size L/2 ly size M được 1 dấu tích điểm, 8 dấu = 1 ly nước trị giá 16.000đ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <a class="tab" href="#desc">Description</a>
+          <a class="tab active" href="#review">Review</a>
+          <a class="tab" href="#commit">Commitment</a>
+        </div>
+
+        <div class="grid-2">
+          <div class="col-left">
+            <div class="score" id="score-value">5.0 <span class="unit">out of 5</span></div>
+            <div class="stars" aria-label="Đánh giá" style="margin-top:6px"><span class="fill" id="score-stars" style="width:100%"></span></div>
+            <div class="count" id="score-count">(0 lượt đánh giá)</div>
+          </div>
+          <div class="col-right">
+            <div class="bar-row"><span>5 sao</span><div class="bar"><span style="--val:80%"></span></div></div>
+            <div class="bar-row"><span>4 sao</span><div class="bar"><span style="--val:70%"></span></div></div>
+            <div class="bar-row"><span>3 sao</span><div class="bar"><span style="--val:35%"></span></div></div>
+            <div class="bar-row"><span>2 sao</span><div class="bar"><span style="--val:15%"></span></div></div>
+            <div class="bar-row"><span>1 sao</span><div class="bar"><span style="--val:5%"></span></div></div>
+          </div>
+        </div>
+
+        <h3 class="reviews-title">Đánh giá sản phẩm</h3>
+        <div class="review">
+          <img class="avatar" src="/assets/icons/user.png" alt="avatar">
+          <div>
+            <div class="name">Hồng Hạnh <span class="stars"><span class="fill" style="width:100%"></span></span></div>
+            <div class="title">Tôi yêu HTVT!!!!!!!</div>
+            <div class="content">HTVT là thức uống ngon nhất trên đời tôi từng được thưởng thức, tôi có thể uống thay cơm, uống mỗi ngày, mỗi đêm, mỗi năm mỗi tháng.</div>
+          </div>
+          <div class="time">2 ngày trước</div>
+        </div>
+        <div class="review">
+          <img class="avatar" src="/assets/icons/user.png" alt="avatar">
+          <div>
+            <div class="name">Thành Danh <span class="stars"><span class="fill" style="width:100%"></span></span></div>
+            <div class="title">So good, so yummy</div>
+            <div class="content">HTVT là thức uống ngon nhất tôi từng uống mỗi ngày. Tuyệt vời!</div>
+          </div>
+          <div class="time">3 ngày trước</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="./product.js" defer></script>
+</body>
+</html>

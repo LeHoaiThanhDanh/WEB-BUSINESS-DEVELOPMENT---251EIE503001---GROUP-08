@@ -1,29 +1,30 @@
-﻿<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Đăng ký - Hồng Trà Ngô Gia</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="stylesheet" href="{% static 'Pages/Register/Register.css' %}">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="./Register.css">
   <base href="/" />
 </head>
 <body>
   <section class="auth">
+    <!-- Trái -->
     <aside class="side-left">
       <div class="inner">
         <div class="brand">
-          <a class="brand-link" href="/" aria-label="Về trang chủ">
-            <img src="/assets/images/logo ngo gia.png" alt="Ngô Gia Logo" onerror="this.style.display='none'">
-          </a>
+          <img src="/assets/images/logo ngo gia.png" alt="Ngô Gia Logo" onerror="this.style.display='none'">
         </div>
-        <p class="desc">Tạo tài khoản để nhận ưu đãi VIP, lưu địa chỉ giao hàng và theo dõi đơn nhanh chóng.</p>
+        <p class="desc">
+          Tạo tài khoản để nhận ưu đãi VIP, lưu địa chỉ giao hàng và theo dõi đơn nhanh chóng.
+        </p>
       </div>
     </aside>
 
+    <!-- Phải -->
     <main class="side-right">
       <div class="form-wrap">
         <div class="welcome-header">
@@ -36,26 +37,26 @@
         <div class="form-group">
           <label class="label">Tên đăng nhập <span class="req">*</span></label>
           <div class="control">
-            <input id="reg-username" type="text" class="input" placeholder="Nhập tên đăng nhập" autocomplete="username">
+            <input type="text" class="input" placeholder="Nhập tên đăng nhập" autocomplete="username">
           </div>
         </div>
 
         <div class="form-group">
           <label class="label">Mật khẩu <span class="req">*</span></label>
           <div class="control">
-            <input id="reg-password" type="password" class="input" placeholder="Nhập mật khẩu" autocomplete="new-password">
+            <input type="password" class="input" placeholder="Nhập mật khẩu" autocomplete="new-password">
           </div>
         </div>
 
         <div class="form-group">
           <label class="label">Nhập lại mật khẩu <span class="req">*</span></label>
           <div class="control">
-            <input id="reg-confirm" type="password" class="input" placeholder="Nhập lại mật khẩu" autocomplete="new-password">
+            <input type="password" class="input" placeholder="Nhập lại mật khẩu" autocomplete="new-password">
           </div>
         </div>
 
         <div class="form-group">
-          <button id="reg-submit" class="btn btn-primary">Đăng ký</button>
+          <button class="btn btn-primary">Đăng ký</button>
         </div>
 
         <div class="divider">Hoặc</div>
@@ -63,6 +64,6 @@
       </div>
     </main>
   </section>
-  <script src="{% static 'Pages/Register/register.js' %}" defer></script>
+  <script src="./register.js" defer></script>
 </body>
 </html>

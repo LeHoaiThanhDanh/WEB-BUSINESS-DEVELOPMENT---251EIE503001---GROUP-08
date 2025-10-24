@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hồ sơ cá nhân</title>
+  <link rel="stylesheet" href="{% static 'Pages/Profile/profile.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <main class="account-page">
+    <!-- breadcrumb light bar -->
+    <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Thông tin tài khoản</h2>
+        <p>Trang chủ / Tài khoản</p>
+      </div>
+    </div>
+
+    <div class="container account-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="account-sidebar">
+        <h3 class="sidebar-title">Tài khoản</h3>
+        <nav class="sidebar-nav">
+          <a class="nav-link active" id="link-profile" href="/profile">Thông tin cá nhân</a>
+          <a class="nav-link" id="link-security" href="#security">Tài khoản &amp; bảo mật</a>
+          <a class="nav-link" id="link-policy" href="#policy">Chính sách &amp; điều khoản</a>
+          <a class="nav-link" id="link-support" href="#support">Trung tâm trợ giúp</a>
+          <a class="nav-link danger" href="/login" id="btn-logout">Đăng xuất</a>
+        </nav>
+      </aside>
+
+      <!-- CONTENT -->
+      <section class="account-content" id="account-content">
+        <header class="block-header">
+          <h3>Thông tin cá nhân</h3>
+        </header>
+
+        <!-- Block: Cơ bản -->
+        <div class="account-block">
+          <h4 class="block-title">Thông tin cơ bản</h4>
+
+          <div class="avatar-row">
+            <div class="avatar-label">Hình ảnh:</div>
+            <div class="avatar">
+              <img id="avatarPreview" src="#" alt="Ảnh đại diện">
+              <input id="avatarInput" type="file" accept="image/*" hidden>
+            </div>
+            <div class="avatar-actions">
+              <button type="button" class="btn btn-text" id="btnUpload">Tải lên ảnh đại diện mới</button>
+              <button type="button" class="btn btn-text danger" id="btnRemoveAvatar">Gỡ ảnh đại diện</button>
+            </div>
+          </div>
+          <div class="kv-table">
+            <div class="kv-row">
+              <div class="kv-label">Họ và tên:</div>
+              <div class="kv-value"><input class="input-plain" id="fullName" value="Nguyễn Thị Hồng Hạnh" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Ngày sinh:</div>
+              <div class="kv-value"><input class="input-plain" id="dob" value="31/07/2005" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Giới tính:</div>
+              <div class="kv-value"><input class="input-plain" id="gender" value="Nữ" readonly></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block: Thông tin tài khoản-->
+        <div class="account-block">
+          <h4 class="block-title">Thông tin tài khoản</h4>
+
+          <div class="kv-table">
+            <div class="kv-row">
+              <div class="kv-label">Email:</div>
+              <div class="kv-value"><input class="input-plain" id="email" value="badudeptrai@gmail.com" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Số điện thoại:</div>
+              <div class="kv-value"><input class="input-plain" id="phone" value="0123456789" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Địa chỉ giao hàng:</div>
+              <div class="kv-value"><input class="input-plain" id="address" value="HT Pearl, Quốc lộ 1K, Thành phố Thủ Đức, Thành phố Hồ Chí Minh." readonly></div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="btnEdit" class="btn btn-primary">Chỉnh sửa thông tin</button>
+            <button id="btnSave" class="btn btn-primary" style="display:none;">Lưu thay đổi</button>
+            <button id="btnCancel" class="btn btn-outline" style="display:none;">Hủy</button>
+          </div>
+        </div>
+      </section>
+      <!-- Block: Tài khoản và bảo mật-->
+      <section class="account-content" id="account-content2">
+        <header class="block-header">
+            <h3>Tài khoản và bảo mật</h3>
+        </header>
+          <div class="account-block">
+            <div class="kv-row">
+              <div class="kv-label">Tên đăng nhập:</div>
+              <div class="kv-value"><input id="pf-username" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Mật khẩu:</div>
+              <div class="kv-value"><input id="pf-password" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Tình trạng:</div>
+              <div class="kv-value"><input id="pf-status" class="input-plain" readonly></div>
+            </div>
+          </div>
+            <div class="actions">
+              <button id="btnEdit" class="btn btn-primary">Chỉnh sửa thông tin</button>
+              <button id="btnSave" class="btn btn-primary" style="display:none;">Lưu thay đổi</button>
+              <button id="btnCancel" class="btn btn-outline" style="display:none;">Hủy</button>
+            </div>      
+      </section>
+      <!-- Block: Chính sách & điều khoản -->
+      <section class="account-policy" id="account-policy" style="display:none;">
+        <div class="policy-header">
+          <div class="policy-icon">
+            <img src="{% static 'icons/policy.png' %}" alt="Chính sách" class="policy-icon-img">
+          </div>
+
+          <!-- wrapper tiêu đề có 2 đường kẻ 2 bên -->
+          <div class="policy-title-line">
+            <span class="line"></span>
+            <h2 class="policy-main-title">Chính sách</h2>
+            <span class="line"></span>
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-section">
+            <h3 class="policy-subtitle">a. Chính sách đặt hàng &amp; thanh toán</h3>
+            <ul>
+              <li>Khách hàng có thể đặt trực tiếp tại quán, qua hotline hoặc qua website chính thức của Hồng Trà Ngô Gia.</li>
+              <li>Giá niêm yết là giá tại thời điểm đặt hàng, bao gồm thuế VAT (nếu có).</li>
+              <li>Thanh toán có thể bằng tiền mặt, mã QR, hoặc ví điện tử.</li>
+            </ul>
+          </div>
+
+          <div class="policy-section">
+            <h3 class="policy-subtitle">b. Chính sách đổi trả – hoàn tiền</h3>
+            <ul>
+              <li>Sản phẩm là đồ uống tươi nên không áp dụng đổi trả sau khi giao hàng trừ trường hợp lỗi của nhà cung cấp.</li>
+              <li>Trường hợp đơn hàng sai, hư hỏng hoặc chất lượng không đảm bảo, khách liên hệ hotline để được hỗ trợ đổi hoặc hoàn tiền trong vòng 24h.</li>
+            </ul>
+          </div>
+
+          <div class="policy-section">
+            <h3 class="policy-subtitle">c. Chính sách bảo mật thông tin khách hàng</h3>
+            <ul>
+              <li>Mọi thông tin cá nhân (số điện thoại, địa chỉ, lịch sử đặt hàng) được bảo mật và chỉ dùng để phục vụ chăm sóc khách hàng.</li>
+              <li>Ngô Gia không chia sẻ dữ liệu cho bên thứ ba khi chưa có sự đồng ý của khách hàng.</li>
+            </ul>
+          </div>
+
+          <div class="policy-section">
+            <h3 class="policy-subtitle">d. Chính sách khuyến mãi &amp; tích điểm</h3>
+            <ul>
+              <li>Mỗi chương trình khuyến mãi có điều kiện riêng (hóa đơn tối thiểu, thời gian áp dụng...).</li>
+              <li>Điểm thành viên hoặc ưu đãi khác được quy định theo chính sách tại từng thời kỳ.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="policy-header policy-header-terms">
+          <div class="policy-title-line">
+            <span class="line"></span>
+            <h2 class="policy-main-title">Điều khoản</h2>
+            <span class="line"></span>
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-section">
+            <h3 class="policy-subtitle">a. Điều khoản sử dụng</h3>
+            <ul>
+              <li>Khách hàng đồng ý tuân thủ quy định và chính sách của Hồng Trà Ngô Gia khi sử dụng dịch vụ.</li>
+              <li>Cửa hàng có quyền từ chối phục vụ nếu khách hàng có hành vi vi phạm nội quy hoặc gây rối.</li>
+              <li>Chương trình khuyến mãi không được quy đổi thành tiền mặt trừ khi có quy định riêng.</li>
+            </ul>
+          </div>
+
+          <div class="policy-section">
+            <h3 class="policy-subtitle">b. Điều khoản bổ sung</h3>
+            <ul>
+              <li>Hồng Trà Ngô Gia có thể cập nhật, thay đổi hoặc bổ sung điều khoản theo từng giai đoạn phát triển.</li>
+              <li>Mọi thay đổi sẽ được công khai trên kênh chính thức; tiếp tục sử dụng dịch vụ sau khi cập nhật được xem là đồng ý với thay đổi đó.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/Profile/profile.js' %}" defer></script>
+</body>
+</html>
+

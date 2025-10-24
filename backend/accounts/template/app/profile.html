@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hồ sơ cá nhân</title>
+  <link rel="stylesheet" href="./profile.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app-header"></div>
+  <main class="account-page">
+    <!-- breadcrumb light bar -->
+    <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Thông tin tài khoản</h2>
+        <p>Trang chủ / Tài khoản</p>
+      </div>
+    </div>
+
+    <div class="container account-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="account-sidebar">
+        <h3 class="sidebar-title">Tài khoản</h3>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="/profile.html">Thông tin cá nhân</a>
+          <a class="nav-link active" href="/security.html">Tài khoản & bảo mật</a>
+          <a class="nav-link" href="/policy.html">Chính sách & điều khoản</a>
+          <a class="nav-link" href="/support.html">Trung tâm trợ giúp</a>
+          <a class="nav-link danger" href="/logout.html" id="btn-logout">Đăng xuất</a>
+        </nav>
+      </aside>
+
+      <!-- CONTENT -->
+      <section class="account-content">
+        <header class="block-header">
+          <h3>Thông tin cá nhân</h3>
+        </header>
+
+        <!-- Block: Cơ bản -->
+        <div class="account-block">
+          <h4 class="block-title">Thông tin cơ bản</h4>
+
+          <div class="avatar-row">
+            <div class="avatar-label">Hình ảnh:</div>
+            <div class="avatar">
+              <img id="avatarPreview" src="#" alt="Ảnh đại diện">
+              <input id="avatarInput" type="file" accept="image/*" hidden>
+            </div>
+            <div class="avatar-actions">
+              <button type="button" class="btn btn-text" id="btnUpload">Tải lên ảnh đại diện mới</button>
+              <button type="button" class="btn btn-text danger" id="btnRemoveAvatar">Gỡ ảnh đại diện</button>
+            </div>
+          </div>
+
+          <div class="kv-table">
+            <div class="kv-row">
+              <div class="kv-label">Họ và tên:</div>
+              <div class="kv-value"><input class="input-plain" id="fullName" value="Nguyễn Thị Hồng Hạnh" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Ngày sinh:</div>
+              <div class="kv-value"><input class="input-plain" id="dob" value="31/07/2005" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Giới tính:</div>
+              <div class="kv-value"><input class="input-plain" id="gender" value="Nam" readonly></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block: Tài khoản -->
+        <div class="account-block">
+          <h4 class="block-title">Thông tin tài khoản</h4>
+
+          <div class="kv-table">
+            <div class="kv-row">
+              <div class="kv-label">Email:</div>
+              <div class="kv-value"><input class="input-plain" id="email" value="badudeptrai@gmail.com" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Số điện thoại:</div>
+              <div class="kv-value"><input class="input-plain" id="phone" value="0123456789" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Địa chỉ giao hàng:</div>
+              <div class="kv-value"><input class="input-plain" id="address" value="HT Pearl, Quốc lộ 1K, Thành phố Thủ Đức, Thành phố Hồ Chí Minh." readonly></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="btnEdit" class="btn btn-primary">Chỉnh sửa thông tin</button>
+            <button id="btnSave" class="btn btn-primary" style="display:none;">Lưu thay đổi</button>
+            <button id="btnCancel" class="btn btn-outline" style="display:none;">Hủy</button>
+          </div>
+        </div>
+      </section>
+        <section class="account-block">
+          <div class="block-title">Thông tin tài khoản</div>
+
+          <div class="kv-table">
+            <div class="kv-row">
+              <div class="kv-label">Tên đăng nhập:</div>
+              <div class="kv-value"><input id="pf-username" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Mật khẩu:</div>
+              <div class="kv-value"><input id="pf-password" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Tình trạng:</div>
+              <div class="kv-value"><input id="pf-status" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Email:</div>
+              <div class="kv-value"><input id="pf-email" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Số điện thoại:</div>
+              <div class="kv-value"><input id="pf-phone" class="input-plain" readonly></div>
+            </div>
+            <div class="kv-row">
+              <div class="kv-label">Địa chỉ giao hàng:</div>
+              <div class="kv-value">
+                <textarea id="pf-address" class="textarea-plain" rows="2" readonly></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="pf-save" class="btn btn-primary">Chỉnh sửa thông tin</button>
+          </div>
+        </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="./profile.js" defer></script>
+</body>
+</html>
+
