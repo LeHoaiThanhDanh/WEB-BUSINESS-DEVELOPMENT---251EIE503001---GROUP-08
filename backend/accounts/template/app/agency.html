@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chi nhánh</title>
+  <link rel="stylesheet" href="{% static 'Pages/Agency/agency.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <main class="account-page">
+    <!-- breadcrumb light bar -->
+    <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Liên Hệ</h2>
+        <p>Liên Hệ</p>
+      </div>
+    </div>
+    <div class="contact-container">
+        <!-- LEFT FORM -->
+        <aside class="contact-card">
+            <div class="contact-card__body">
+                <h3 class="contact-card__title">Thông tin liên hệ:</h3>
+                <p class="contact-card__desc">
+                    Hồng Trà Ngô Gia luôn mong muốn nhận được những phản hồi quý giá của quý khách
+                    hàng để có cơ hội hoàn thiện sản phẩm, dịch vụ hơn nữa. Những đóng góp của quý
+                    khách hàng luôn là tài sản vô giá đối với chúng tôi.
+                </p>
+                <div class="contact-card__line">
+                    <img src="{% static 'assets/icons/Phone2.png' %}" alt="sđt" class="icons">
+                    <span>0999.888.777</span>
+                </div>
+
+                <div class="contact-card__line">
+                    <img src="{% static 'assets/icons/Mail2.png' %}" alt="email" class="icons">
+                    <a><u>ngogiahotro@gmail.com</u></a>
+                </div>
+            </div>
+        </aside>
+        <style>
+            .contact-card{
+            background: url("{% static 'assets/icons/Rectangle2.png' %}") center/cover no-repeat;
+            }
+        </style>
+        <!-- RIGHT FORM -->
+        <div class="contact-form">
+            <form id="supportForm" novalidate>
+                <div class="form-grid">
+                    
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa-solid fa-paper-plane me-1"></i> GỬI
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/Agency/agency.js' %}" defer></script>
+</body>
+</html>
+
