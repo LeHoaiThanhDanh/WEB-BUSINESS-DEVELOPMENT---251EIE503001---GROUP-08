@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chi nhánh</title>
+  <link rel="stylesheet" href="{% static 'Pages/Agency/agency.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <main class="account-page">
+    <!-- breadcrumb light bar -->
+    <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Các chi nhánh hoạt động</h2>
+        <p>Chi nhánh</p>
+      </div>
+    </div>
+    <section class="agency-layout">
+      <!-- COLUMN LEFT: BRANCH LIST -->
+      <div class="agency-left">
+        <!-- Chi nhánh 1 -->
+        <article class="branch-card is-active"
+                 data-embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14182.903941439841!2d106.75868788715823!3d10.875831500000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d941a4965aa1%3A0x627e453d69bfb1b6!2zSOG7k25nIFRyw6AgTmfDtCBHaWEgSDA3MQ!5e1!3m2!1svi!2s!4v1761293422137!5m2!1svi!2s">
+            <img class="branch-thumb" src="{% static 'assets/icons/chi_nhanh1.png' %}" alt="Đường số 8 - H071">
+            <div class="branch-meta">
+              <h3 class="branch-title">
+                <img src="{% static 'assets/icons/nha.png' %}" class="i" >Đường số 8 - H071</h3>
+              <p class="branch-addr">
+                <img src="{% static 'assets/icons/location.png' %}" class="i">244 Đường Số 8, Khu Phố 3, Linh Xuân, Thủ Đức</p>
+              <p class="branch-phone">
+                <img src="{% static 'assets/icons/Phone3.png' %}" class="i">0999.888.777</p>
+            </div>
+        </article>
+
+        <!-- Chi nhánh 2 -->
+        <article class="branch-card"
+                 data-embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14182.903941439841!2d106.75868788715823!3d10.875831500000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d9fae15ace3d%3A0xd82774e6f288eaa1!2zSOG7k25nIFRyw6AgTmfDtCBHaWEgSDI0Ng!5e1!3m2!1svi!2s!4v1761293503652!5m2!1svi!2s">    
+            <img class="branch-thumb" src="{% static 'assets/icons/chi_nhanh2.png' %}" alt="Nguyễn An Ninh - H246">
+            <div class="branch-meta">
+              <h3 class="branch-title"><img src="{% static 'assets/icons/nha.png' %}" class="i" >Nguyễn An Ninh - H246</h3>
+              <p class="branch-addr"><img src="{% static 'assets/icons/location.png' %}" class="i" >60 Nguyễn An Ninh, Dĩ An, Bình Dương</p>
+              <p class="branch-phone"><img src="{% static 'assets/icons/Phone3.png' %}" class="i" >0789.654.321</p>
+            </div>
+          
+        </article>
+
+        <!-- Chi nhánh 3 -->
+        <article class="branch-card"
+                 data-embed="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14181.91561997498!2d106.74865978715823!3d10.8965924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d9c6bfb7f1d5%3A0x8372b67d534b8675!2zSOG7k25nIFRyw6AgTmfDtCBHaWEgSDAzMw!5e1!3m2!1svi!2s!4v1761293527849!5m2!1svi!2s">
+            <img class="branch-thumb" src="{% static 'assets/icons/chi_nhanh3.png' %}" alt="Lý Thường Kiệt - H033">
+            <div class="branch-meta">
+              <h3 class="branch-title"><img src="{% static 'assets/icons/nha.png' %}" class="i" >Lý Thường Kiệt - H033</h3>
+              <p class="branch-addr"><img src="{% static 'assets/icons/location.png' %}" class="i" >24 Lý Thường Kiệt, Dĩ An, Bình Dương</p>
+              <p class="branch-phone"><img src="{% static 'assets/icons/Phone3.png' %}" class="i" >0159.753.456</p>
+            </div>
+        </article>
+      </div>
+
+      <!-- COLUMN RIGHT: MAP -->
+      <aside class="agency-right">
+        <div class="map-wrap">
+          <!-- Iframe map chỉ 1 cái — sẽ đổi src bằng JS -->
+          <iframe
+            id="branchMap"
+            class="map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14182.903941439841!2d106.75868788715823!3d10.875831500000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d941a4965aa1%3A0x627e453d69bfb1b6!2zSOG7k25nIFRyw6AgTmfDtCBHaWEgSDA3MQ!5e1!3m2!1svi!2s!4v1761293422137!5m2!1svi!2s"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/Agency/agency.js' %}" defer></script>
+</body>
+</html>
+

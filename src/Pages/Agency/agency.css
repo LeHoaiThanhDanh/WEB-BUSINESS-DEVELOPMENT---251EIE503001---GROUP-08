@@ -1,0 +1,160 @@
+
+.account-page{
+  background:#f2f9fe;
+  color:#0b1320;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.account-breadcrumb {
+  background: #e8f2ff;
+  border-bottom: 1px solid #dbe8ff;
+  margin-bottom: 6px;
+  text-align: center;
+  padding-top:20px
+}
+.account-breadcrumb-container {             
+  margin-top: 16px;
+  margin-bottom: 26px;
+}
+.account-breadcrumb h2 {
+  margin: 0;
+  font-weight: 700;
+}
+.account-breadcrumb p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+/* ========== RESET / BASE ========== */
+*{box-sizing:border-box}
+html,body{
+  margin:0; padding:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:#1f2937;                 
+  background:#f4f7fb;          
+}
+
+
+.agency-hero{
+  background:#e7f1ff;
+  border-bottom:1px solid #e6eefc;
+}
+.agency-hero__inner{
+  max-width:1200px; margin:0 auto;
+  padding:20px 16px; text-align:center;
+}
+.agency-hero__inner h1{margin:0 0 6px; font-size:24px; font-weight:800}
+.agency-hero__inner p{margin:0; font-size:14px; color:#6b93cf}
+
+/* ========== LAYOUT ========== */
+.agency-layout{
+  max-width:1200px;
+  margin:22px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns: 1fr 420px;  /* trái – phải */
+  gap:22px;
+}
+.agency-left{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+/* ========== CARD CHI NHÁNH ========== */
+.branch-card {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e6eefc;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(22, 119, 255, .10);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.branch-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(22, 119, 255, .14);
+}
+
+.branch-card.is-active {
+  border-color: #2b6fe6;
+  box-shadow: 0 12px 28px rgba(19, 94, 230, .16);
+}
+
+/* Bên trái: hình */
+.branch-thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Bên phải: chữ */
+.branch-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 4px;
+}
+
+.branch-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0088ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  margin-top: 12px;
+}
+
+.branch-addr,
+.branch-phone {
+  margin: 6px 0;
+  font-size: 16px;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.i {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: .9;
+}
+
+
+/* ========== MAP (CỘT PHẢI) ========== */
+.agency-right .map-wrap{
+  position:sticky; top:16px;
+  background:#fff;
+  border:1px solid #e6eefc;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(22,119,255,.10);
+}
+.map-iframe{
+  width:100%; height:600px; border:0; display:block;
+  cursor:pointer;                
+}
+
+
+@media (max-width:1024px){
+  .agency-layout{grid-template-columns:1fr}
+  .agency-right .map-wrap{position:relative}
+  .map-iframe{height:400px}
+  .branch-card{grid-template-columns:220px 1fr}
+  .branch-card__thumb img{height:160px}
+}
