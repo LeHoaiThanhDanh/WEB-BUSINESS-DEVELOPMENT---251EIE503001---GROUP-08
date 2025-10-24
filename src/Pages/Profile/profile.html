@@ -123,7 +123,7 @@
       <section class="account-policy" id="account-policy" style="display:none;">
         <div class="policy-header">
           <div class="policy-icon">
-            <img src="{% static 'icons/policy.png' %}" alt="Chính sách" class="policy-icon-img">
+            <img src="{% static 'assets/icons/policy.png' %}" alt="Chính sách" class="policy-icon-img">
           </div>
 
           <!-- wrapper tiêu đề có 2 đường kẻ 2 bên -->
@@ -196,6 +196,133 @@
           </div>
         </div>
       </section>
+      <!-- PHẦN MỚI (tĩnh, không liên quan tab) -->
+      <section class="policy-static" id="account-policy-static" aria-label="Chính sách tĩnh">
+        <div class="policy-static-inner">
+          <div class="policy-static-header">
+            <img src="{% static 'assets/icons/policy.png' %}" alt="Chính sách" class="policy-static-icon">
+            <div class="policy-title-line-static">
+              <span class="line-static"></span>
+              <h2 class="policy-static-title">Chính sách</h2>
+              <span class="line-static"></span>
+            </div>
+          </div>
+
+          <div class="policy-static-card">
+            <div class="policy-static-section">
+              <h3 class="policy-static-sub">a. Chính sách đặt hàng &amp; thanh toán</h3>
+              <ul>
+                <li>Khách hàng có thể đặt trực tiếp tại quán, qua hotline hoặc qua website chính thức của Hồng Trà Ngô Gia.</li>
+                <li>Giá niêm yết là giá tại thời điểm đặt hàng, bao gồm thuế VAT (nếu có).</li>
+                <li>Thanh toán có thể bằng tiền mặt, mã QR, hoặc ví điện tử.</li>
+              </ul>
+            </div>
+
+            <div class="policy-static-section">
+              <h3 class="policy-static-sub">b. Chính sách đổi trả – hoàn tiền</h3>
+              <ul>
+                <li>Sản phẩm là đồ uống tươi nên không áp dụng đổi trả sau khi giao hàng trừ trường hợp lỗi của nhà cung cấp.</li>
+                <li>Trường hợp đơn hàng sai, hư hỏng hoặc chất lượng không đảm bảo, khách liên hệ hotline để được hỗ trợ đổi hoặc hoàn tiền trong vòng 24h.</li>
+              </ul>
+            </div>
+
+            <div class="policy-static-section">
+              <h3 class="policy-static-sub">c. Chính sách bảo mật thông tin khách hàng</h3>
+              <ul>
+                <li>Mọi thông tin cá nhân (số điện thoại, địa chỉ, lịch sử đặt hàng) được bảo mật và chỉ dùng để phục vụ chăm sóc khách hàng.</li>
+                <li>Ngô Gia không chia sẻ dữ liệu cho bên thứ ba khi chưa có sự đồng ý của khách hàng.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Block: Trung tâm trợ giúp -->
+      <section id="support-section" class="support-section" style="display:none;" aria-label="Trung tâm trợ giúp">
+        <div class="support-hero">
+          <div class="support-hero-inner">
+            <h2 class="support-hero-title">Xin chào <span id="support-username">Nguyễn Ba Dù</span>,<br>Hồng trà Ngô gia giúp được gì cho bạn?</h2>
+            <form class="searchbar">
+              <button class="searchbar__menu" type="button" aria-label="Mở menu">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path d="M3 6h18M3 12h18M3 18h18"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+
+              <input id="q" name="q" type="search"
+                    placeholder="Bạn có đang gặp khó khăn gì không nè?"
+                    autocomplete="off" aria-label="Tìm kiếm"/>
+
+              <button class="searchbar__submit" type="submit" aria-label="Tìm">
+                <img src="{% static 'assets/icons/search.png' %}" alt="Menu" width="32" height="32">
+              </button>
+            </form>
+          </div>
+        </div>
+        <style>
+          .support-hero{
+            background: url("{% static 'assets/icons/Rectangle.png' %}") center/cover no-repeat;
+          }
+        </style>
+
+        <div class="support-card wrapper-card" role="region" aria-label="Liên hệ hỗ trợ">
+          <h3 class="support-card-title">Liên hệ hỗ trợ</h3>
+
+          <div class="support-contacts">
+            <div class="contact-item">
+              <div class="contact-icon-wrap">
+                <img src="{% static 'assets/icons/facebook.png' %}" alt="facebook" class="contact-icon">
+              </div>
+              <div class="contact-body">
+                <a href="https://byvn.net/o4Yn" target="_blank" rel="noopener">https://byvn.net/o4Yn</a>
+                <div class="contact-divider"></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon-wrap">
+                <img src="{% static 'assets/icons/tiktok.png' %}" alt="tiktok" class="contact-icon">
+              </div>
+              <div class="contact-body">
+                <a href="https://www.tiktok.com/@hongtrangogiavn" target="_blank" rel="noopener">https://www.tiktok.com/@hongtrangogiavn</a>
+                <div class="contact-divider"></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon-wrap">
+                <img src="{% static 'assets/icons/ig.png' %}" alt="instagram" class="contact-icon">
+              </div>
+              <div class="contact-body">
+                <a href="https://www.instagram.com/wujiablacktea/" target="_blank" rel="noopener">https://www.instagram.com/wujiablacktea/</a>
+                <div class="contact-divider"></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon-wrap">
+                <img src="{% static 'assets/icons/mail.png' %}" alt="email" class="contact-icon">
+              </div>
+              <div class="contact-body">
+                <a href="mailto:marketing@wujiateavn.com">marketing@wujiateavn.com</a>
+                <div class="contact-divider"></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon-wrap">
+                <img src="{% static 'assets/icons/phone.png' %}" alt="phone" class="contact-icon">
+              </div>
+              <div class="contact-body">
+                <a href="tel:0999888777">0.999.888.777</a>
+                <div class="contact-divider"></div>
+              </div>
+            </div>
+            <div class="contact-item contact-empty" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+    </div> 
   </main>
 
   <div id="app-footer"></div>

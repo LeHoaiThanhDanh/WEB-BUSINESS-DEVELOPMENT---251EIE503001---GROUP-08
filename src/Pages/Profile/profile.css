@@ -327,3 +327,200 @@
   .account-layout{ grid-template-columns: 1fr; }
   .kv-row{ grid-template-columns: 1fr; align-items:flex-start; }
 }
+
+/* SUPPORT (stacked blocks) */
+.support-section { padding: 30px 0 60px; }
+.support-inner { max-width: 1180px; margin: 0 auto; display:flex; flex-direction:column; gap:24px; }
+
+/* chung cho mỗi block */
+.support-block { width:100%; }
+
+/* block top: full-width hero */
+.support-block-top .support-hero {
+  width:100%;
+  background: linear-gradient(135deg,#0a66ff 0%, #1a9bff 60%);
+  color:#fff;
+  border-radius:12px;
+  padding:22px;
+  box-shadow:0 10px 30px rgba(10,90,160,0.12);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* hero internals */
+.support-hero-top { display:flex; justify-content:space-between; gap:16px; align-items:center; }
+.support-greeting h3 { margin:0; font-size:20px; font-weight:700; }
+.support-greeting p { margin:4px 0 0; opacity:0.95; font-size:14px; }
+.support-search { display:flex; gap:8px; align-items:center; }
+.support-search input[type="search"] {
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 28px;
+  min-width: 320px;
+  outline: none;
+}
+.support-search .btn { background:transparent; color:#fff; border:none; cursor:pointer; font-size:16px; }
+
+/* quick contacts row inside hero (stacked list) */
+.support-contact-quick ul { display:flex; flex-direction:column; gap:10px; margin:0; padding:0; list-style:none; }
+.support-contact-quick li { display:flex; gap:12px; align-items:center; }
+.contact-icon { width:28px; height:28px; object-fit:contain; display:inline-block; vertical-align:middle; margin-right:10px; }
+.support-contact-quick a { color: #e6f2ff; text-decoration:none; font-weight:600; }
+
+/* block bottom: centered card */
+.support-block-bottom { display:flex; justify-content:center; }
+.support-card {
+  width:100%;
+  max-width:720px;
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 8px 22px rgba(16,36,63,0.08);
+  border:1px solid rgba(11,27,48,0.04);
+}
+.support-card h4 { margin:0 0 12px; color:#0b76f0; font-size:18px; }
+.support-card .small.muted { color:#6b7785; margin:0 0 12px; font-size:13px; }
+.support-card dl { margin:0; }
+.support-card dt { font-weight:700; color:#23304a; margin-top:10px; font-size:13px; }
+.support-card dd { margin:4px 0 8px 0; }
+.support-card a { color:#0b76f0; text-decoration:none; }
+
+/* SUPPORT - hero + contacts card like image */
+.support-section { padding: 30px 0 60px; }
+
+.support-hero {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #fff;
+  padding: 60px 30px;
+  box-shadow: 0 10px 30px rgba(11,36,80,0.08)
+}
+
+.support-hero-inner { max-width: 1180px; margin: 0 auto; display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
+
+.support-hero-title {
+  font-size: 26px;
+  font-weight:700;
+  margin:0;
+  line-height:1.15;
+}
+
+/* search pill centered */
+.searchbar{
+  position: relative;
+  width: min(560px, 100%);
+}
+
+.searchbar input{
+  width: 100%;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid #8d8d8d;
+  background: #fff;
+  font-size: 14px;
+  padding-left: 44px;   
+  padding-right: 44px; 
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.searchbar input:focus{
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px var(--sb-focus);
+}
+
+.searchbar__menu,
+.searchbar__submit{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  cursor: pointer;
+}
+.searchbar__menu{
+  left: 4px;
+  border-radius: 50%;
+}
+.searchbar__submit{
+  right: 4px;
+  border-radius: 50%;
+}
+.searchbar__submit:active{ transform: translateY(-50%) scale(.98); }
+.searchbar input::placeholder{ color: #9aa0a6; }
+
+/* card */
+.support-card { max-width:1180px; margin: 0 auto; background:#fff; border-radius:12px; padding:20px 22px; border:1px solid #8d8d8d; box-shadow:0 8px 22px rgba(16,36,63,0.06); }
+.support-card-title { color:#0b76f0; margin:0 0 14px; font-size:20px; }
+
+/* contacts grid: 2 columns */
+.support-contacts {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 28px;
+  align-items:start;
+}
+
+/* each row item */
+.contact-item {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  min-height:56px;
+}
+
+.contact-icon-wrap {
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 44px;
+}
+
+.contact-icon {
+  width:32px;
+  height:32px;
+  object-fit:contain;
+}
+
+/* body contains link and divider line under */
+.contact-body { flex:1; width:100%; }
+.contact-body a { color:#23304a; text-decoration:none; font-weight:600; display:inline-block; padding-bottom:10px; }
+.contact-divider { height:1px; background:#8D8D8D; margin-top:8px; border-radius:1px; }
+
+/* empty placeholder to keep grid balanced */
+.contact-empty { visibility:hidden; }
+
+/* responsive */
+@media (max-width:900px){
+  .support-contacts { grid-template-columns: 1fr; }
+  .support-hero-inner { padding:0 12px; }
+  .support-card { padding:16px; }
+  .support-hero-title { font-size:20px; }
+  .support-search input[type="search"]{ min-width:0; }
+}
+
+@media (max-width:960px) {
+  .support-inner { gap:16px; padding:0 16px; }
+  .support-search input[type="search"] { min-width: 140px; }
+  .support-contact-quick ul { gap:8px; }
+  .support-card { max-width:100%; }
+}
+
+@media (max-width: 640px) {
+  .contact-icon { width: 20px; height: 20px; margin-right: 8px; }
+  .policy-icon-img { width: 44px; height: 44px; }
+}
+
+/* nếu cần invert cho nền tối (hero) */
+.support-hero .contact-icon { filter: brightness(0) invert(1); }

@@ -189,7 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = {
     profile: document.getElementById('account-content') || document.querySelector('.account-content'),
     security: document.getElementById('account-content2') || document.querySelector('#account-content2') || document.querySelector('.account-content2'),
-    policy: document.getElementById('account-policy') || document.querySelector('.account-policy')
+    policy: document.getElementById('account-policy') || document.querySelector('.account-policy'),
+    supportStatic: document.getElementById('account-policy-static') || document.querySelector('.policy-static')
   };
 
   function setActiveLink(id) {
@@ -210,6 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (tab === 'policy' && sections.policy) {
       sections.policy.style.display = 'block';
       setActiveLink('link-policy');
+    } else if (tab === 'support' && sections.supportStatic) {
+      // chỉ hiện phần static support
+      sections.supportStatic.style.display = 'block';
+      setActiveLink('link-support');
     } else {
       // default to profile
       if (sections.profile) sections.profile.style.display = 'block';
@@ -223,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return new URLSearchParams(location.search).get('tab') || 'profile';
   }
 
-  // initial display: if on /profile path and no hash/query => profile
+  // initial display
   const onProfilePath = /\/profile\/?$/.test(location.pathname);
   const hasHash = Boolean(location.hash);
   const hasTabParam = Boolean(new URLSearchParams(location.search).get('tab'));
@@ -234,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showTab(tabFromLocation());
   }
 
-  // delegation for sidebar links
+  // delegation for sidebar links (support shows static section)
   layoutRoot.addEventListener('click', (e) => {
     const a = e.target.closest('.sidebar-nav .nav-link');
     if (!a) return;
@@ -245,14 +250,61 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (a.id === 'link-policy' || href.includes('#policy')) {
       e.preventDefault();
       location.hash = 'policy';
-    } else if (a.id === 'link-profile' || href.includes('#profile')) {
+    } else if (a.id === 'link-support' || href.includes('#support')) {
+      e.preventDefault();
+      location.hash = 'support';
+    } else if (a.id === 'link-profile' || href.includes('/profile') || href.includes('#profile')) {
       e.preventDefault();
       location.hash = 'profile';
     }
-    // other links (policy/support external) will follow their default behaviour
   });
 
   window.addEventListener('hashchange', () => {
     showTab(tabFromLocation());
   });
 })();
+
+// Activate support button: scroll to support card and show quick contact info
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('#btn-security-help, .btn-support, [data-action="support"]');
+  if (!btn) return;
+  e.preventDefault();
+
+  // ưu tiên các section hỗ trợ hiện có
+  const target =
+    document.getElementById('account-policy') ||
+    document.getElementById('account-policy-static') ||
+    document.querySelector('.support-hero') ||
+    document.querySelector('.policy-static') ||
+    document.querySelector('.account-policy');
+
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Hiển thị thông tin liên hệ nhanh (thay bằng modal hoặc mở form khi cần)
+  const phone = '0.999.888.777';
+  const email = 'marketing@wujiateavn.com';
+  alert('Liên hệ hỗ trợ\\nHotline: ' + phone + '\\nEmail: ' + email);
+});
+
+// optional: populate username and ensure support tab shows this section
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('ngogia_user') || '{}') || {};
+    const name = user.fullName || document.getElementById('fullName')?.value || 'Khách hàng';
+    const el = document.getElementById('support-username');
+    if (el) el.textContent = name;
+  } catch {}
+});
+
+// when clicking sidebar support link, ensure only support-section shown (if using tab code)
+window.addEventListener('hashchange', () => {
+  if ((location.hash || '').replace('#','') === 'support') {
+    document.querySelectorAll('.account-content, .account-policy, .policy-static').forEach(s => { if (s) s.style.display = 'none'; });
+    const ss = document.getElementById('support-section');
+    if (ss) ss.style.display = 'block';
+    // scroll to support
+    ss?.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+});
