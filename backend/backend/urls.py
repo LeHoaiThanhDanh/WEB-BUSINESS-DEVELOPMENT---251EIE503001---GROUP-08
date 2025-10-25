@@ -21,6 +21,7 @@ urlpatterns = [
     path('profile/', TemplateView.as_view(template_name='Pages/Profile/profile.html'), name='profile'),
     path('contact/', TemplateView.as_view(template_name='Pages/Contact/Contact.html'), name='contact'),
     path('agency/', TemplateView.as_view(template_name='Pages/Agency/agency.html'), name='agency'),
+    path('aboutus/', TemplateView.as_view(template_name='Pages/Aboutus/Aboutus.html'), name='aboutus'),
 ]
 
 # Serve legacy absolute asset paths like "/assets/..." during development
