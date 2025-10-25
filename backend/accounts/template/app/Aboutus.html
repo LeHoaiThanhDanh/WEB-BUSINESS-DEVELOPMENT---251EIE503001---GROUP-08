@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hồng Trà Ngô Gia - Về chúng tôi</title>
+  <link rel="stylesheet" href="{% static 'Pages/Aboutus/Aboutus.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="aboutus-page">
+    <!-- HERO -->
+    <section class="about-hero">
+      <div class="container hero-wrap">
+        <div class="hero-left">
+          <h2 class="eyebrow">Hồng trà <span>Ngô gia</span></h2>
+          <h1 class="title">Tự hào 74 năm hình thành và phát triển</h1>
+        </div>
+        <div class="hero-right">
+          <img src="{% static 'assets/images/logo ngo gia.png' %}" alt="Hồng Trà Ngô Gia" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY INTRO -->
+    <section class="story-intro">
+      <div class="container">
+        <h2 class="section-title">CÂU CHUYỆN THƯƠNG HIỆU</h2>
+        <p class="story-lead">
+          Năm 1951, giữa đất trà mộc mạc, thương hiệu ra đời với đam mê tạo nên những ly trà đậm vị.
+          Từ đó, Ngô Gia đã trở thành một trong những thương hiệu trà được yêu thích nhờ chất lượng ổn định,
+          dịch vụ tận tâm và không ngừng đổi mới để bắt kịp xu hướng của giới trẻ Việt.
+        </p>
+
+        <div class="feature-cards">
+          <article class="feature">
+            <img src="{% static 'assets/icons/leaf.png' %}" class="icon" alt="Hồng Trà Ngô Gia" />
+            <h3>Chất lượng hàng đầu</h3>
+            <p>An toàn, vệ sinh và ngon miệng. Việc sử dụng các nguyên liệu an toàn, tự nhiên và vệ sinh là ưu tiên hàng đầu của Hồng trà Ngô Gia. Hương vị tuyệt hảo của các món thức uống là mục đích quan trọng tiếp theo mà chúng tôi muốn hướng đến.</p>
+          </article>
+          <article class="feature">
+            <img src="{% static 'assets/icons/heart.png' %}" class="icon" alt="Hồng Trà Ngô Gia" />
+            <h3>Dịch vụ tận tâm</h3>
+            <p>Hồng trà Ngô Gia mong muốn làm hài lòng khách hàng tốt nhất với tác phong phục vụ chuyên nghiệp và thân thiện, luôn lắng nghe những đóng góp của khách hàng.</p>
+          </article>
+          <article class="feature">
+            <img src="{% static 'assets/icons/star.png' %}" class="icon" alt="Hồng Trà Ngô Gia" />
+            <h3>Truyền thống & sáng tạo</h3>
+            <p>Dựa trên hai nền tảng cốt lõi là Chất Lượng và Dịch Vụ, Hồng trà Ngô gia luôn nỗ lực xây dựng và duy trì hình ảnh thương hiệu đáng tin cậy trong mắt khách hàng.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIDE BRAND BANNER -->
+    <section class="brand-banner">
+      <div class="container">
+        <div class="banner-card">
+          <iframe
+            class="banner-yt"
+            src="https://www.youtube.com/embed/Nqfs_ic7U0I?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=Nqfs_ic7U0I"
+            title="Brand video"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION SPLIT -->
+    <section class="mission">
+      <div class="container mission-grid">
+        <div class="mission-text">
+          <h3>SỨ MỆNH CỦA CHÚNG TÔI</h3>
+          <p>
+            Hồng Trà Ngô Gia cam kết mang đến những thức uống tinh tế, lành mạnh và an toàn cho sức khỏe.
+            Chúng tôi luôn hướng tới trải nghiệm khách hàng hoàn hảo: từ mùi vị chuẩn, không gian dễ chịu,
+            cho đến dịch vụ chu đáo. Mỗi ly trà là tâm huyết của người làm nghề, gửi gắm niềm tự hào Việt.
+          </p>
+        </div>
+        <div class="mission-visual">
+          <img src="{% static 'assets/images/tra-sua.png' %}" alt="Sứ mệnh Ngô Gia" />
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION OVER IMAGE -->
+    <section class="vision">
+      <div class="vision-wrap">
+        <img src="{% static 'assets/images/tra-latte.png' %}" alt="Tầm nhìn"/>
+        <div class="vision-box">
+          <h3>TẦM NHÌN THƯƠNG HIỆU</h3>
+          <p>
+            Trở thành thương hiệu tiên phong trong lĩnh vực đồ uống chất lượng cao tại Việt Nam,
+            được người tiêu dùng tin cậy và yêu mến. Ngô Gia hướng đến phát triển bền vững, đóng góp
+            tích cực cho cộng đồng và lan tỏa văn hóa trà hiện đại.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRINKS MOSAIC BACKDROP -->
+    <section class="mosaic">
+      <div class="mosaic-grid">
+        <img src="{% static 'assets/images/products/tra-sua-dai-loan.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/hong-tra-dai-loan.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-xanh-dao-ngo-gia.png' %}" alt=""/>
+        <img src="{% static 'assets/images/products/o-long-nho.png' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-sua-tran-chau-duong-den.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/hong-tra-kem-cheese.png' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-o-long-bi-dao.png' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-xanh-chanh.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-sua-o-long.png' %}" alt=""/>
+        <img src="{% static 'assets/images/products/hong-tra-chanh-vai-thieu.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-xanh-latte.jpg' %}" alt=""/>
+        <img src="{% static 'assets/images/products/tra-o-long-dao.png' %}" alt=""/>
+      </div>
+    </section>
+
+    <!-- BIG GREETING -->
+    <section class="greeting">
+      <div class="container greet-wrap">
+        <h2 class="ghost" aria-hidden="true">NGÔ GIA XIN CHÀO</h2>
+        <h2 class="greet">NGÔ GIA XIN CHÀO</h2>
+      </div>
+    </section>
+
+   
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+</body>
+</html>
