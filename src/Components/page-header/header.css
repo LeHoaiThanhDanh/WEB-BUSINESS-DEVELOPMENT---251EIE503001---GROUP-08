@@ -43,6 +43,39 @@
   gap: 30px;
 }
 
+/* Cart link pill (guest + user) */
+.actions .cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid #e6eef9;
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+  color: #0f172a;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+.actions .cart-link:hover { background: #f7fbff; border-color: #b6d8ff; box-shadow: 0 10px 24px rgba(15, 23, 42, .08); }
+.actions .cart-link:active { transform: translateY(1px); }
+.actions .cart-link img { width: 28px; height: 28px; object-fit: contain; }
+.actions .cart-link .icon-wrap { position: relative; display: inline-flex; }
+.actions .cart-link .cart-badge {
+  position: absolute;
+  top: -6px; right: -6px;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ef4444; color: #fff;
+  font-size: 11px; line-height: 18px; font-weight: 800;
+  display: inline-block; text-align: center;
+}
+.actions .cart-link .cart-meta { display: flex; flex-direction: column; line-height: 1.1; }
+.actions .cart-link .cart-meta .label { font-size: 11px; color: #6b7280; }
+.actions .cart-link .cart-meta .header-cart-count { display: none; }
+.actions .cart-link .cart-meta .header-cart-total, .actions .cart-link .cart-meta .total { font-weight: 800; color: #2563eb; font-size: 14px; }
+
 .cart-btn {
   position: relative;
   border: none;
@@ -155,7 +188,17 @@
 .nav-bar a.active img {
   filter: brightness(0) saturate(100%) invert(33%) sepia(93%) saturate(3487%) hue-rotate(198deg) brightness(96%) contrast(101%);
 }
-
+.user { position:relative; z-index: 101; }
+.user-btn { display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#fff; border:1px solid #e5e7eb; cursor:pointer; }
+.user-btn:focus { outline: 2px solid #bfdbfe; outline-offset: 2px; }
+/* avatar và name là phần tử con của .user */
+.user .avatar { width:32px; height:32px; border-radius:50%; object-fit:cover; }
+.user .name { font-weight:600; font-size:14px; }
+/* menu là phần tử con của .user */
+.user .menu { position:absolute; right:0; top:120%; background:#fff; border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 12px 40px rgba(15,23,42,.18); padding:8px; display:none; gap:4px; min-width:170px; z-index: 1000; font-size:14px; line-height:1.4; }
+.user.open .menu { display: grid !important; }
+.user .menu a, .logged .user .menu button { text-align:left; padding:8px 12px; border:0; background:transparent; cursor:pointer; color:#111827; text-decoration:none; border-radius:8px; font-size:14px; }
+.user .menu a:hover, .logged .user .menu button:hover { background:#f3f4f6; }
 /* ========== RESPONSIVE ========== */
 @media (max-width: 992px) {
   .shop-header {
@@ -192,4 +235,19 @@
   .nav-bar a {
     font-size: 13px;
   }
+
+  /* On small screens: keep icon + total, hide label to save space */
+  .actions .cart-link { gap: 8px; padding: 6px 10px; }
+  .actions .cart-link .cart-meta .label { display: none; }
+  .actions .cart-link .cart-meta .header-cart-total, .actions .cart-link .cart-meta .total { font-size: 13px; }
 }
+
+/* ===== Logged-in header tweaks (used by header2.html) ===== */
+.shop-header.logged { background: #eef7ff; position: relative; z-index: 100; }
+.logged .actions { gap: 18px; }
+.logged .cart-link { text-decoration: none; color: #0f172a; padding: 8px 12px; gap: 10px; }
+.logged .cart-link img { width: 28px; height: 28px; }
+.logged .cart-meta { display: flex; flex-direction: column; line-height: 1.1; font-size: 12px; color: #6b7280; }
+.logged .cart-meta .total,
+.logged .cart-meta .header-cart-total { font-weight: 800; color: #2563eb; font-size: 14px; }
+.logged .caret { color: #64748b; font-size: 12px; margin-left: 2px; }

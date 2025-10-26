@@ -14,7 +14,7 @@
   display: grid;
   border-top: none;
   border-bottom: 1px solid #e5e7eb;
-  margin-top: 100;
+  margin-top: 100px;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.03);
   background-color: #ffffff;
 }
@@ -149,32 +149,39 @@
 
 /* Form nhập email */
 .sub-form{
-  position: relative;        
-  width: 80%;              
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  width: 80%;
   height: 70px;
+  border: 1.6px solid rgba(255,255,255,.85);
+  border-radius: 999px;
+  padding: 0 6px 0 18px;
+  background: transparent;
+  overflow: hidden;
 }
 
 .sub-form input{
-  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
   height: 100%;
   border-radius: 999px;
-  border: 1.6px solid rgba(255,255,255,.85);
+  border: 0;
   background: transparent;
   color: #fff;
   font-size: 16px;
-  padding: 0 130px 0 18px;   
+  padding: 0 8px 0 0;
   outline: none;
 }
 .sub-form input::placeholder{ color: rgba(255,255,255,.75); }
 
 /* nút ở trong ô */
 .sub-form .btn-primary{
-  position: absolute;
-  top: 50%;
-  right: 6px;
-  transform: translateY(-50%);
-  height: 90%;
-  width: 20%;
+  position: static;
+  transform: none;
+  height: 80%;
+  padding: 0 22px;
   border-radius: 999px;
   background: #fff;
   color: #0088ff;
@@ -183,6 +190,7 @@
   border: none;
   cursor: pointer;
   transition: .2s ease;
+  white-space: nowrap;
 }
 .sub-form .btn-primary:hover{
   background: transparent;

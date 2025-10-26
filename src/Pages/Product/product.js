@@ -1,35 +1,3 @@
-// Product detail page (clean UTF-8)
-
-async function loadComponent(targetSelector, url) {
-  const host = document.querySelector(targetSelector);
-  if (!host) return;
-  try {
-    const res = await fetch(url, { cache: 'no-cache' });
-    if (!res.ok) {
-      host.innerHTML = `<div style="padding:16px;color:#b00">Không tải được ${url}</div>`;
-      return;
-    }
-    const html = await res.text();
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
-    const frag = document.createDocumentFragment();
-    for (const node of Array.from(tmp.childNodes)) {
-      const isScript = node.tagName && node.tagName.toLowerCase() === 'script';
-      if (!isScript) frag.appendChild(node.cloneNode(true));
-    }
-    host.innerHTML = '';
-    host.appendChild(frag);
-    for (const old of Array.from(tmp.querySelectorAll('script'))) {
-      const s = document.createElement('script');
-      for (const { name, value } of Array.from(old.attributes)) s.setAttribute(name, value);
-      if (old.src) s.src = old.src; else s.textContent = old.textContent || '';
-      document.body.appendChild(s);
-    }
-  } catch (err) {
-    host.innerHTML = `<div style="padding:16px;color:#b00">Không tải được ${url}</div>`;
-    console.error('loadComponent error:', url, err);
-  }
-}
 
 function getCurrentUser() {
   try {
@@ -44,12 +12,9 @@ function getCurrentUser() {
   }
 }
 
-const headerUrl = getCurrentUser()
-  ? '/src/Components/page-header/header2.html'
-  : '/src/Components/page-header/header.html';
+const STATIC_BASE =
+  document.querySelector('meta[name="static-base"]')?.content || '/static/';
 
-loadComponent('#app-header', headerUrl);
-loadComponent('#app-footer', '/src/Components/page-footer/footer.html');
 
 function getQuery() {
   const sp = new URLSearchParams(location.search);
@@ -249,13 +214,20 @@ async function renderRelated(baseProduct, products) {
       </a>`;
   }).join('');
 
+  // Thay alert bằng toast/console và đảm bảo không bind trùng
   list.querySelectorAll('.related-card').forEach((card) => {
     const btn = card.querySelector('.cart2-btn');
     if (!btn) return;
+    // HỦY BIND CŨ (nếu có)
+    btn.replaceWith(btn.cloneNode(true));
+  });
+
+  list.querySelectorAll('.related-card .cart2-btn').forEach((btn) => {
     btn.addEventListener('click', (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
       if (!window.NGCart) return;
+      const card = btn.closest('.related-card');
       window.NGCart.addItem({
         id: card.dataset.id || '',
         name: card.dataset.name || '',
@@ -264,7 +236,9 @@ async function renderRelated(baseProduct, products) {
         size: 'M',
         qty: 1,
       });
-      alert('Đã thêm sản phẩm vào giỏ hàng!');
+      // Thông báo nhẹ, không block UI
+      console.info('Thêm vào giỏ hàng thành công');
+      window.dispatchEvent(new CustomEvent('cart:updated', { detail: { silent: true } }));
     });
   });
 }
@@ -387,6 +361,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           qty,
           options,
         });
+        window.dispatchEvent(new CustomEvent('cart:updated'));
         alert('Đã thêm sản phẩm vào giỏ hàng!');
       });
     }

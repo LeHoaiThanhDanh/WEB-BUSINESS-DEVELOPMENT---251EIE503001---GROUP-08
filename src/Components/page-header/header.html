@@ -5,9 +5,16 @@
     </div>
 
     <div class="actions">
-      <a class="cart-btn" href="/cart/">
-        <img src="/assets/icons/Cart.png" alt="Giỏ hàng">
-        <span class="badge">0</span>
+      <a class="cart-link" href="/cart/">
+        <span class="icon-wrap">
+          <img src="/assets/icons/Cart.png" alt="Giỏ hàng">
+          <span class="cart-badge" data-cart-count>0</span>
+        </span>
+        <div class="cart-meta">
+          <span class="label">Giỏ hàng</span>
+          <span id="headerCartCount" class="header-cart-count">0</span>
+          <span id="headerCartTotal" class="header-cart-total">0đ</span>
+        </div>
       </a>
       <a class="btn login-btn" href="/login/">Đăng nhập</a>
       <a class="btn signup-btn" href="/register/">Đăng ký</a>
@@ -25,5 +32,4 @@
 </header>
 
 <link rel="stylesheet" href="/src/Components/page-header/header.css" />
-<script src="/src/Components/page-header/header.js" defer></script>
 

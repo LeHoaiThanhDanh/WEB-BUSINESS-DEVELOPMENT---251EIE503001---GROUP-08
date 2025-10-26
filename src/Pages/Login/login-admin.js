@@ -54,7 +54,8 @@
       try { data = await res.json(); } catch {}
       if (!res.ok || data.ok === false) { showError('Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng nhập lại chính xác.'); return; }
       // Success → redirect (có thể đổi sang /admin/ nếu cần)
-      location.href = '/home2/';
+      try { localStorage.setItem('authAdmin','1'); } catch {}
+      location.href = '/admin-dashboard/';
     } catch (e) {
       showError('Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng nhập lại chính xác.');
     }
@@ -63,4 +64,3 @@
   if (btn) btn.addEventListener('click', doLogin);
   [usernameEl, pwdEl].forEach(el => el && el.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
 })();
-

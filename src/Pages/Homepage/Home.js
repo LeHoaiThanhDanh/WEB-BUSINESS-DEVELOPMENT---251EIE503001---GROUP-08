@@ -1,10 +1,4 @@
-﻿﻿/*******************************
- * HOME PAGE ONLY (works with app.js)
- * - Không load header/footer (đã do app.js xử lý)
- * - Chỉ khởi tạo Swiper, modal danh mục đồ uống, Top Hot, Hot Menu
- *******************************/
-
-let ALL_PRODUCTS = [];
+﻿﻿let ALL_PRODUCTS = [];
 let drinksSwiper = null;
 
 // Map “slug” ←→ tên hiển thị (giống trước đây)

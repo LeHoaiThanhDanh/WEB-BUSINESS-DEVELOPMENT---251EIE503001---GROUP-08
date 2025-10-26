@@ -1,6 +1,6 @@
 // Menu page script
 
-async function loadComponent(targetSelector, url) {
+async function loadComponent(targetSelector, url, runScripts = false) {
   const host = document.querySelector(targetSelector);
   if (!host) return;
   try {
@@ -9,9 +9,12 @@ async function loadComponent(targetSelector, url) {
       host.innerHTML = `<div style="padding:16px;color:#b00">Không thể tải ${url}</div>`;
       return;
     }
+
     const html = await res.text();
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
+
+    // 1) Chỉ append các node KHÔNG phải <script>
     const frag = document.createDocumentFragment();
     for (const node of Array.from(tmp.childNodes)) {
       const isScript = node.tagName && node.tagName.toLowerCase() === 'script';
@@ -19,12 +22,18 @@ async function loadComponent(targetSelector, url) {
     }
     host.innerHTML = '';
     host.appendChild(frag);
-    for (const old of Array.from(tmp.querySelectorAll('script'))) {
-      const s = document.createElement('script');
-      for (const { name, value } of Array.from(old.attributes)) s.setAttribute(name, value);
-      if (old.src) s.src = old.src; else s.textContent = old.textContent || '';
-      document.body.appendChild(s);
+
+    // 2) KHÔNG thực thi script bên trong fragment (TRÁNH vòng lặp nạp header)
+    if (runScripts) {
+      for (const old of Array.from(tmp.querySelectorAll('script'))) {
+        const s = document.createElement('script');
+        for (const { name, value } of Array.from(old.attributes)) s.setAttribute(name, value);
+        if (old.src) s.src = old.src; else s.textContent = old.textContent || '';
+        document.body.appendChild(s);
+      }
     }
+
+    // Cập nhật tổng tiền nếu có NGCart (không bắt buộc)
     if (window.NGCart) {
       const totals = window.NGCart.totals(window.NGCart.getItems());
       const totalEl = document.getElementById('cart-total');
@@ -49,12 +58,6 @@ function getCurrentUser() {
   }
 }
 
-const headerUrl = getCurrentUser()
-  ? '/src/Components/page-header/header2.html'
-  : '/src/Components/page-header/header.html';
-
-loadComponent('#app-header', headerUrl);
-loadComponent('#app-footer', '/src/Components/page-footer/footer.html');
 
 let lastRenderedItems = [];
 
@@ -93,7 +96,8 @@ function formatVND(value) {
 }
 
 async function fetchProducts() {
-  const res = await fetch('/public/data/products.json', { cache: 'no-cache' });
+  const url = `${STATIC_BASE}data/products.json`; 
+  const res = await fetch(url, { cache: 'no-cache' });
   if (!res.ok) throw new Error('HTTP ' + res.status);
   return res.json();
 }

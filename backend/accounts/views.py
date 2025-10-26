@@ -1,6 +1,7 @@
 import json
 import random
 from pathlib import Path
+from django.core.cache import cache
 
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
@@ -70,14 +71,32 @@ def register_view(request):
 
 
 def _load_products():
+    """Load products.json with a simple cache.
+
+    - Uses Django's default cache (LocMemCache in development).
+    - Auto-busts when the file's mtime changes.
+    - Falls back gracefully if file missing or invalid.
+    """
+    try:
+        mtime = int(Path(PRODUCTS_FILE).stat().st_mtime)
+    except FileNotFoundError:
+        mtime = 0
+
+    cache_key = f"products_cache_v1:{mtime}"
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
     try:
         with Path(PRODUCTS_FILE).open(encoding='utf-8') as handle:
             data = json.load(handle)
-            return data if isinstance(data, list) else []
-    except FileNotFoundError:
-        return []
-    except json.JSONDecodeError:
-        return []
+            data = data if isinstance(data, list) else []
+    except (FileNotFoundError, json.JSONDecodeError):
+        data = []
+
+    # Cache for 5 minutes
+    cache.set(cache_key, data, timeout=300)
+    return data
 
 
 @api_view(['GET'])

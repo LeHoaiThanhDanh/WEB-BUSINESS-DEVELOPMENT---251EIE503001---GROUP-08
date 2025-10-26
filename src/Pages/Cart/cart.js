@@ -196,7 +196,8 @@
         console.error(err);
       }
     });
-    window.dispatchEvent(new CustomEvent('ng:cart-change', { detail: { items } }));
+    window.dispatchEvent(new CustomEvent('ng:cart-change', { detail: { items, silent: true } }));
+    window.dispatchEvent(new CustomEvent('cart:updated', { detail: { items, silent: true } }));
   }
 
   function saveItems(items) {
@@ -251,13 +252,14 @@
   }
 
   window.addEventListener('storage', (evt) => {
+    if (evt.storageArea !== localStorage) return;
     if (evt.key === STORAGE_KEY || evt.key === COUPON_KEY) {
       const items = loadItems();
       updateHeader(items);
       notify(items);
     }
   });
-
+  
   updateHeader(loadItems());
 
   window.NGCart = {
@@ -295,7 +297,7 @@
       .replace(/'/g, '&#39;');
   }
 
-  async function loadComponent(targetSelector, url) {
+  async function cartLoadHtml(targetSelector, url) {
     const host = document.querySelector(targetSelector);
     if (!host) return;
     try {
@@ -326,7 +328,7 @@
         if (totalEl) totalEl.textContent = window.NGCart.price(totals.grand) + 'd';
       }
     } catch (err) {
-      console.error('loadComponent error:', url, err);
+      console.error('cartLoadHtml error:', url, err);
     }
   }
 
@@ -342,12 +344,10 @@
     return null;
   }
 
-  const headerUrl = getCurrentUser()
-    ? '/src/Components/page-header/header2.html'
-    : '/src/Components/page-header/header.html';
+  const STATIC_BASE =
+    document.querySelector('meta[name="static-base"]')?.content || '/static/';
 
-  loadComponent('#app-header', headerUrl);
-  loadComponent('#app-footer', '/src/Components/page-footer/footer.html');
+
 
   function markCartNavActive() {
     const nav = document.querySelector('.nav-bar');
@@ -980,7 +980,7 @@
       evt.preventDefault();
       const value = emailInput.value.trim();
       if (!value) {
-        alert('Vui long nhap email truoc khi dang ky.');
+        alert('Vui lòng nhập email trước khi đăng ký.');
         emailInput.focus();
         return;
       }
@@ -995,15 +995,21 @@
     btn.addEventListener('click', () => {
       const agree = document.getElementById('agree-terms');
       if (!agree || !agree.checked) {
-        alert('Vui long dong y voi cac dieu khoan truoc khi thanh toan.');
+        alert('Vui lòng đồng ý với các điều khoản trước khi thanh toán.');
         return;
       }
       const items = window.NGCart.getItems();
       if (!items.length) {
-        alert('Gio hang hien dang trong.');
+        alert('Giỏ hàng hiện đang trống.');
         return;
       }
-      alert('Cam on ban! Don hang cua ban dang duoc xu ly (demo).');
+      // Chuyen sang trang thanh toan theo phuong thuc da chon
+      const pm = document.querySelector('input[name="payment"]:checked');
+      const val = (pm && pm.value) || '';
+      const map = { momo: 'momo', zalopay: 'zalopay', ewallet: 'payoo' };
+      const method = map[val] || 'momo';
+      try { window.location.href = '/payment/?method=' + method; }
+      catch { location.assign('/payment/?method=' + method); }
     });
   }
 

@@ -6,10 +6,14 @@
 
     <div class="actions">
       <a class="cart-link" href="/cart/">
-        <img src="/assets/icons/Cart.png" alt="Giỏ hàng">
+        <span class="icon-wrap">
+          <img src="/assets/icons/Cart.png" alt="Giỏ hàng">
+          <span class="cart-badge" data-cart-count>0</span>
+        </span>
         <div class="cart-meta">
           <span class="label">Giỏ hàng</span>
-          <span class="total" id="cart-total">0đ</span>
+          <span id="headerCartCount" class="header-cart-count">0</span>
+          <span id="headerCartTotal" class="header-cart-total">0đ</span>
         </div>
       </a>
 
@@ -17,13 +21,13 @@
         <button class="user-btn" id="user-btn" type="button"
                 aria-haspopup="menu" aria-expanded="false" aria-controls="user-menu">
           <img class="avatar" id="user-avatar" src="/assets/icons/user.png" alt="User">
-          <span class="name" id="user-name" id="userName" data-user-chip>Tài khoản</span>
-          <span class="caret" aria-hidden="true">▼</span>
+          <span class="name" id="user-name" data-user-chip>Tài khoản</span>
+          <span class="caret" aria-hidden="true">▾</span>
         </button>
         <div class="menu" id="user-menu" role="menu" hidden>
-          <a role="menuitem" href="/profile">Hồ sơ</a>
-          <a role="menuitem" href="/orders">Đơn hàng</a>
-          <button role="menuitem" id="btn-logout" id="btnLogout" type="button">Đăng xuất</button>
+          <a role="menuitem" href="/profile/">Hồ sơ</a>
+          <a role="menuitem" href="/orders/">Đơn hàng</a>
+          <button role="menuitem" id="btn-logout" type="button">Đăng xuất</button>
         </div>
       </div>
     </div>
@@ -38,7 +42,4 @@
     <a href="/agency/"><img src="/assets/icons/chi_nhanh.png" alt="">Chi nhánh</a>
   </nav>
 </header>
-
-<link rel="stylesheet" href="/src/Components/page-header/header2.css" />
-<script src="/src/Components/page-header/header2.js?v=2" defer></script>
-
+<link rel="stylesheet" href="/src/Components/page-header/header.css" />
