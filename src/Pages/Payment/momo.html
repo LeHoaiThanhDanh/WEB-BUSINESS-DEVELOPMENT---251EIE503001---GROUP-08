@@ -1,39 +1,13 @@
-<html>
-<head>
-    <title>Momo</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="footer.css">
-</head>
-<body>
-    <!--Header-->
-    <header class="momo-header">
-        <div class="header-inner">
-        <img src="assets/images/momo.png" alt="MoMo Logo" class="momo-logo">
-        <span class="header-title-momo">Cổng thanh toán MoMo</span>
-        </div>
-    </header>
-    <!--Main-->
-    <main class="momo-container">
-        <div class="qr-box-momo">
-            <h2 class="qr-title">Quét mã QR để thanh toán</h2>
-        <div class="qr-frame">
-            <img src="assets/images/qrcode.png" alt="QR MoMo" class="qr-image-momo">
-            <div class="scan-line"></div>
-        </div> 
-            <p class="qr-desc-momo">
-                Sử dụng <b>App MoMo</b> hoặc ứng dụng camera hỗ trợ quét mã để thanh toán
-            </p>
-        </div>
-    </main>
-    <!-- Footer -->
-    <div id="footer-placeholder"></div>
-    <script>
-        fetch("footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer-placeholder").innerHTML = data;
-        })
-        .catch(error => console.error("Không thể tải footer:", error));
-    </script>
-</body>
+<!DOCTYPE html>
+<html lang="vi">
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
+  <link rel="canonical" href="payment.html?method=momo">
+  <meta http-equiv="refresh" content="0; url=payment.html?method=momo">
+  <script>location.replace('payment.html?method=momo');</script>
+  <body>
+    Nếu trình duyệt không tự chuyển, vui lòng bấm
+    <a href="payment.html?method=momo">vào đây</a>.
+  </body>
 </html>
+

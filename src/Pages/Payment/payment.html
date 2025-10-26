@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cổng thanh toán</title>
+  <link rel="stylesheet" href="/src/Pages/Payment/payment.css">
+  <link rel="stylesheet" href="/src/Components/page-footer/footer.css">
+  <style>
+    /* Giảm FOUC khi JS gán class động */
+    header, main { visibility: hidden; }
+    .ready header, .ready main { visibility: visible; }
+  </style>
+</head>
+<body>
+  <!-- Header động theo phương thức -->
+  <header id="brandHeader" class="">
+    <div class="header-inner">
+      <img id="brandLogo" src="" alt="" class="">
+      <span id="brandTitle" class=""></span>
+    </div>
+  </header>
+
+  <!-- Main nội dung QR -->
+  <main id="brandContainer" class="">
+    <div id="qrBox" class="">
+      <h2 class="qr-title">Quét mã QR để thanh toán</h2>
+      <div class="qr-frame">
+        <img id="qrImage" src="" alt="" class="">
+      <div class="scan-line"></div>
+      </div>
+      <p id="qrDesc" class=""></p>
+      <p class="qr-after">Đã thanh toán? <a href="/orders/">Kiểm tra đơn hàng</a>.</p>
+    </div>
+  </main>
+
+  <!-- Danh sách ngân hàng (chỉ hiện với Payoo) -->
+  <section class="banks-section" id="banks" hidden>
+    <h3 class="banks-title">Ngân hàng hỗ trợ</h3>
+    <div class="banks-grid">
+      <img src="/assets/images/vib.png" alt="VIB">
+      <img src="/assets/images/mb.png" alt="MB Bank">
+      <img src="/assets/images/acb.png" alt="ACB">
+      <img src="/assets/images/no.png" alt=" ">
+      <img src="/assets/images/scb.png" alt="SCB">
+      <img src="/assets/images/vcb.png" alt="Vietcombank">
+      <img src="/assets/images/bidv.png" alt="BIDV">
+      <img src="/assets/images/agri.png" alt="Agribank">
+      <img src="/assets/images/tech.png" alt="Techcombank">
+      <img src="/assets/images/tp.png" alt="TP Bank">
+      <img src="/assets/images/cake.png" alt="Cake">
+      <img src="/assets/images/blue.png" alt=" ">
+      <img src="/assets/images/yello.png" alt=" ">
+      <img src="/assets/images/white.png" alt=" ">
+      <img src="/assets/images/lp.png" alt="LPBank">
+    </div>
+  </section>
+
+  <!-- Footer component via app.js -->
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/app.js" defer></script>
+  <script src="/src/Pages/Payment/payment.js"></script>
+</body>
+</html>

@@ -1,39 +1,13 @@
-<html>
-<head>
-    <title>Zalo Pay</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="footer.css">
-</head>
-<body>
-    <!--Header-->
-    <header class="zalo-header">
-        <div class="header-inner">
-        <img src="assets/images/zalo.png" alt="Zalo Logo" class="zalo-logo">
-        <span class="header-title-zalo">Cổng thanh toán Zalo Pay</span>
-        </div>
-    </header>
-    <!--Main-->
-    <main class="zalo-container">
-        <div class="qr-box-zalo">
-            <h2 class="qr-title">Quét mã QR để thanh toán</h2>
-        <div class="qr-frame">
-            <img src="assets/images/qrzalo.png" alt="QR Zalo Pay" class="qr-image-zalo">
-            <div class="scan-line"></div>
-        </div> 
-            <p class="qr-desc-zalo">
-                Sử dụng <b>App Zalo Pay</b> hoặc ứng dụng camera hỗ trợ quét mã để thanh toán
-            </p>
-        </div>
-    </main>
-    <!-- Footer -->
-    <div id="footer-placeholder"></div>
-    <script>
-        fetch("footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer-placeholder").innerHTML = data;
-        })
-        .catch(error => console.error("Không thể tải footer:", error));
-    </script>
-</body>
+<!DOCTYPE html>
+<html lang="vi">
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
+  <link rel="canonical" href="payment.html?method=zalopay">
+  <meta http-equiv="refresh" content="0; url=payment.html?method=zalopay">
+  <script>location.replace('payment.html?method=zalopay');</script>
+  <body>
+    Nếu trình duyệt không tự chuyển, vui lòng bấm
+    <a href="payment.html?method=zalopay">vào đây</a>.
+  </body>
 </html>
+

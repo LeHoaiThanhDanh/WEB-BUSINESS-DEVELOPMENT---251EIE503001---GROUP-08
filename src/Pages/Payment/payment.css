@@ -7,26 +7,10 @@ body {
 }
 
 /* HEADER */
-.momo-header {
+.momo-header,.payoo-header,.zalo-header {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #eee;
-  padding: 12px 40px;
-  box-sizing: border-box;
-}
-
-.zalo-header {
-  width: 100%;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-  padding: 12px 40px;
-  box-sizing: border-box;
-}
-
-.payoo-header {
-  width: 100%;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1.5px solid rgba(13, 110, 253, 0.18);
   padding: 12px 40px;
   box-sizing: border-box;
 }
@@ -194,15 +178,9 @@ body {
   text-decoration: underline;
 }
 
-#footer-placeholder {
-  transform: scale(0.8);
-  transform-origin: top center;
-}
+#footer-placeholder, #app-footer { transform: none; }
 
-#footer-placeholder footer {
-  max-width: 100%;
-  margin: 0 auto;
-}
+#footer-placeholder footer, #app-footer footer { max-width: 100%; margin: 0 auto; }
 
 /* Phần danh sách ngân hàng */
 .banks-section {
@@ -257,6 +235,9 @@ body {
   padding: 8px;              
 }
 
+.qr-after { margin-top: 10px; font-size: 13px; color: #fff; }
+.qr-after a { color: #fff; text-decoration: underline; font-weight: 600; }
+
 .qr-frame .qr-image-momo {
   width: 100%;
   height: 100%;
@@ -300,6 +281,10 @@ body {
   border-radius: 2px;
   z-index: 2;
   animation: scanY 2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qr-frame .scan-line { animation: none; }
 }
 
 @keyframes scanY {

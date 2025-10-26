@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cổng thanh toán</title>
+  <link rel="stylesheet" href="{% static 'Pages/Payment/payment.css' %}">
+  <link rel="stylesheet" href="{% static 'Components/page-footer/footer.css' %}">
+  <style>
+    header, main { visibility: hidden; }
+    .ready header, .ready main { visibility: visible; }
+  </style>
+</head>
+<body>
+  <!-- Header động theo phương thức -->
+  <header id="brandHeader" class="">
+    <div class="header-inner">
+      <img id="brandLogo" src="" alt="" class="">
+      <span id="brandTitle" class=""></span>
+    </div>
+  </header>
+
+  <!-- Main nội dung QR -->
+  <main id="brandContainer" class="">
+    <div id="qrBox" class="">
+      <h2 class="qr-title">Quét mã QR để thanh toán</h2>
+      <div class="qr-frame">
+        <img id="qrImage" src="" alt="" class="">
+        <div class="scan-line"></div>
+      </div>
+      <p id="qrDesc" class=""></p>
+      <p class="qr-after">Đã thanh toán? <a href="/orders/">Kiểm tra đơn hàng</a>.</p>
+    </div>
+  </main>
+
+  <!-- Danh sách ngân hàng (chỉ hiện với Payoo) -->
+  <section class="banks-section" id="banks" hidden>
+    <h3 class="banks-title">Ngân hàng hỗ trợ</h3>
+    <div class="banks-grid">
+      <img src="{% static 'assets/images/vib.png' %}" alt="VIB">
+      <img src="{% static 'assets/images/mb.png' %}" alt="MB Bank">
+      <img src="{% static 'assets/images/acb.png' %}" alt="ACB">
+      <img src="{% static 'assets/images/no.png' %}" alt=" ">
+      <img src="{% static 'assets/images/scb.png' %}" alt="SCB">
+      <img src="{% static 'assets/images/vcb.png' %}" alt="Vietcombank">
+      <img src="{% static 'assets/images/bidv.png' %}" alt="BIDV">
+      <img src="{% static 'assets/images/agri.png' %}" alt="Agribank">
+      <img src="{% static 'assets/images/tech.png' %}" alt="Techcombank">
+      <img src="{% static 'assets/images/tp.png' %}" alt="TP Bank">
+      <img src="{% static 'assets/images/cake.png' %}" alt="Cake">
+      <img src="{% static 'assets/images/blue.png' %}" alt=" ">
+      <img src="{% static 'assets/images/yello.png' %}" alt=" ">
+      <img src="{% static 'assets/images/white.png' %}" alt=" ">
+      <img src="{% static 'assets/images/lp.png' %}" alt="LPBank">
+    </div>
+  </section>
+
+  <!-- Footer component via app.js -->
+  <div id="app-footer"></div>
+
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/Payment/payment.js' %}"></script>
+</body>
+</html>
