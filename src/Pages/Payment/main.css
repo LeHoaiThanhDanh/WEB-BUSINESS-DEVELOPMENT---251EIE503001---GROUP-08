@@ -1,0 +1,312 @@
+/* Font & nền tổng thể */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+.momo-header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 12px 40px;
+  box-sizing: border-box;
+}
+
+.zalo-header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 12px 40px;
+  box-sizing: border-box;
+}
+
+.payoo-header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 12px 40px;
+  box-sizing: border-box;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.momo-logo {
+  width: 38px;
+  height: auto;
+}
+
+.zalo-logo {
+  width: 38px;
+  height: auto;
+}
+
+.payoo-logo {
+  width: 38px;
+  height: auto;
+}
+
+.header-title-momo {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.header-title-zalo {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.header-title-payoo {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* MAIN */
+.momo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.zalo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.payoo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hộp QR */
+.qr-box-momo {
+  background-color: #e83e8c; 
+  border-radius: 16px;
+  padding: 40px 60px;
+  text-align: center;
+  color: #fff;
+  width: 360px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.qr-box-zalo {
+  background-color: #0088ff; 
+  border-radius: 16px;
+  padding: 40px 60px;
+  text-align: center;
+  color: #fff;
+  width: 360px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.qr-box-payoo {
+  background-color: #0088ff; 
+  border-radius: 16px;
+  padding: 40px 60px;
+  text-align: center;
+  color: #fff;
+  width: 360px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Tiêu đề */
+.qr-title {
+  font-size: 20px;
+  font-weight: 450;
+  margin-bottom: 20px;
+}
+
+/* QR Image */
+.qr-image-momo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 8px;
+  display: block;
+}
+
+.qr-image-zalo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 8px;
+  display: block;
+}
+
+.qr-image-payoo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 8px;
+  display: block;
+}
+
+/* Dòng mô tả */
+.qr-desc-momo {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.qr-desc-zalo {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.qr-desc-payoo {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.highlight {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#footer-placeholder {
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+
+#footer-placeholder footer {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Phần danh sách ngân hàng */
+.banks-section {
+  text-align: center;
+  padding: 30px 0 60px;
+  background-color: #fff;
+}
+
+.banks-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.banks-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-auto-rows: 1fr; 
+  gap: 20px; 
+  justify-items: center; 
+  align-items: center;
+  max-width: 700px; 
+  margin: 0 auto; 
+}
+
+.banks-grid img {
+  width: 70px; 
+  height: 70px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f9f9f9;
+  padding: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banks-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* QR khung */
+.qr-frame {
+  position: relative;
+  width: 200px;        
+  height: 200px;
+  margin: 0 auto 20px;
+  overflow: hidden;    
+  border-radius: 8px;
+  background-color: #ffffff; 
+  box-sizing: border-box;    
+  padding: 8px;              
+}
+
+.qr-frame .qr-image-momo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 6px; 
+  box-sizing: border-box;
+}
+
+.qr-frame .qr-image-zalo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 6px; 
+  box-sizing: border-box;
+}
+
+.qr-frame .qr-image-payoo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 6px; 
+  box-sizing: border-box;
+}
+
+.qr-frame .scan-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px; 
+  background: rgba(0, 123, 255, 0.85); 
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.9);
+  border-radius: 2px;
+  z-index: 2;
+  animation: scanY 2s linear infinite;
+}
+
+@keyframes scanY {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: calc(100% - 3px);
+  }
+}
