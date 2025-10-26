@@ -235,7 +235,9 @@ body {
   padding: 8px;              
 }
 
-.qr-after { margin-top: 10px; font-size: 13px; color: #fff; }
+.qr-after { margin-top: 10px; font-size: 13px; color: #fff; opacity: 0; }
+.ready .qr-after { animation: qrAfterIn .35s ease forwards; animation-delay: 5s; }
+@keyframes qrAfterIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .qr-after a { color: #fff; text-decoration: underline; font-weight: 600; }
 
 .qr-frame .qr-image-momo {
