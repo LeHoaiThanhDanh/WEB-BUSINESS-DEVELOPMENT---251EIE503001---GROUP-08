@@ -63,7 +63,7 @@
       try { data = await res.json(); } catch {}
       if (!res.ok || data.ok === false) { showModal('Lỗi đăng ký', (data && data.message) || 'Đăng ký thất bại. Vui lòng thử lại.'); return; }
       // Redirect to login page when success
-      location.href = '/login-customer/';
+      location.href = '/login/';
     } catch (e) {
       showModal('Lỗi đăng ký', 'Đăng ký thất bại. Vui lòng thử lại.');
     }
