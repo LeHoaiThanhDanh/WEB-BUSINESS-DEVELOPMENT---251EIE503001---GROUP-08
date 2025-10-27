@@ -286,7 +286,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .qr-frame .scan-line { animation: none; }
+  .qr-frame .scan-line { animation: scanY 2s linear infinite !important; }
 }
 
 @keyframes scanY {
