@@ -265,7 +265,6 @@
   display: grid;
   gap: 6px;
   justify-items: center;
-  border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .menu-card .price-col .line {
