@@ -36,6 +36,9 @@
   object-fit: contain;
 }
 
+
+.shop-header.admin .brand .logo { width: 220px; }
+
 /* ========== CÁC NÚT BÊN PHẢI ========== */
 .actions {
   display: flex;
@@ -221,6 +224,7 @@
   .brand .logo {
     width: 70px;
   }
+  .shop-header.admin .brand .logo { width: 70px; }
 
   .btn {
     font-size: 13px;

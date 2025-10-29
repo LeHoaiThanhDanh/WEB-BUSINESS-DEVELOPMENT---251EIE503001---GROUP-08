@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diễn đàn - Hồng Trà Ngô Gia</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/src/Pages/Blog/blog.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+</head>
+<body>
+    <!-- Header -->
+    <div id="app-header"></div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-banner">
+        <h1 class="breadcrumb-title">Tất cả bài viết</h1>
+        <p class="breadcrumb-path">Trang chủ/ Diễn đàn</p>
+    </div>
+
+    <!-- Background -->
+    <div class="background-overlay"></div>
+    <img src="/assets/images/nen.png" alt="Decor" class="top-overlay">
+    
+    <!-- Blog List Container -->
+    <div class="container">
+        <div class="promo-container" id="promo-container"></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="app-footer"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/app.js"></script>
+    <script src="/src/Pages/Blog/blog-data.js"></script>
+    <script>
+        // Render blog list
+        (function() {
+            const promoContainer = document.getElementById('promo-container');
+            const allBlogs = Object.keys(BLOG_DATA).map(key => ({
+                id: key,
+                ...BLOG_DATA[key]
+            }));
+            
+            promoContainer.innerHTML = allBlogs.map(blog => {
+                const imageUrl = blog.thumbnailImage || blog.image || (blog.images && blog.images[0]) || '/assets/images/placeholder.jpg';
+                
+                return `
+                    <a href="/src/Pages/Blog/blog-detail.html?id=${blog.id}" class="promo-card">
+                        <img src="${imageUrl}" alt="${blog.title}" class="promo-img">
+                        <div class="promo-content">
+                            <p class="promo-date">
+                                <img src='/assets/icons/Vector (1).png' alt="icon" width="12px" height="12px"/>
+                                ${blog.date}
+                            </p>
+                            <hr class="divider">
+                            <h3 class="promo-title">${blog.heading}</h3>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        })();
+    </script>
+</body>
+</html>

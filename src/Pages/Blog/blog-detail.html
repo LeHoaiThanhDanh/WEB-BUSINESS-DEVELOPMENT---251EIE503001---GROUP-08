@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="blog-title">Blog - Ngô Gia</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'Pages/Blog/blog.css' %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+</head>
+<body>
+    <!-- Header -->
+    <div id="app-header"></div>
+
+    <div class="main-section">
+        <div class="background-overlay"></div>
+        <img src="{% static 'assets/images/nen.png' %}" alt="Decor" class="top-overlay">
+        
+        <div class="container">
+            <!-- Ngày đăng blog -->
+            <div class="blog-date">
+                <p id="blog-date-text"></p>
+            </div>
+            
+            <!-- Tiêu đề blog -->
+            <h1 id="blog-heading"></h1>
+            
+            <!-- Subheading (nếu có) -->
+            <h2 id="blog-subheading"></h2>
+            
+            <!-- Title divider -->
+            <div class="title-divider">
+                <hr>
+                <img src="{% static 'assets/images/logo-divider.png' %}" alt="logo"/>
+                <hr>
+            </div>
+            
+            <!-- Layout ảnh đơn -->
+            <div class="img" id="single-image-layout">
+                <img id="blog-main-image" src="" alt="" class="blog-img">
+            </div>
+            
+            <!-- Layout gallery -->
+            <div class="image-layout" id="gallery-image-layout">
+                <div class="left-image">
+                    <img id="gallery-left-img" src="" alt="">
+                </div>
+                <div class="right-images">
+                    <img id="gallery-right-img-1" src="" alt="">
+                    <img id="gallery-right-img-2" src="" alt="" class="flip-opc">
+                </div>
+            </div>
+            
+            <!-- Nội dung blog -->
+            <div class="blog-content" id="blog-body"></div>
+        </div>
+
+        <!-- Bài viết liên quan -->
+        <div class="related-section">
+            <h2 class="related-title">Có thể bạn sẽ quan tâm</h2>
+        </div>
+        
+        <div class="related-container" id="related-container"></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="app-footer"></div>
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/app.js' %}" defer></script>
+    <script src="{% static 'Pages/Blog/blog-data.js' %}"></script>
+    <script src="{% static 'Pages/Blog/blog-detail-loader.js' %}"></script>
+</body>
+</html>
