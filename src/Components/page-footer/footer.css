@@ -231,13 +231,157 @@
 @media (max-width: 768px){ :root{ --overlap: 0px; } }
 
 /* Subscribe success modal */
-.sub-modal{ position: fixed; inset: 0; z-index: 9999; display: none; }
-.sub-modal.show{ display: block; }
-.sub-backdrop{ position: absolute; inset: 0; background: rgba(15,23,42,.6); backdrop-filter: blur(1.5px); }
-.sub-card{ position: relative; z-index: 1; width: min(520px, 92vw); margin: 22vh auto 0; background:#fff; border-radius: 16px; padding: 18px 18px; box-shadow: 0 30px 70px rgba(15,23,42,.35); }
-.sub-row{ display:flex; align-items: center; gap: 12px; }
-.sub-icon{ color: #10b981; font-size: 28px; }
-.sub-title{ font-weight: 800; color: #1d4ed8; font-size: 18px; }
-.sub-desc{ color:#475569; margin-top: 4px; }
-.sub-close{ position:absolute; top:8px; right:10px; border:0; background:none; font-size:20px; cursor:pointer; color:#64748b; }
+.sub-modal { 
+  position: fixed; 
+  inset: 0; 
+  z-index: 9999; 
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-modal.show { 
+  display: flex !important; 
+}
+
+.sub-backdrop { 
+  position: absolute; 
+  inset: 0; 
+  background: rgba(15, 23, 42, 0.65); 
+  backdrop-filter: blur(2px); 
+  cursor: pointer; 
+}
+
+.sub-card { 
+  position: relative; 
+  z-index: 1; 
+  box-sizing: border-box; /* ✅ THÊM - Quan trọng */
+  width: 420px; /* ✅ Đổi từ min() sang giá trị cố định */
+  max-width: 90vw; /* ✅ Đảo ngược logic */
+  min-height: auto; /* ✅ THÊM */
+  height: auto; /* ✅ THÊM */
+  margin: 0; 
+  background: #fff; 
+  border-radius: 16px; 
+  padding: 24px 28px; 
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4); 
+  animation: subModalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  overflow: visible; /* ✅ THÊM */
+}
+
+@keyframes subModalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sub-row { 
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+  width: 100%; /* ✅ THÊM */
+}
+
+.sub-icon { 
+  color: #10b981; 
+  font-size: 36px; 
+  flex-shrink: 0;
+  width: 36px; /* ✅ THÊM - Cố định kích thước */
+  height: 36px; /* ✅ THÊM */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-texts {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden; /* ✅ THÊM */
+}
+
+.sub-title { 
+  font-weight: 800; 
+  color: #1d4ed8; 
+  font-size: 19px; 
+  margin: 0 0 6px 0; 
+  line-height: 1.3; 
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* ✅ THÊM */
+}
+
+.sub-desc { 
+  color: #475569; 
+  margin: 0; 
+  font-size: 14px; 
+  line-height: 1.5; 
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* ✅ THÊM */
+}
+
+.sub-close { 
+  position: absolute; 
+  top: 12px; 
+  right: 12px; 
+  border: 0; 
+  background: none; 
+  font-size: 24px; 
+  cursor: pointer; 
+  color: #94a3b8; 
+  width: 32px; 
+  height: 32px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 6px; 
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* ✅ THÊM */
+}
+
+.sub-close:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+  transform: rotate(90deg);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 640px) {
+  .sub-card {
+    width: 92vw;
+    max-width: 92vw; /* ✅ Sửa */
+    padding: 20px 24px;
+    border-radius: 12px;
+  }
+
+  .sub-row {
+    gap: 14px;
+  }
+
+  .sub-icon {
+    font-size: 32px;
+    width: 32px; /* ✅ THÊM */
+    height: 32px; /* ✅ THÊM */
+  }
+
+  .sub-title {
+    font-size: 17px;
+  }
+
+  .sub-desc {
+    font-size: 13px;
+  }
+
+  .sub-close {
+    font-size: 22px;
+    width: 28px;
+    height: 28px;
+    top: 10px;
+    right: 10px;
+  }
+}
 
