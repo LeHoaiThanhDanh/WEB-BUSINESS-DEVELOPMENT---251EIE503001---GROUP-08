@@ -38,7 +38,7 @@
       }
     } catch {}
     try {
-      const raw2 = localStorage.getItem('authUser'); // fallback
+      const raw2 = localStorage.getItem('authUser');
       if (raw2) {
         const u2 = JSON.parse(raw2);
         if (u2 && (u2.fullName || u2.name || u2.username || u2.email)) return u2;
@@ -95,7 +95,81 @@
     markActiveNav();
   }
 
-  async function renderFooter(){ await loadHTML('#app-footer', PATHS.footer); }
+  async function renderFooter(){ 
+    await loadHTML('#app-footer', PATHS.footer); 
+    attachFooterEvents(); // 
+  }
+
+  function attachFooterEvents() {
+    // Tìm nút đăng ký ở footer
+    const registerBtns = qsa('#footer-register-btn, .footer-register-btn, [data-footer-register]');
+    
+    registerBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // ✅ Tìm modal đăng ký TÀI KHOẢN (không phải sub-modal)
+        const modal = qs('#sub-modal, [data-modal="register"]');
+        
+        if (modal) {
+          // Hiển thị modal
+          if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+          } 
+          else {
+            openRegisterModal(modal); // ✅ Đổi tên hàm
+          }
+        } else {
+          console.error('Modal #sub-modal không tìm thấy trong footer.html');
+          alert('Chức năng đăng ký đang được bảo trì. Vui lòng thử lại sau!');
+        }
+      });
+    });
+  }
+
+  // ✅ Đổi tên hàm từ openModal() → openRegisterModal()
+  function openRegisterModal(modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('show');
+    modal.removeAttribute('aria-hidden'); 
+    document.body.classList.add('modal-open');
+    
+    const closeModal = () => {
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true'); 
+      document.body.classList.remove('modal-open');
+    };
+    
+    // ✅ Nút đóng
+    const closeBtn = modal.querySelector('.modal-close, [data-dismiss="modal"]');
+    if (closeBtn) {
+      closeBtn.onclick = closeModal;
+    }
+    
+    // ✅ Click backdrop
+    const backdrop = modal.querySelector('.modal-backdrop');
+    if (backdrop) {
+      backdrop.onclick = closeModal;
+    }
+    
+    // ✅ Click outside modal-dialog
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    };
+    
+    // ✅ ESC key
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+  }
 
   function markActiveNav() {
     const path = location.pathname.replace(/\/+$/, '');
