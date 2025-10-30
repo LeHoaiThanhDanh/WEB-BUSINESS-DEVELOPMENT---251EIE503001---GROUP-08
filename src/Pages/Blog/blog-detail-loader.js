@@ -71,7 +71,7 @@
   const relatedContainer = document.getElementById('related-container');
   const relatedBlogs = RELATED_BLOGS.filter(blog => blog.id !== blogId).slice(0, 6);
 
-  // ✅ Lấy current URL pathname
+
   const currentPath = window.location.pathname;
 
   relatedContainer.innerHTML = relatedBlogs.map(blog => `
