@@ -29,10 +29,8 @@
           <h2>Thông tin giao hàng</h2>
         </div>
         <dl class="shipping-info" id="shipping-info">
-          <!-- filled via JS -->
         </dl>
       </article>
-
       <article class="panel cart-panel">
         <div class="panel-head">
           <h2>Giỏ hàng của bạn</h2>
@@ -41,7 +39,6 @@
         <div class="cart-list" id="cart-list" aria-live="polite">
           <!-- items inserted via JS -->
         </div>
-     
         <section class="totals" aria-label="Thông tin thanh toán">
           <h3>Thông tin thanh toán</h3>
           <div class="coupon-tools">
@@ -88,7 +85,96 @@
 
   <div id="cart-modal-root"></div>
 
+  <!-- Alert Modal HTML - checkout -->
+  <div id="alert-overlay" class="alert-overlay" role="dialog" aria-modal="true">
+    <div id="alert-dialog" class="alert-dialog">
+      <div class="alert-icon" id="alert-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <h3 id="alert-title" class="alert-title"></h3>
+      <p id="alert-message" class="alert-message"></p>
+      <div class="alert-actions" id="alert-actions">
+        <button type="button" class="alert-btn alert-btn-primary" id="alert-confirm">OK</button>
+      </div>
+    </div>
+  </div>
+
   <div id="app-footer"></div>
+  
+  <script>
+  window.showAlert = function(type, title, message, isConfirm) {
+    const overlay = document.getElementById('alert-overlay');
+    const dialog = document.getElementById('alert-dialog');
+    const iconEl = document.getElementById('alert-icon');
+    const titleEl = document.getElementById('alert-title');
+    const messageEl = document.getElementById('alert-message');
+    const actionsEl = document.getElementById('alert-actions');
+
+    if (!overlay || !dialog || !iconEl || !titleEl || !messageEl || !actionsEl) {
+      console.error('Alert elements not found');
+      return Promise.resolve(false);
+    }
+
+    titleEl.textContent = title || '';
+    messageEl.textContent = message || '';
+    dialog.className = 'alert-dialog alert-' + (type || 'info');
+
+    const icons = {
+      // ✅ THAY ĐỔI: Icon warning với dấu chấm than
+      warning: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+      info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
+      confirm: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>'
+    };
+    iconEl.innerHTML = icons[type] || icons.info;
+
+    if (isConfirm) {
+      actionsEl.innerHTML = `
+        <button type="button" class="alert-btn alert-btn-secondary" id="alert-cancel">Hủy</button>
+        <button type="button" class="alert-btn alert-btn-primary" id="alert-confirm">Xác nhận</button>
+      `;
+    } else {
+      actionsEl.innerHTML = `
+        <button type="button" class="alert-btn alert-btn-primary" id="alert-confirm">OK</button>
+      `;
+    }
+
+    overlay.classList.add('show');
+    document.body.classList.add('alert-open');
+
+    return new Promise(function(resolve) {
+      const confirmBtn = document.getElementById('alert-confirm');
+      const cancelBtn = document.getElementById('alert-cancel');
+
+      function close(result) {
+        overlay.classList.remove('show');
+        document.body.classList.remove('alert-open');
+        resolve(result);
+      }
+
+      if (confirmBtn) confirmBtn.onclick = function() { close(true); };
+      if (cancelBtn) cancelBtn.onclick = function() { close(false); };
+
+      if (!isConfirm) {
+        overlay.onclick = function(e) {
+          if (e.target === overlay) close(false);
+        };
+      }
+
+      function onKeyDown(evt) {
+        if (evt.key === 'Escape' && !isConfirm) {
+          close(false);
+          document.removeEventListener('keydown', onKeyDown);
+        }
+      }
+      document.addEventListener('keydown', onKeyDown);
+    });
+  };
+</script>
+  
   <script src="{% static 'assets/js/app.js' %}" defer></script>
   <script src="{% static 'Pages/Cart/cart.js' %}" defer></script>
 </body>

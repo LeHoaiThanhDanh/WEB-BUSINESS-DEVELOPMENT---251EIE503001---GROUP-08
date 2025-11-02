@@ -992,15 +992,27 @@
   function initCheckout() {
     const btn = document.getElementById('btn-checkout');
     if (!btn) return;
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       const agree = document.getElementById('agree-terms');
       if (!agree || !agree.checked) {
-        alert('Vui lòng đồng ý với các điều khoản trước khi thanh toán.');
+        // ✅ THAY ĐỔI: Dùng showAlert thay vì alert()
+        await window.showAlert(
+          'warning',
+          'Chưa đồng ý điều khoản',
+          'Vui lòng đồng ý với các điều khoản trước khi thanh toán.',
+          false
+        );
         return;
       }
       const items = window.NGCart.getItems();
       if (!items.length) {
-        alert('Giỏ hàng hiện đang trống.');
+        // ✅ THAY ĐỔI: Dùng showAlert thay vì alert()
+        await window.showAlert(
+          'info',
+          'Giỏ hàng trống',
+          'Giỏ hàng hiện đang trống.',
+          false
+        );
         return;
       }
       // Chuyen sang trang thanh toan theo phuong thuc da chon
@@ -1021,4 +1033,3 @@
 
   window.NGCart.subscribe(renderCartItems);
 })(window, document);
-

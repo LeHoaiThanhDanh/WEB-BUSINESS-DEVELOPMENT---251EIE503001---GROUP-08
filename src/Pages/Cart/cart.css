@@ -762,6 +762,22 @@ body.modal-open {
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 @media (max-width: 1024px) {
   .checkout-layout {
     grid-template-columns: 1fr;
@@ -808,4 +824,144 @@ body.modal-open {
 .item-controls .remove-item img {
   width: 16px;
   height: 16px;
+}
+
+/* ========================================
+   Alert Modal - CHỈ cho checkout
+   ======================================== */
+
+.alert-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.2s;
+}
+
+.alert-overlay.show {
+  display: flex;
+}
+
+.alert-dialog {
+  background: white;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.alert-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.alert-warning .alert-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.alert-info .alert-icon {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+.alert-confirm .alert-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.alert-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px;
+}
+
+.alert-message {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.alert-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.alert-btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.alert-btn-primary:hover {
+  background: #2563eb;
+}
+
+.alert-btn-secondary {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.alert-btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+body.alert-open {
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .alert-dialog {
+    max-width: calc(100% - 40px);
+    padding: 20px;
+  }
+  .alert-actions {
+    flex-direction: column-reverse;
+  }
 }
