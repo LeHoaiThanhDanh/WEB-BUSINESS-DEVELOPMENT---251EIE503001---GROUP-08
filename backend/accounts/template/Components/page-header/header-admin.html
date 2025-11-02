@@ -1,0 +1,182 @@
+<header class="shop-header logged admin">
+  <div class="header-top">
+    <div class="brand">
+      <a href="/src/Pages/Admin/Admin.html">
+        <img src="/assets/images/logo ngo gia.png" alt="Hồng Trà Ngô Gia" class="logo" />
+      </a>
+    </div>
+
+    <div class="actions">
+      <div class="user" id="user-box">
+        <button class="user-btn" id="user-btn" type="button">
+          <img class="avatar" id="user-avatar" src="/assets/icons/user.png" alt="User">
+          <span class="name" id="user-name" data-user-chip>Tài khoản</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="menu" id="user-menu" role="menu" hidden>
+          <a role="menuitem" href="/src/Pages/Admin/admin-account.html">Hồ sơ</a>
+          <button role="menuitem" id="btn-logout" type="button">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <a href="/admin-dashboard" class="nav-item" data-action="navigate">
+      <img src="/assets/icons/Home.png" alt=""> Tổng quan
+    </a>
+    <a href="#products" class="nav-item" data-action="scroll" data-target="products">
+      <img src="/assets/icons/info.png" alt="">Sản phẩm
+    </a>
+    <a href="#orders" class="nav-item" data-action="scroll" data-target="orders">
+      <img src="/assets/icons/menu.png" alt="">Đơn hàng
+    </a>
+    <a href="/admin-account/" class="nav-item" data-action="navigate">
+      <img src="/assets/icons/lien_he.png" alt="">Tài khoản
+    </a>
+    <a href="#reports" class="nav-item" data-action="scroll" data-target="reports">
+      <img src="/assets/icons/dien_dan.png" alt="">Báo cáo
+    </a>
+  </nav>
+</header>
+
+<script>
+(function() {
+  const currentPath = window.location.pathname;
+  const isAdminPage = currentPath.includes('Admin.html');
+  const isAccountPage = currentPath.includes('admin-account.html');
+
+  // Logout
+  document.getElementById('btn-logout')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (confirm('Bạn có chắc muốn đăng xuất?')) {
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('ngogia_user');
+      window.location.href = '/src/Pages/Admin/admin-login.html';
+    }
+  });
+
+  // User menu toggle
+  const userBtn = document.getElementById('user-btn');
+  const userMenu = document.getElementById('user-menu');
+  
+  if (userBtn && userMenu) {
+    userBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isExpanded = userBtn.getAttribute('aria-expanded') === 'true';
+      userBtn.setAttribute('aria-expanded', String(!isExpanded));
+      userMenu.hidden = isExpanded;
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('user-box')?.contains(e.target)) {
+        userBtn.setAttribute('aria-expanded', 'false');
+        userMenu.hidden = true;
+      }
+    });
+  }
+
+  // Navigation logic
+  document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+    const action = item.getAttribute('data-action');
+    const target = item.getAttribute('data-target');
+    const href = item.getAttribute('href');
+
+    item.addEventListener('click', function(e) {
+      console.log('Clicked:', item.textContent.trim(), 'Action:', action);
+
+      // Case 1: Navigate to another page (Tổng quan, Tài khoản)
+      if (action === 'navigate') {
+        console.log('→ Navigate to:', href);
+        // Let default link behavior
+        return;
+      }
+
+      // Case 2: Scroll to section (Sản phẩm, Đơn hàng, Báo cáo)
+      if (action === 'scroll') {
+        e.preventDefault();
+
+        // If not on Admin page, navigate to Admin.html with hash
+        if (!isAdminPage) {
+          console.log('→ Navigate to Admin.html and scroll to:', target);
+          window.location.href = `/src/Pages/Admin/Admin.html#${target}`;
+          return;
+        }
+
+        // If on Admin page, smooth scroll to section
+        const targetSection = document.getElementById(target);
+        if (targetSection) {
+          console.log('→ Scroll to section:', target);
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // Update active state
+          document.querySelectorAll('.nav-bar .nav-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        } else {
+          console.error('Section not found:', target);
+        }
+      }
+    });
+  });
+
+  // Set active state on load
+  document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+    const action = item.getAttribute('data-action');
+    const target = item.getAttribute('data-target');
+    const href = item.getAttribute('href');
+
+    // Active for account page
+    if (isAccountPage && href && href.includes('admin-account')) {
+      item.classList.add('active');
+    }
+    
+    // Active for admin page sections based on hash
+    if (isAdminPage) {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash === target) {
+        item.classList.add('active');
+      } else if (!hash && item.textContent.includes('Tổng quan')) {
+        item.classList.add('active');
+      }
+    }
+  });
+
+  // Handle hash change for scroll sections
+  if (isAdminPage) {
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash.replace('#', '');
+      const targetSection = document.getElementById(hash);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Update active state
+        document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+          const target = item.getAttribute('data-target');
+          if (target === hash) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Trigger scroll on page load if hash exists
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash) {
+      setTimeout(() => {
+        const targetSection = document.getElementById(initialHash);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  }
+
+  console.log('Header navigation initialized');
+  console.log('Current page:', isAdminPage ? 'Admin.html' : 'Other');
+})();
+</script>
+
+<link rel="stylesheet" href="/src/Components/page-header/header.css" />

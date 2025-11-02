@@ -1,0 +1,82 @@
+<footer class="site-footer">
+  <!-- Subscribe banner -->
+  <section class="subscribe">
+    <img class="cup" src="/assets/images/tra-sua.png" alt="Drink" onerror="this.style.display='none'">
+    <div class="sub-text">
+      <h3 data-i18n="footer.sub.title">
+        Đăng ký bản tin của chúng tôi để được nhận những thông báo mới nhất về các ưu đãi và khuyến mãi cực hot
+      </h3>
+      <form class="sub-form" id="subForm">
+        <input type="email" id="subEmail"
+               placeholder="Nhập email của bạn tại đây"
+               data-i18n-placeholder="footer.sub.placeholder"
+               required>
+        <button type="button" id="footer-register-btn" class="btn-primary footer-register-btn" data-i18n="footer.sub.cta">Đăng ký</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Columns -->
+  <section class="footer-cols">
+    <div class="col brand">
+      <img class="logo" src="/assets/images/logo ngo gia.png" alt="Hồng Trà Ngô Gia" onerror="this.style.display='none'">
+    </div>
+
+    <nav class="col links">
+      <h5 data-i18n="footer.links.title">Liên kết nhanh</h5>
+      <ul>
+        <li><a href="/src/Pages/Homepage/Home.html" data-i18n="footer.links.home">Trang chủ</a></li>
+        <li><a href="/aboutus" data-i18n="footer.links.about">Về chúng tôi</a></li>
+        <li><a href="/menu" data-i18n="footer.links.menu">Menu thức uống</a></li>
+        <li><a href="/contact" data-i18n="footer.links.contact">Liên hệ</a></li>
+        <li><a href="/blog" data-i18n="footer.links.forum">Diễn đàn</a></li>
+      </ul>
+    </nav>
+
+    <div class="col branches">
+      <h5 data-i18n="footer.branches.title">Địa chỉ các chi nhánh</h5>
+      <ul>
+        <li data-i18n="footer.branches.b1">Chi nhánh 1: 244 đường số 8, Linh Xuân, Tp Thủ Đức, Tp Hồ Chí Minh, Việt Nam.</li>
+        <li data-i18n="footer.branches.b2">Chi nhánh 2: 60 Nguyễn An Ninh, Kp Nhị Đồng 2, Dĩ An, Việt Nam.</li>
+        <li data-i18n="footer.branches.b3">Chi nhánh 3: 24 Lý Thường Kiệt, Tp Dĩ An, Bình Dương, Việt Nam.</li>
+      </ul>
+    </div>
+
+    <div class="col contact">
+      <h5 data-i18n="footer.contact.title">Liên hệ</h5>
+      <ul>
+        <li><img src="/assets/icons/phone.png" alt="" /> <span>1222-888</span></li>
+        <li><img src="/assets/icons/mail.png" alt="" /> <span>ngogiaxinchao@gmail.com</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Bottom bar -->
+  <section class="footer-bottom">
+    <div class="copy">Ngô Gia © 2025 All right reserved</div>
+    <div class="socials">
+      <a aria-label="Facebook" href="https://byvn.net/o4Yn"><img src="/assets/icons/facebook.png" alt=""></a>
+      <a aria-label="TikTok"   href="https://www.tiktok.com/@hongtrangogiavn"><img src="/assets/icons/tiktok.png" alt=""></a>
+      <a aria-label="Instagram"href="https://www.instagram.com/wujiablacktea/"><img src="/assets/icons/ig.png" alt=""></a>
+      <a aria-label="Thread" href="https://www.instagram.com/wujiablacktea/"><img src="/assets/icons/Thread.png" alt=""></a>
+    </div>
+  </section>
+
+  <!-- Subscribe success modal -->
+  <div class="sub-modal" id="sub-modal" aria-hidden="true">
+    <div class="sub-backdrop" data-close></div>
+    <div class="sub-card" role="dialog" aria-modal="true" aria-labelledby="sub-modal-title">
+      <button class="sub-close" type="button" aria-label="Đóng" data-close>×</button>
+      <div class="sub-row">
+        <span class="sub-icon">✔</span>
+        <div class="sub-texts">
+          <div class="sub-title" id="sub-modal-title">ĐĂNG KÝ THÀNH CÔNG</div>
+          <div class="sub-desc">Bạn sẽ nhận được những thông tin mới nhất từ Hồng trà Ngô Gia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/src/Components/page-footer/footer.css">
+<script src="/src/Components/page-footer/footer.js" defer></script>

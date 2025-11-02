@@ -1,0 +1,205 @@
+<header class="shop-header logged admin">
+  <div class="header-top">
+    <div class="brand">
+      <a href="/admin-dashboard">
+        <img src="/assets/images/logo ngo gia.png" alt="Hồng Trà Ngô Gia" class="logo" />
+      </a>
+    </div>
+
+    <div class="actions">
+      <div class="user" id="user-box">
+        <button class="user-btn" id="user-btn" type="button">
+          <img class="avatar" id="user-avatar" src="/assets/icons/user.png" alt="User">
+          <span class="name" id="user-name" data-user-chip data-i18n="header.admin.account">Tài khoản</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="menu" id="user-menu" role="menu" hidden>
+          <a role="menuitem" href="/admin-account" data-i18n="header.admin.profile">Hồ sơ</a>
+          <button role="menuitem" id="btn-logout" type="button" data-i18n="header.admin.logout">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <a href="/admin-dashboard" class="nav-item" data-action="navigate">
+      <img src="/assets/icons/Home.png" alt="">
+      <span data-i18n="header.admin.overview">Tổng quan</span>
+    </a>
+    <a href="/admin-dashboard#products" class="nav-item" data-action="scroll" data-target="products">
+      <img src="/assets/icons/sanpham.png" alt="">
+      <span data-i18n="header.admin.products">Sản phẩm</span>
+    </a>
+    <a href="/admin-dashboard#orders" class="nav-item" data-action="scroll" data-target="orders">
+      <img src="/assets/icons/Cart.png" alt="">
+      <span data-i18n="header.admin.orders">Đơn hàng</span>
+    </a>
+    <a href="/admin-account/" class="nav-item" data-action="navigate">
+      <img src="/assets/icons/account.png" alt="">
+      <span data-i18n="header.admin.account">Tài khoản</span>
+    </a>
+    <a href="/admin-blog/" class="nav-item" data-action="scroll" data-target="forums">
+      <img src="/assets/icons/dien_dan.png" alt="">
+      <span data-i18n="header.admin.forums">Diễn đàn</span>
+    </a>
+  </nav>
+</header>
+
+<script>
+(function() {
+  const currentPath = window.location.pathname;
+  const isAdminPage = currentPath.includes('admin-dashboard') || currentPath.includes('Admin.html');
+  const isAccountPage = currentPath.includes('admin-account');
+
+  // Logout
+  document.getElementById('btn-logout')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    const confirmMsg = document.querySelector('[data-i18n="header.admin.logoutConfirm"]')?.textContent || 'Bạn có chắc muốn đăng xuất?';
+    if (confirm(confirmMsg)) {
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('ngogia_user');
+      window.location.href = '/admin-login';
+    }
+  });
+
+  // User menu toggle
+  const userBtn = document.getElementById('user-btn');
+  const userMenu = document.getElementById('user-menu');
+  
+  if (userBtn && userMenu) {
+    userBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isExpanded = userBtn.getAttribute('aria-expanded') === 'true';
+      userBtn.setAttribute('aria-expanded', String(!isExpanded));
+      userMenu.hidden = isExpanded;
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('user-box')?.contains(e.target)) {
+        userBtn.setAttribute('aria-expanded', 'false');
+        userMenu.hidden = true;
+      }
+    });
+  }
+
+  // Navigation logic
+  document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+    const action = item.getAttribute('data-action');
+    const target = item.getAttribute('data-target');
+    const href = item.getAttribute('href');
+
+    item.addEventListener('click', function(e) {
+      console.log('Clicked:', item.textContent.trim(), 'Action:', action);
+
+      // Case 1: Navigate to another page (Tổng quan, Tài khoản)
+      if (action === 'navigate') {
+        console.log('→ Navigate to:', href);
+        return;
+      }
+
+      // Case 2: Scroll to section (Sản phẩm, Đơn hàng, Báo cáo)
+      if (action === 'scroll') {
+        e.preventDefault();
+
+        // If not on Admin page, navigate to dashboard with hash
+        if (!isAdminPage) {
+          console.log('→ Navigate to admin-dashboard and scroll to:', target);
+          window.location.href = `/admin-dashboard#${target}`;
+          return;
+        }
+
+        // If on Admin page, smooth scroll to section
+        const targetSection = document.getElementById(target);
+        if (targetSection) {
+          console.log('→ Scroll to section:', target);
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // Update active state
+          document.querySelectorAll('.nav-bar .nav-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        } else {
+          console.error('Section not found:', target);
+        }
+      }
+    });
+  });
+
+  // Set active state on load
+  document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+    const action = item.getAttribute('data-action');
+    const target = item.getAttribute('data-target');
+    const href = item.getAttribute('href');
+
+    // Active for account page
+    if (isAccountPage && href && href.includes('admin-account')) {
+      item.classList.add('active');
+    }
+    
+    // Active for admin page sections based on hash
+    if (isAdminPage) {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash === target) {
+        item.classList.add('active');
+      } else if (!hash) {
+        // Set "Tổng quan" active by default on dashboard
+        const overviewSpan = item.querySelector('[data-i18n="header.admin.overview"]');
+        if (overviewSpan) {
+          item.classList.add('active');
+        }
+      }
+    }
+  });
+
+  // Handle hash change for scroll sections
+  if (isAdminPage) {
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash.replace('#', '');
+      const targetSection = document.getElementById(hash);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Update active state
+        document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
+          const target = item.getAttribute('data-target');
+          if (target === hash) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Trigger scroll on page load if hash exists
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash) {
+      setTimeout(() => {
+        const targetSection = document.getElementById(initialHash);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  }
+
+  // ✅ Lắng nghe sự kiện đổi ngôn ngữ từ trang admin-account
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'app.lang' && typeof window.reloadTranslations === 'function') {
+      const newLang = e.newValue || 'vi';
+      window.reloadTranslations(newLang);
+    }
+  });
+
+  // ✅ Load translations ngay khi header load
+  if (typeof window.reloadTranslations === 'function') {
+    const savedLang = localStorage.getItem('app.lang') || 'vi';
+    window.reloadTranslations(savedLang);
+  }
+
+  console.log('Header navigation initialized');
+  console.log('Current page:', isAdminPage ? 'Admin Dashboard' : 'Other');
+})();
+</script>
+
+<link rel="stylesheet" href="/src/Components/page-header/header.css" />

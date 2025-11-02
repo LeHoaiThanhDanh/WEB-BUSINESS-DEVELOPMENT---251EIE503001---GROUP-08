@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="admin.dashboard.title">Admin Dashboard • Hồng Trà Ngô Gia</title>
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <div class="admin-layout" id="adminLayout">
+    <div class="main">
+      <header class="topbar">
+        <button class="export-btn" id="btnExportReport" type="button" data-i18n="admin.dashboard.exportReport">Xuất báo cáo tổng kết</button>
+        <div class="top-actions">
+          <div class="dropdown" id="ddUser">
+            <button class="dd-btn" id="ddUserBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ddUserMenu"></button>
+            <div class="dd-menu" id="ddUserMenu" role="menu" hidden></div>
+          </div>
+          <div class="dropdown" id="ddMore">
+            <button class="dd-btn" id="ddMoreBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ddMoreMenu"></button>
+            <div class="dd-menu" id="ddMoreMenu" role="menu" hidden></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="cards" id="overview">
+          <div class="card stat revenue">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/doanhthu.png' %}" alt="Revenue icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+              <span data-i18n="admin.dashboard.revenue">DOANH THU</span>
+            </div>
+            <div class="stat-value" id="sRevenue">679.000đ</div>
+            <div class="stat-desc">
+              <img src="/assets/icons/grow.png" alt="Bestseller icon" class="stat-desc-icon">
+              <span data-i18n="admin.dashboard.last24h">Trong 24h qua</span> +36.6%
+            </div>
+          </div>
+          
+          <div class="card stat orders">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/order.png' %}" alt="Order icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+              <span data-i18n="admin.dashboard.ordersToday">Đơn hàng hôm nay</span>
+            </div>
+            <div class="stat-value" id="sOrders">0</div>
+            <div class="stat-desc">
+              <img src="/assets/icons/grow.png" alt="Bestseller icon" class="stat-desc-icon">
+              <span data-i18n="admin.dashboard.vsYesterday">So với hôm qua:</span> <span id="sOrdersDelta">+65.4%</span>
+            </div>
+          </div>
+          
+          <div class="card stat bestseller">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/bestseller.png' %}" alt="Best seller icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+              <span data-i18n="admin.dashboard.productsSold">Sản phẩm đã bán</span>
+            </div>
+            <div class="stat-value" id="sCustomers">327 SẢN PHẨM</div>
+            <div class="stat-desc">
+              <img src="/assets/icons/grow.png" alt="Bestseller icon" class="stat-desc-icon">
+              <span data-i18n="admin.dashboard.thisWeek">Tuần này</span>
+            </div>
+          </div>
+          
+          <div class="card stat products">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/product.png' %}" alt="Product icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+              <span data-i18n="admin.dashboard.products">Sản phẩm</span>
+            </div>
+            <div class="stat-value" id="sProducts">0</div>
+            <div class="stat-desc" data-i18n="admin.dashboard.inBusiness">Đang kinh doanh</div>
+          </div>
+        </section>
+
+        <section class="grid2">
+          <div class="card chart" id="reports">
+            <div class="card-title" data-i18n="admin.dashboard.performance">Hiệu suất (Doanh thu & Chi phí)</div>
+            <canvas id="revCostChart" height="260"></canvas>
+          </div>
+
+          <div class="card tasks" id="settings">
+            <div class="card-title" data-i18n="admin.dashboard.topDrinks">Top thức uống bán chạy</div>
+            <div class="chart-wrap">
+              <canvas id="catPieChart" height="220"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="card table" id="orders">
+          <div class="card-title" data-i18n="admin.dashboard.recentOrders">Đơn hàng gần đây</div>
+          <div class="table-scroll">         
+            <table>
+              <thead>
+                <tr>
+                  <th data-i18n="admin.dashboard.orderCode">Mã</th>
+                  <th data-i18n="admin.dashboard.customer">Khách</th>
+                  <th data-i18n="admin.dashboard.time">Thời Gian</th>
+                  <th data-i18n="admin.dashboard.status">Trạng thái</th>
+                  <th data-i18n="admin.dashboard.total">Tổng</th>
+                  <th data-i18n="admin.dashboard.actions">Tùy chỉnh</th>
+                </tr>
+              </thead>
+              <tbody id="ordersBody">
+              </tbody>
+            </table>  
+          </div>       
+        </section>
+
+        <section class="card table" id="products">
+          <div class="card-header-block">
+            <div class="card-title" data-i18n="admin.dashboard.products">Sản phẩm</div>
+            <div class="card-actions-row">
+              <button type="button" class="btn btn-add" id="btn-add-product">
+                <span class="btn-icon">+</span>
+                <span data-i18n="admin.dashboard.addProduct">Thêm sản phẩm</span>
+              </button>
+              
+              <div class="search-box">
+                <input type="search" id="product-search" data-i18n-placeholder="admin.dashboard.searchProduct" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm sản phẩm">
+                <button type="button" class="search-btn" aria-label="Tìm kiếm">
+                  <img src="{% static 'assets/icons/search.png' %}" alt="Search">
+                </button>
+              </div>
+              
+              <div style="flex: 1;"></div>
+              
+              <select id="category-filter" class="category-filter" aria-label="Lọc theo danh mục">
+                <option value="" data-i18n="admin.dashboard.allCategories">Tất cả danh mục</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th data-i18n="admin.dashboard.id">ID</th>
+                  <th data-i18n="admin.dashboard.name">Tên</th>
+                  <th data-i18n="admin.dashboard.category">Danh mục</th>
+                  <th data-i18n="admin.dashboard.image">Hình ảnh</th>
+                  <th data-i18n="admin.dashboard.price">Giá</th>
+                  <th data-i18n="admin.dashboard.actions">Tùy chỉnh</th>
+                </tr>
+              </thead>
+              <tbody id="productsBody"></tbody>
+            </table>
+          </div>
+          
+          <div class="productsPager" id="productsPager"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal chỉnh sửa sản phẩm - Bố cục giống Thêm sản phẩm -->
+<div id="modal-edit-product" class="modal" style="display:none;" role="dialog" aria-labelledby="edit-product-title" aria-modal="true">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-container modal-add-product">
+    <div class="modal-header">
+      <h2 id="edit-product-title" class="modal-title">CHỈNH SỬA SẢN PHẨM</h2>
+      <button type="button" class="modal-close" data-close-modal>&times;</button>
+    </div>
+
+    <form id="form-edit-product" class="modal-body">
+      <!-- Row 1: Tên sản phẩm + Loại -->
+      <div class="form-row-equal">
+        <div class="form-group">
+          <label for="edit-product-name">Tên sản phẩm</label>
+          <input 
+            type="text" 
+            id="edit-product-name" 
+            placeholder="Nhập tên sản phẩm" 
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-product-category">Loại</label>
+          <select id="edit-product-category" required>
+            <option value="">Chọn loại sản phẩm</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: Tình trạng - Checkbox nằm ngang bên phải -->
+      <div class="form-group-status">
+        <label>Tình trạng</label>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="edit-product-visible" checked>
+            <span>Hiển thị sản phẩm</span>
+          </label>
+          <label>
+            <input type="checkbox" id="edit-product-special">
+            <span>Sản phẩm có ưu đãi đặc biệt</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Row 3: Giá hiện tại + Giá VIP (2 cột) -->
+      <div class="price-section">
+        <div class="price-column">
+          <div class="price-column-title">Giá hiện tại</div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="edit-price-m" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size M</span>
+          </div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="edit-price-l" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size L</span>
+          </div>
+        </div>
+
+        <div class="price-column">
+          <div class="price-column-title">Giá VIP</div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="edit-vip-price-m" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size M</span>
+          </div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="edit-vip-price-l" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size L</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: Thông tin sản phẩm -->
+      <div class="form-group">
+        <label for="edit-product-desc">Thông tin sản phẩm</label>
+        <textarea 
+          id="edit-product-desc" 
+          rows="4"
+          placeholder="Nhập thông tin sản phẩm..."
+        ></textarea>
+      </div>
+
+      <!-- Row 5: Mô tả sản phẩm -->
+      <div class="form-group">
+        <label for="edit-product-detail">Mô tả sản phẩm</label>
+        <textarea 
+          id="edit-product-detail" 
+          rows="4"
+          placeholder="Nhập mô tả sản phẩm..."
+        ></textarea>
+      </div>
+
+      <!-- Row 6: Hình ảnh -->
+      <div class="image-upload-section">
+        <label>Hình ảnh sản phẩm</label>
+        
+        <input 
+          type="file" 
+          id="edit-product-image" 
+          accept="image/*" 
+          style="display:none;"
+        >
+        
+        <!-- Click vào box để upload -->
+        <div class="image-preview-box" id="edit-image-preview-box">
+          <div class="upload-placeholder" id="edit-upload-placeholder">
+            <img 
+              src="/assets/icons/upload.png" 
+              alt="Upload" 
+              class="upload-icon"
+            >
+            <span class="upload-text">Tải ảnh lên</span>
+          </div>
+          <img src="" alt="Preview" id="edit-preview-img" style="display:none;">
+        </div>
+      </div>
+    </form>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-danger" id="btn-delete-product">
+        <span class="btn-icon"><img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;"></span>
+        <span>Xóa</span>
+      </button>
+      <button type="submit" form="form-edit-product" class="btn-primary">
+        <span class="btn-icon"><img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;"></span>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal xác nhận xóa sản phẩm -->
+<div id="modal-delete-confirm" class="modal" style="display:none;" role="dialog" aria-labelledby="delete-title" aria-modal="true">
+  <div class="modal-overlay" data-close-delete></div>
+  <div class="modal-container modal-confirm">
+    <button type="button" class="modal-close" data-close-delete aria-label="Đóng">&times;</button>
+    
+    <div class="modal-body modal-confirm-body">
+      <div class="modal-confirm-header">
+        <div class="confirm-icon">
+          <span class="icon-question">?</span>
+        </div>
+        <div class="confirm-text">
+          <h2 id="delete-title" class="confirm-title">XÁC NHẬN XÓA SẢN PHẨM</h2>
+          <p class="confirm-message">Sau khi xóa, bạn sẽ không thể khôi phục sản phẩm.</p>
+        </div>
+      </div>
+      
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-cancel" data-close-delete>
+          <img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;margin-right:6px;">
+          Hủy bỏ
+        </button>
+        <button type="button" class="btn btn-confirm" id="btn-confirm-delete">
+          <img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;margin-right:6px;">
+          Tiếp tục
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal chi tiết đơn hàng -->
+<div id="modal-order-detail" class="modal" style="display:none;" role="dialog" aria-modal="true">
+  <!--  data-close-order -->
+  <div class="modal-overlay" data-close-order></div>
+  <div class="modal-container modal-order-detail">
+    <div class="modal-header-order">
+      <h2 class="modal-title-order">CHI TIẾT ĐƠN HÀNG</h2>
+      <!-- data-close-order -->
+      <button type="button" class="modal-close" data-close-order aria-label="Đóng">&times;</button>
+    </div>
+
+    <div class="modal-body-order">
+      <!-- Thông tin đơn hàng - Bao gồm cả địa chỉ -->
+      <div class="order-info-section">
+        <div class="order-info-header">
+          <img src="{% static 'assets/icons/Cart.png' %}" alt="Cart" class="section-icon">
+          <h3 class="section-title">Thông tin đơn hàng</h3>
+        </div>
+        <div class="order-info-grid">
+          <div class="info-row">
+            <span class="info-label">Mã đơn hàng:</span>
+            <span class="info-value" id="order-id">HTNGTD273</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Ngày đặt hàng:</span>
+            <span class="info-value" id="order-date">20/10/2025</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Thời gian:</span>
+            <span class="info-value" id="order-time">07:28 am</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Tình trạng đơn hàng:</span>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <select id="order-status-dropdown" class="status-dropdown">
+                <option value="pending">Chờ xác nhận</option>
+                <option value="processing">Đang xử lý</option>
+                <option value="completed">Đã giao hàng</option>
+                <option value="cancelled">Đã hủy</option>
+              </select>
+              <span class="info-value status-badge status-delivered" id="order-status-text">Đã giao hàng</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Địa chỉ người nhận - Nằm trong cùng section -->
+        <div class="order-info-divider"></div>
+        <div class="order-info-subsection">
+          <div class="subsection-header">
+            <h4 class="subsection-title">Địa chỉ người nhận:</h4>
+          </div>
+          <div class="order-info-grid">
+            <div class="info-row">
+              <span class="info-label">Họ và tên:</span>
+              <span class="info-value" id="customer-name">Nguyễn Bá Dũ</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Số điện thoại:</span>
+              <span class="info-value" id="customer-phone">0934727978</span>
+            </div>
+            <div class="info-row full-width">
+              <span class="info-label">Địa chỉ:</span>
+              <span class="info-value" id="customer-address">Bcons plaza, Thống Nhất, Dĩ An Bình Dương</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Danh sách đơn hàng -->
+      <div class="order-items-section">
+        <div class="order-info-header">
+          <img src="{% static 'assets/icons/cart3.png' %}" alt="List" class="section-icon">
+          <h3 class="section-title">Danh sách đơn hàng</h3>
+        </div>
+        <div class="order-items-list" id="order-items">
+          <!-- Item 1 -->
+          <div class="order-item">
+            <img src="{% static 'assets/images/products/hong-tra-dai-loan.jpg' %}" alt="Product" class="item-image">
+            <div class="item-details">
+              <h4 class="item-name">Hồng trà đài loan</h4>
+              <p class="item-specs">Kích cỡ: L, Độ ngọt: Vừa, 2x Thạch dừa nguyên vị</p>
+            </div>
+            <div class="item-price">25.000đ</div>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="order-item">
+            <img src="{% static 'assets/images/products/tra-sua-dai-loan.jpg' %}" alt="Product" class="item-image">
+            <div class="item-details">
+              <h4 class="item-name">Trà sữa Đài Loan</h4>
+              <p class="item-specs">Kích cỡ: M, Độ ngọt: Ít, Trân châu hoàng kim, 2x pudding Trung</p>
+            </div>
+            <div class="item-price">40.000đ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thông tin thanh toán -->
+      <div class="order-payment-section">
+        <h3 class="payment-title">Thông tin thanh toán</h3>
+        <div class="payment-row">
+          <span class="payment-label">Tổng tiền tạm tính</span>
+          <span class="payment-value" id="subtotal">65.000đ</span>
+        </div>
+        <div class="payment-row">
+          <span class="payment-label">Phí vận chuyển</span>
+          <span class="payment-value" id="shipping-fee">0đ</span>
+        </div>
+        <div class="payment-row">
+          <span class="payment-label">Mã giảm giá</span>
+          <span class="payment-value" id="discount">0đ</span>
+        </div>
+        <div class="payment-row payment-total">
+          <span class="payment-label-total">Tổng tiền</span>
+          <span class="payment-value-total" id="total-amount">65.000đ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nút Lưu -->
+    <div class="modal-footer">
+      <button type="button" class="btn-primary" id="btn-save-order">
+        <span class="btn-icon"><img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;"></span>
+        <span>Lưu</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!--  Modal thêm sản phẩm - Bố cục mới -->
+<div id="modal-add-product" class="modal" style="display:none;" role="dialog" aria-modal="true">
+  <div class="modal-overlay" data-close-add-modal></div>
+  <div class="modal-container modal-add-product">
+    <div class="modal-header">
+      <h2 class="modal-title">THÊM SẢN PHẨM</h2>
+      <button type="button" class="modal-close" data-close-add-modal>&times;</button>
+    </div>
+
+    <form id="form-add-product" class="modal-body">
+      <!-- Row 1: Tên sản phẩm + Loại -->
+      <div class="form-row-equal">
+        <div class="form-group">
+          <label for="add-product-name">Tên sản phẩm</label>
+          <input 
+            type="text" 
+            id="add-product-name" 
+            placeholder="Nhập tên sản phẩm" 
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="add-product-category">Loại</label>
+          <select id="add-product-category" required>
+            <option value="">Chọn loại sản phẩm</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: Tình trạng -->
+      <div class="form-group-status">
+        <label>Tình trạng</label>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="add-product-visible" checked>
+            <span>Hiển thị sản phẩm</span>
+          </label>
+          <label>
+            <input type="checkbox" id="add-product-special">
+            <span>Sản phẩm có ưu đãi đặc biệt</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Row 3: Giá hiện tại + Giá VIP (2 cột) -->
+      <div class="price-section">
+        <div class="price-column">
+          <div class="price-column-title">Giá hiện tại</div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="add-price-m" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size M</span>
+          </div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="add-price-l" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size L</span>
+          </div>
+        </div>
+
+        <div class="price-column">
+          <div class="price-column-title">Giá VIP</div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="add-vip-price-m" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size M</span>
+          </div>
+          <div class="price-input-row">
+            <input 
+              type="text" 
+              id="add-vip-price-l" 
+              placeholder="0 VNĐ"
+            >
+            <span class="size-label">Size L</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: Thông tin sản phẩm -->
+      <div class="form-group">
+        <label for="add-product-desc">Thông tin sản phẩm</label>
+        <textarea 
+          id="add-product-desc" 
+          rows="4"
+          placeholder="Nhập thông tin sản phẩm..."
+        ></textarea>
+      </div>
+
+      <!-- Row 5: Mô tả sản phẩm -->
+      <div class="form-group">
+        <label for="add-product-detail">Mô tả sản phẩm</label>
+        <textarea 
+          id="add-product-detail" 
+          rows="4"
+          placeholder="Nhập mô tả sản phẩm..."
+        ></textarea>
+      </div>
+
+      <!-- Row 6: Hình ảnh -->
+      <div class="image-upload-section">
+        <label>Hình ảnh sản phẩm</label>
+        
+        <input 
+          type="file" 
+          id="add-product-image" 
+          accept="image/*" 
+          style="display:none;"
+        >
+        
+        <div class="image-preview-box" id="add-image-preview-box">
+          <div class="upload-placeholder" id="upload-placeholder">
+            <img 
+              src="/assets/icons/upload.png" 
+              alt="Upload" 
+              class="upload-icon"
+            >
+            <span class="upload-text">Tải ảnh lên</span>
+          </div>
+          <img src="" alt="Preview" id="add-preview-img" style="display:none;">
+        </div>
+      </div>
+    </form>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-danger" data-close-add-modal>
+        <span class="btn-icon"><img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;"></span>
+        <span>Hủy bỏ</span>
+      </button>
+      <button type="submit" form="form-add-product" class="btn-primary">
+        <span class="btn-icon">+</span>
+        <span>Thêm</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal-success" class="modal modal-success" style="display:none;" role="dialog" aria-modal="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-container modal-success-container">
+    <div class="modal-success-content">
+      <div class="success-icon">
+        <img src="{% static 'assets/icons/tick2.png' %}" alt="Success" style="width:48px;height:48px;">
+      </div>
+      <h2 class="success-title" id="success-message">CHỈNH SỬA THÀNH CÔNG</h2>
+      <button type="button" class="btn-close-success" id="btn-close-success">
+        &times;
+      </button>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <script>
+    window.reloadAdminTranslations = async function(lang) {
+      try {
+        const response = await fetch(`/lang/${lang}.json`);
+        if (!response.ok) throw new Error('Failed to load translations');
+        
+        const translations = await response.json();
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[key]) {
+            if (el.tagName === 'TITLE') {
+              document.title = translations[key];
+            } else if (el.tagName === 'INPUT' && el.type !== 'button') {
+              el.placeholder = translations[key];
+            } else if (el.tagName === 'OPTION') {
+              el.textContent = translations[key];
+            } else {
+              el.textContent = translations[key];
+            }
+          }
+        });
+        
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+          const key = el.getAttribute('data-i18n-placeholder');
+          if (translations[key]) {
+            el.placeholder = translations[key];
+          }
+        });
+        
+        document.documentElement.lang = lang;
+        window.adminTranslations = translations;
+        
+        console.log('✅ Admin translations reloaded:', lang);
+      } catch (error) {
+        console.error('Failed to reload admin translations:', error);
+      }
+    };
+
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'app.lang' && e.newValue) {
+        console.log('🔄 Language changed:', e.newValue);
+        window.reloadAdminTranslations(e.newValue);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('app.lang') || 'vi';
+      window.reloadAdminTranslations(savedLang);
+    });
+  </script>
+  
+  <script>
+    (function(){
+      async function loadHeaderAdmin(){
+        try{
+          const el = document.getElementById('app-header');
+          if(!el) return;
+          const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
+          el.innerHTML = await res.text();
+          try{
+            const raw = localStorage.getItem('authUser') || localStorage.getItem('ngogia_user');
+            if(raw){ const u = JSON.parse(raw); const nm = u?.fullName||u?.name||u?.username||u?.email; if(nm){ const chip = el.querySelector('[data-user-chip]'); if(chip) chip.textContent = nm; } }
+          }catch{}
+          try {
+            const chip = el.querySelector('[data-user_chip]');
+            if (chip) {
+              const current = (chip.textContent || '').trim();
+              if (!current || current === 'Tài khoản' || current === 'Tai khoan') {
+                let name = '';
+                try {
+                  const u1 = JSON.parse(localStorage.getItem('authUser') || 'null');
+                  const u2 = JSON.parse(localStorage.getItem('ngogia_user') || 'null');
+                  name = u1?.fullName || u1?.name || u1?.username || u1?.email ||
+                         u2?.fullName || u2?.name || u2?.username || u2?.email || '';
+                } catch {}
+                if (!name) {
+                  name = localStorage.getItem('authAdminName') ||
+                         document.getElementById('adminName')?.textContent?.trim() ||
+                         'Admin';
+                }
+                chip.textContent = name;
+              }
+            }
+          } catch {}
+          const btn = el.querySelector('#btn-logout');
+          if(btn){ btn.addEventListener('click', (e)=>{ e.preventDefault?.(); localStorage.removeItem('authAdmin'); localStorage.removeItem('authUser'); localStorage.removeItem('ngogia_user'); location.href = '/login-admin/'; }); }
+          const userBox = el.querySelector('#user-box');
+          const userBtn = el.querySelector('#user-btn');
+          const menu = el.querySelector('#user-menu');
+          function openM(){ if(menu){ menu.removeAttribute('hidden'); userBox?.classList.add('open'); userBtn?.setAttribute('aria-expanded','true'); } }
+          function closeM(){ if(menu){ menu.setAttribute('hidden',''); userBox?.classList.remove('open'); userBtn?.setAttribute('aria-expanded','false'); } }
+          if(userBtn){
+            userBtn.addEventListener('click',(ev)=>{ ev.stopPropagation(); menu?.hasAttribute('hidden')?openM():closeM(); });
+            document.addEventListener('click',(ev)=>{ if(menu && userBox && !userBox.contains(ev.target)) closeM(); });
+            document.addEventListener('keydown',(ev)=>{ if(ev.key==='Escape') closeM(); });
+          }
+        }catch(err){ console.error('Load admin header failed', err); }
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); else loadHeaderAdmin();
+    })();
+  </script>
+  <script>
+    (function(){
+      function populateMonths(menu){
+        if(!menu) return;
+        menu.innerHTML='';
+        const now=new Date();
+        for(let i=0;i<12;i++){
+          const d=new Date(now.getFullYear(), now.getMonth()-i, 1);
+          const label=(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();
+          const val=d.toISOString().slice(0,7);
+          const btn=document.createElement('button');
+          btn.type='button'; btn.setAttribute('role','menuitem'); btn.dataset.value=val; btn.textContent=label;
+          menu.appendChild(btn);
+        }
+      }
+      function boot(){
+        const ddUserBtn=document.getElementById('ddUserBtn');
+        const ddUserMenu=document.getElementById('ddUserMenu');
+        const ddMoreBtn=document.getElementById('ddMoreBtn');
+        const ddMoreMenu=document.getElementById('ddMoreMenu');
+        if(ddUserBtn && ddUserMenu){
+          ddUserBtn.innerHTML='Chi nhánh: <strong id="branchLabel">Tất cả</strong> <span class="caret" aria-hidden="true">▾</span>';
+          ddUserMenu.innerHTML='<button role="menuitem" data-branch="all" type="button">Tất cả</button>'+
+            '<button role="menuitem" data-branch="1" type="button">Đướng số 8 - H071</button>'+
+            '<button role="menuitem" data-branch="2" type="button">Nguyễn An Ninh - H246</button>'+
+            '<button role="menuitem" data-branch="3" type="button">Lý Thường Kiệt - H033</button>';
+          const branchLabel=document.getElementById('branchLabel');
+          const savedBranch=localStorage.getItem('admin_branch')||'all';
+          const map={all:'Tất cả','1':'Đướng số 8 - H071','2':'Nguyễn An Ninh - H246','3':'Lý Thường Kiệt - H033'};
+          if(branchLabel) branchLabel.textContent=map[savedBranch]||'Tất cả';
+          ddUserMenu.addEventListener('click', (e)=>{ const b=e.target.closest('button[role="menuitem"]'); if(!b) return; const val=b.dataset.branch; localStorage.setItem('admin_branch', val); if(branchLabel) branchLabel.textContent=map[val]||'Tất cả'; window.dispatchEvent(new CustomEvent('admin:filters',{detail:{branch:val}})); });
+        }
+        if(ddMoreBtn && ddMoreMenu){
+          ddMoreBtn.innerHTML='Tháng: <strong id="monthLabel">Tháng này</strong> <span class="caret" aria-hidden="true">▾</span>';
+          populateMonths(ddMoreMenu);
+          const monthLabel=document.getElementById('monthLabel');
+          const savedMonth=localStorage.getItem('admin_month');
+          if(savedMonth && monthLabel){ const [y,m]=savedMonth.split('-'); monthLabel.textContent=m+'/'+y; }
+          ddMoreMenu.addEventListener('click', (e)=>{ const b=e.target.closest('button[role="menuitem"]'); if(!b) return; const val=b.dataset.value; localStorage.setItem('admin_month', val); const [y,m]=val.split('-'); if(monthLabel) monthLabel.textContent=m+'/'+y; window.dispatchEvent(new CustomEvent('admin:filters',{detail:{month:val}})); });
+        }
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+    })();
+  </script>
+  <script src="{% static 'Pages/Admin/admin.js' %}" defer></script>
+  
+  <script>
+    (function(){
+      function setup(btnId, menuId){
+        const btn=document.getElementById(btnId); const menu=document.getElementById(menuId); const box=btn?.closest(".dropdown");
+        if(!btn||!menu||!box) return;
+        function open(){ menu.removeAttribute("hidden"); btn.setAttribute("aria-expanded","true"); box.classList.add("open"); }
+        function close(){ menu.setAttribute("hidden",""); btn.setAttribute("aria-expanded","false"); box.classList.remove("open"); }
+        btn.addEventListener("click",(e)=>{ e.stopPropagation(); (menu.hasAttribute("hidden")?open:close)(); });
+        document.addEventListener("click",(e)=>{ if(!box.contains(e.target)) close(); });
+        document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") close(); });
+      }
+      const run=()=>{ setup("ddUserBtn","ddUserMenu"); setup("ddMoreBtn","ddMoreMenu"); };
+      if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", run); else run();
+    })();
+  </script>
+  
+  <script>
+    (function(){
+      function toCSVRow(arr){ return arr.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(','); }
+      function exportCSV(){
+        const orders = document.getElementById('sOrders')?.textContent?.trim() || '';
+        const revenue= document.getElementById('sRevenue')?.textContent?.trim() || '';
+        const customers=document.getElementById('sCustomers')?.textContent?.trim() || '';
+        const products =document.getElementById('sProducts')?.textContent?.trim() || '';
+        const branch = localStorage.getItem('admin_branch') || 'all';
+        const month  = localStorage.getItem('admin_month') || '';
+        const now = new Date();
+        const dateStr = now.toISOString().slice(0,10);
+        const header = toCSVRow(['Chỉ số','Giá trị']);
+        const rows = [
+          toCSVRow(['Đơn hàng hôm nay', orders]),
+          toCSVRow(['Doanh thu', revenue]),
+          toCSVRow(['Khách mới', customers]),
+          toCSVRow(['Sản phẩm đang bán', products]),
+          toCSVRow(['Chi nhánh', branch]),
+          toCSVRow(['Kỳ báo cáo', month || dateStr]),
+        ];
+        const blob = new Blob([header+'\n'+rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        const file = `bao-cao-tong-ket_${branch}_${(month||dateStr).replace(/[^0-9_-]/g,'')}.csv`;
+        a.href = URL.createObjectURL(blob); a.download = file; a.style.display='none';
+        document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+      }
+      const btn = document.getElementById('btnExportReport');
+      if (btn) btn.addEventListener('click', exportCSV);
+    })();
+  </script>
+
+  <!-- ✅ GIỮ: Wait for header -->
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const savedLang = localStorage.getItem('app.lang') || 'vi';
+      
+      let attempts = 0;
+      const waitForHeader = setInterval(() => {
+        const headerElements = document.querySelectorAll('header [data-i18n]');
+        
+        if (headerElements.length > 0 || attempts > 20) {
+          clearInterval(waitForHeader);
+          console.log('✅ Header ready, applying translations');
+          window.reloadAdminTranslations(savedLang);
+        }
+        
+        attempts++;
+      }, 100);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

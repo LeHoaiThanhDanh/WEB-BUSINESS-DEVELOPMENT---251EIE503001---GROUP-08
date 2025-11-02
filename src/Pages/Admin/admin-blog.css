@@ -1,0 +1,354 @@
+/* ✅ Blog posts table column widths */
+#blog-posts table th:nth-child(1),
+#blog-posts table td:nth-child(1) {
+  width: 8%;
+  text-align: center;
+}
+
+#blog-posts table th:nth-child(2),
+#blog-posts table td:nth-child(2) {
+  width: 35%;
+  text-align: left;
+}
+
+#blog-posts table th:nth-child(3),
+#blog-posts table td:nth-child(3) {
+  width: 12%;
+  text-align: center;
+}
+
+#blog-posts table th:nth-child(4),
+#blog-posts table td:nth-child(4) {
+  width: 12%;
+  text-align: center;
+}
+
+#blog-posts table th:nth-child(5),
+#blog-posts table td:nth-child(5) {
+  width: 13%;
+  text-align: center;
+}
+
+#blog-posts table th:nth-child(6),
+#blog-posts table td:nth-child(6) {
+  width: 20%;
+  text-align: center;
+}
+
+.badge-success {
+  background: #10b981;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-warning {
+  background: #f59e0b;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+#blog-posts table th{background:#1596d5 !important;}
+
+/* Form group status */
+.form-group-status {
+  margin-bottom: 20px;
+}
+
+.form-group-status label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 20px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.checkbox-group input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Modal footer - căn giữa nút */
+.modal-footer {
+  display: flex;
+  justify-content: center; /* ✅ Căn giữa các nút */
+  align-items: center;
+  gap: 16px; /* Khoảng cách giữa 2 nút */
+  padding: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-footer .btn-danger,
+.modal-footer .btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px; /* Đảm bảo 2 nút có độ rộng tương đương */
+  justify-content: center;
+}
+
+.modal-footer .btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.modal-footer .btn-danger:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.modal-footer .btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.modal-footer .btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Icon trong nút */
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1); 
+}
+
+/* Image Gallery - Bố cục hình ảnh bài viết */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 16px;
+  margin-top: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #0088ff;
+  border-radius: 8px;
+}
+
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.image-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.image-item:hover img {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.image-label {
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Upload Box - Nút tải ảnh lên */
+.image-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 120px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-upload-box:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.upload-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.image-upload-box:hover .upload-icon-circle {
+  background: #3b82f6;
+  transform: scale(1.1);
+}
+
+.upload-icon-small {
+  width: 28px;
+  height: 24px;
+  filter: invert(46%) sepia(88%) saturate(2815%) hue-rotate(200deg) brightness(95%) contrast(97%);
+  transition: all 0.3s ease;
+}
+
+.image-upload-box:hover .upload-icon-small {
+  filter: brightness(0) invert(1);
+}
+
+.upload-text-small {
+  font-size: 13px;
+  color: #3b82f6;
+  font-weight: 600;
+  text-align: center;
+}
+
+.image-upload-box:hover .upload-text-small {
+  color: #2563eb;
+}
+
+/* Label cho form group */
+.form-label-small {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0088ff !important;
+  margin-bottom: 8px;
+}
+
+/* Input viết hoa */
+.form-input-caps {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #0088ff!important;
+  border-radius: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #1596D5;
+  transition: all 0.3s ease;
+}
+
+.form-input-caps:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Textarea cho phần sơ */
+.form-textarea-excerpt {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #0088ff !important;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1596D5;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+}
+
+.form-textarea-excerpt:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Textarea cho nội dung */
+.form-textarea-content {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #0088ff !important;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1596D5;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+  min-height: 200px;
+  transition: all 0.3s ease;
+}
+
+.form-textarea-content:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Modal body cho edit blog */
+.modal-edit-blog-body {
+  max-height: calc(80vh - 160px);
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.modal-edit-blog-body .form-group {
+  margin-bottom: 20px;
+}
+
+.modal-edit-blog-body .form-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Modal container cho edit blog */
+.modal-edit-blog {
+  max-width: 900px;
+  width: 90%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .image-item img,
+  .image-upload-box {
+    height: 100px;
+  }
+  
+  .modal-edit-blog {
+    width: 95%;
+  }
+}

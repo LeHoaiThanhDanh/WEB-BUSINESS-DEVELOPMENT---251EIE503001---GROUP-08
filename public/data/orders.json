@@ -1,0 +1,112 @@
+[
+  {
+    "id": "HTNGTD273",
+    "orderId": "HTNGTD273",
+    "customerName": "Nguyễn Ba Đù",
+    "customerPhone": "0934727978",
+    "customerAddress": "Bcons plaza, Thống Nhất, Dĩ An Bình Dương",
+    "date": "2025-10-30T07:28:00",
+    "status": "Hoàn tất",
+    "subtotal": 65000,
+    "shippingFee": 0,
+    "discount": 0,
+    "total": 65000,
+    "items": [
+      {
+        "productId": "NG07",
+        "productName": "Hồng trà đài loan",
+        "specs": "Kích cỡ: L, Độ ngọt: Vừa, 2x Thạch dứa nguyên vị",
+        "price": 25000,
+        "quantity": 1
+      },
+      {
+        "productId": "NG15",
+        "productName": "Trà sữa Đài Loan",
+        "specs": "Kích cỡ: M, Độ ngọt: Ít, Trân châu hoàng kim, 2x pudding trứng",
+        "price": 40000,
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "1001",
+    "orderId": "1001",
+    "customerName": "Nguyễn Văn An",
+    "customerPhone": "0912345678",
+    "customerAddress": "123 Lê Lợi, Phường 4, Quận Gò Vấp, TP.HCM",
+    "date": "2025-10-28T10:30:00",
+    "status": "Hoàn tất",
+    "subtotal": 76000,
+    "shippingFee": 10000,
+    "discount": 0,
+    "total": 86000,
+    "items": [
+      {"productId": "NG01", "productName": "Trà sữa truyền thống", "quantity": 2, "price": 76000}
+    ]
+  },
+  {
+    "id": "1002",
+    "orderId": "1002",
+    "customerName": "Lê Thị Bình",
+    "customerPhone": "0923456789",
+    "customerAddress": "456 Nguyễn Văn Linh, Phường Tân Phú, Quận 7, TP.HCM",
+    "date": "2025-10-30T11:15:00",
+    "status": "Đang xử lý",
+    "subtotal": 49000,
+    "shippingFee": 15000,
+    "discount": 10000,
+    "total": 54000,
+    "items": [
+      {"productId": "NG10", "productName": "Trà đào cam sả", "quantity": 1, "price": 28000},
+      {"productId": "NG15", "productName": "Trà sữa Đài Loan", "quantity": 1, "price": 21000}
+    ]
+  },
+  {
+    "id": "1003",
+    "orderId": "1003",
+    "customerName": "Trần Văn Cường",
+    "customerPhone": "0934567890",
+    "customerAddress": "789 Võ Văn Kiệt, Phường 5, Quận 5, TP.HCM",
+    "date": "2025-10-30T13:45:00",
+    "status": "Chờ xác nhận",
+    "subtotal": 65000,
+    "shippingFee": 20000,
+    "discount": 5000,
+    "total": 80000,
+    "items": [
+      {"productId": "NG08", "productName": "Trà vải", "quantity": 1, "price": 21000}
+    ]
+  },
+  {
+    "id": "1004",
+    "orderId": "1004",
+    "customerName": "Phạm Thị Dung",
+    "customerPhone": "0945678901",
+    "customerAddress": "321 Hoàng Văn Thụ, Phường 8, Quận Phú Nhuận, TP.HCM",
+    "date": "2025-10-27T16:20:00",
+    "status": "Hoàn tất",
+    "subtotal": 132000,
+    "shippingFee": 0,
+    "discount": 0,
+    "total": 132000,
+    "items": [
+      {"productId": "NG18", "productName": "Trà sữa thạch phô mai", "quantity": 3, "price": 132000}
+    ]
+  },
+  {
+    "id": "1005",
+    "orderId": "1005",
+    "customerName": "Hoàng Văn Em",
+    "customerPhone": "0956789012",
+    "customerAddress": "654 Phan Văn Trị, Phường 10, Quận Gò Vấp, TP.HCM",
+    "date": "2025-10-27T09:10:00",
+    "status": "Đang giao hàng",
+    "subtotal": 19000,
+    "shippingFee": 25000,
+    "discount": 0,
+    "total": 44000,
+    "items": [
+      {"productId": "NG02", "productName": "Trà sữa socola", "quantity": 1, "price": 19000}
+    ]
+  }
+]

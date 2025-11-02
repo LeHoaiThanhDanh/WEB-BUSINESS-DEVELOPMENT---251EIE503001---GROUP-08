@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="admin.account.title">Hồ sơ Admin - Hồng Trà Ngô Gia</title>
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin-account.css' %}">
+</head>
+<body>
+  <div class="admin-layout" id="adminLayout">
+    <!-- Load Header -->
+    <div id="admin-header"></div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <main class="content">
+        <div class="page-title-wrapper">
+          <h1 class="page-title" data-i18n="admin.account.pageTitle">TÀI KHOẢN QUẢN LÝ</h1>
+        </div>
+
+        <div class="account-container">
+          <!-- Thông tin cá nhân -->
+          <section class="info-section">
+            <div class="section-header">
+              <img src="{% static 'icons/account.png' %}" alt="Account icon" class="section-icon">
+              <h3 data-i18n="admin.account.personalInfo">Thông tin cá nhân</h3>
+            </div>
+            
+            <div class="info-item">
+              <label data-i18n="admin.account.avatar">Ảnh đại diện</label>
+              <div class="info-value">
+                <div class="avatar-upload">
+                  <img src="{% static 'images/admin-avatar.jpg' %}" alt="Avatar" class="avatar-preview" id="avatarPreview">
+                </div>
+                <button class="btn-edit" onclick="document.getElementById('avatarInput').click()">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="previewAvatar(this)">
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.fullName">Tên hồ sơ</label>
+              <div class="info-value">
+                <span id="fullName">Nguyễn Ba Đù</span>
+                <button class="btn-edit" onclick="editField('fullName', 'fullName')">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.email">Email</label>
+              <div class="info-value">
+                <span id="email">badudeptra@gmail.com</span>
+                <button class="btn-edit" onclick="editField('email', 'email')">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Bảo mật -->
+          <section class="info-section">
+            <div class="section-header">
+              <img src="{% static 'icons/security.png' %}" alt="Security icon" class="section-icon">
+              <h3 data-i18n="admin.account.security">Bảo mật</h3>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.password">Mật khẩu</label>
+              <div class="info-value">
+                <span class="password-mask">••••••••</span>
+                <button class="btn-edit" onclick="changePassword()">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.smsAuth">Xác thực SMS</label>
+              <div class="info-value">
+                <span class="sms-info" data-i18n="admin.account.smsAuthDesc">Nhận mã bảo mật qua SMS cho mỗi lần đăng nhập</span>
+                <button class="btn-edit" onclick="editSMS()">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Hiển thị -->
+          <section class="info-section">
+            <div class="section-header">
+              <img src="{% static 'icons/settings.png' %}" alt="Settings icon" class="section-icon">
+              <h3 data-i18n="admin.account.display">Hiển thị</h3>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.language">Ngôn ngữ</label>
+              <div class="info-value">
+                <span id="language" data-i18n="admin.account.languageValue">Tiếng Việt</span>
+                <button class="btn-edit" onclick="changeLanguage()">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <label data-i18n="admin.account.currency">Đơn vị</label>
+              <div class="info-value">
+                <span id="currency" data-i18n="admin.account.currencyValue">VND (Việt Nam đồng)</span>
+                <button class="btn-edit" onclick="changeCurrency()">
+                  <img src="{% static 'icons/edit3.png' %}" alt="Edit">
+                </button>
+              </div>
+            </div>
+
+            <div class="info-item toggle-item">
+              <div class="toggle-label">
+                <label data-i18n="admin.account.smsNotification">Thông báo SMS</label>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="smsNotification" checked onchange="toggleSMS(this)">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal chỉnh sửa -->
+  <div class="modal" id="editModal">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 id="modalTitle" data-i18n="admin.account.modal.edit">Chỉnh sửa</h4>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label id="fieldLabel" data-i18n="admin.account.modal.newValue">Giá trị mới</label>
+          <input type="text" id="fieldInput" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeModal()" data-i18n="admin.account.modal.cancel">Hủy</button>
+        <button class="btn-save" onclick="saveField()" data-i18n="admin.account.modal.save">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal đổi mật khẩu -->
+  <div class="modal" id="passwordModal">
+    <div class="modal-backdrop" onclick="closePasswordModal()"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 data-i18n="admin.account.modal.changePassword">Đổi mật khẩu</h4>
+        <button class="modal-close" onclick="closePasswordModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label data-i18n="admin.account.modal.currentPassword">Mật khẩu hiện tại</label>
+          <input type="password" id="currentPassword" class="form-control" data-i18n-placeholder="admin.account.modal.currentPasswordPlaceholder">
+        </div>
+        <div class="form-group">
+          <label data-i18n="admin.account.modal.newPassword">Mật khẩu mới</label>
+          <input type="password" id="newPassword" class="form-control" data-i18n-placeholder="admin.account.modal.newPasswordPlaceholder">
+        </div>
+        <div class="form-group">
+          <label data-i18n="admin.account.modal.confirmPassword">Xác nhận mật khẩu mới</label>
+          <input type="password" id="confirmPassword" class="form-control" data-i18n-placeholder="admin.account.modal.confirmPasswordPlaceholder">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closePasswordModal()" data-i18n="admin.account.modal.cancel">Hủy</button>
+        <button class="btn-save" onclick="savePassword()" data-i18n="admin.account.modal.save">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal chọn ngôn ngữ -->
+  <div class="modal" id="languageModal">
+    <div class="modal-backdrop" onclick="closeLanguageModal()"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 data-i18n="admin.account.modal.selectLanguage">Chọn ngôn ngữ</h4>
+        <button class="modal-close" onclick="closeLanguageModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="language-options">
+          <button class="language-option lang-btn active" data-lang="vi" onclick="selectLanguage('vi')">
+            <img src="{% static 'icons/VN.png' %}" alt="VN" class="lang-flag">
+            <span class="lang-name" data-i18n="admin.account.languages.vietnamese">Tiếng Việt</span>
+          </button>
+          <button class="language-option lang-btn" data-lang="en" onclick="selectLanguage('en')">
+            <img src="{% static 'icons/EN.png' %}" alt="EN" class="lang-flag">
+            <span class="lang-name" data-i18n="admin.account.languages.english">English</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load header
+    async function loadHeader() {
+      try {
+        const response = await fetch('/src/Components/page-header/header-admin.html');
+        const html = await response.text();
+        document.getElementById('admin-header').innerHTML = html;
+        
+        // Initialize sidebar toggle after header loaded
+        initSidebar();
+        
+        // Set active menu
+        const accountMenuItem = document.querySelector('a[href*="admin-account"]');
+        if (accountMenuItem) {
+          accountMenuItem.classList.add('active');
+        }
+      } catch (error) {
+        console.error('Error loading header:', error);
+      }
+    }
+
+    // Initialize sidebar
+    function initSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.getElementById('menuToggle');
+      const adminLayout = document.getElementById('adminLayout');
+
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('collapsed');
+          adminLayout.classList.toggle('sidebar-collapsed');
+        });
+      }
+    }
+
+    // Load header on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadHeader);
+    } else {
+      loadHeader();
+    }
+  </script>
+  
+  <!-- Load i18n -->
+  <script src="{% static 'js/i18n.js' %}"></script>
+  <script src="{% static 'Pages/Admin/admin-account.js' %}"></script>
+</body>
+</html>

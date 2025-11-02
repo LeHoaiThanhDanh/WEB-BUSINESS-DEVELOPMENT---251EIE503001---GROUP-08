@@ -24,6 +24,8 @@ urlpatterns = [
     path('aboutus/', TemplateView.as_view(template_name='Pages/Aboutus/Aboutus.html'), name='aboutus'),
     path('payment/', TemplateView.as_view(template_name='Pages/Payment/payment.html'), name='payment'),
     path('admin-dashboard/', TemplateView.as_view(template_name='Pages/Admin/admin.html'), name='admin_dashboard'),
+    path('admin-account/', TemplateView.as_view(template_name='Pages/Admin/admin-account.html'), name='admin_account'),
+    path('admin-blog/', TemplateView.as_view(template_name='Pages/Admin/admin-blog.html'), name='admin_blog'),
     path('blog/', TemplateView.as_view(template_name='Pages/Blog/blog-list.html'), name='blog'),
     path('blog_detail/', TemplateView.as_view(template_name='Pages/Blog/blog-detail.html'), name='blog_detail'),
 ]

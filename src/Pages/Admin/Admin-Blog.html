@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="admin.blog.title">Quản lý Blog • Hồng Trà Ngô Gia</title>
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin.css' %}">
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin-blog.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <div class="admin-layout" id="adminLayout">
+    <div class="main">
+      <main class="content">
+        <!-- Stats Cards -->
+        <section class="cards" id="overview">
+          <div class="card stat revenue">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/blog.png' %}" alt="Blog icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <span data-i18n="admin.blog.totalPosts">TỔNG BÀI VIẾT</span>
+            </div>
+            <div class="stat-value" id="sTotalPosts">0</div>
+            <div class="stat-desc">
+              <img src="/assets/icons/grow.png" alt="Growth icon" class="stat-desc-icon">
+              <span data-i18n="admin.blog.thisMonth">Tháng này</span>
+            </div>
+          </div>
+          
+          <div class="card stat orders">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/eye.png' %}" alt="Views icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <span data-i18n="admin.blog.totalViews">LƯỢT XEM</span>
+            </div>
+            <div class="stat-value" id="sTotalViews">0</div>
+            <div class="stat-desc">
+              <img src="/assets/icons/grow.png" alt="Growth icon" class="stat-desc-icon">
+              <span data-i18n="admin.blog.thisWeek">Tuần này</span>
+            </div>
+          </div>
+          
+          <div class="card stat bestseller">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/tick2.png' %}" alt="Published icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <span data-i18n="admin.blog.published">ĐÃ XUẤT BẢN</span>
+            </div>
+            <div class="stat-value" id="sPublished">0</div>
+            <div class="stat-desc" data-i18n="admin.blog.active">Đang hoạt động</div>
+          </div>
+          
+          <div class="card stat products">
+            <div class="stat-title">
+              <img src="{% static 'assets/icons/clock.png' %}" alt="Draft icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <span data-i18n="admin.blog.draft">BẢN NHÁP</span>
+            </div>
+            <div class="stat-value" id="sDraft">0</div>
+            <div class="stat-desc" data-i18n="admin.blog.pending">Chờ xuất bản</div>
+          </div>
+        </section>
+
+        <!-- Blog Posts Table -->
+        <section class="card table" id="blog-posts">
+          <div class="card-header-block">
+            <div class="card-title" data-i18n="admin.blog.posts">Bài viết</div>
+            <div class="card-actions-row">
+              <button type="button" class="btn btn-add" id="btn-add-post">
+                <span class="btn-icon">+</span>
+                <span data-i18n="admin.blog.addPost">Thêm bài viết</span>
+              </button>
+              
+              <div class="search-box">
+                <input type="search" id="post-search" data-i18n-placeholder="admin.blog.searchPost" placeholder="Tìm kiếm bài viết..." aria-label="Tìm kiếm bài viết">
+                <button type="button" class="search-btn" aria-label="Tìm kiếm">
+                  <img src="{% static 'assets/icons/search.png' %}" alt="Search">
+                </button>
+              </div>
+              
+              <div style="flex: 1;"></div>
+              
+              <select id="status-filter" class="category-filter" aria-label="Lọc theo trạng thái">
+                <option value="" data-i18n="admin.blog.allStatus">Tất cả trạng thái</option>
+                <option value="published" data-i18n="admin.blog.statusPublished">Đã xuất bản</option>
+                <option value="draft" data-i18n="admin.blog.statusDraft">Bản nháp</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th data-i18n="admin.blog.id">ID</th>
+                  <th data-i18n="admin.blog.title">Tiêu đề</th>
+                  <th data-i18n="admin.blog.date">Ngày đăng</th>
+                  <th data-i18n="admin.blog.image">Hình ảnh</th>
+                  <th data-i18n="admin.blog.status">Trạng thái</th>
+                  <th data-i18n="admin.blog.actions">Tùy chỉnh</th>
+                </tr>
+              </thead>
+              <tbody id="postsBody">
+                <!-- JS sẽ render ở đây -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="pagination" id="postsPager"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal thêm bài viết -->
+  <div id="modal-add-post" class="modal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay" data-close-add-modal></div>
+    <div class="modal-container modal-edit-blog">
+      <div class="modal-header">
+        <h2 class="modal-title">THÊM BÀI VIẾT</h2>
+        <button type="button" class="modal-close" data-close-add-modal>&times;</button>
+      </div>
+
+      <form id="form-add-post" class="modal-body modal-edit-blog-body">
+        <!-- Tiêu đề trang -->
+        <div class="form-group">
+          <label for="add-post-title" class="form-label-small">Tiêu đề trang</label>
+          <input type="text" id="add-post-title" class="form-input-caps" placeholder="Nhập tiêu đề trang" required>
+        </div>
+
+        <!-- Tiêu đề nội dung -->
+        <div class="form-group">
+          <label for="add-post-excerpt" class="form-label-small">Tiêu đề nội dung</label>
+          <textarea id="add-post-excerpt" class="form-textarea-excerpt" rows="2" placeholder="Nhập tiêu đề nội dung"></textarea>
+        </div>
+
+        <!-- Nội dung bài viết -->
+        <div class="form-group">
+          <label for="add-post-content" class="form-label-small">Nội dung bài viết</label>
+          <textarea id="add-post-content" class="form-textarea-content" rows="10" placeholder="Nhập nội dung bài viết" required></textarea>
+        </div>
+
+        <!-- Hình ảnh bài viết -->
+        <div class="form-group">
+          <label class="form-label-small">Hình ảnh bài viết</label>
+          <input type="file" id="add-post-image" accept="image/*" multiple style="display:none;">
+          <div class="image-gallery" id="add-image-gallery">
+            <!-- JS sẽ render ảnh đã chọn ở đây -->
+            <div class="image-upload-box" id="add-image-upload-box">
+              <div class="upload-icon-circle">
+                <img src="/assets/icons/upload.png" alt="Upload" class="upload-icon-small">
+              </div>
+              <span class="upload-text-small">Tải ảnh lên</span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-danger" data-close-add-modal>
+          <span class="btn-icon"><img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;"></span>
+          <span>Hủy bỏ</span>
+        </button>
+        <button type="submit" form="form-add-post" class="btn-primary">
+          <span class="btn-icon"><img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;"></span>
+          <span>Thêm</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal chỉnh sửa bài viết -->
+  <div id="modal-edit-post" class="modal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-container modal-edit-blog">
+      <div class="modal-header">
+        <h2 class="modal-title">CHỈNH SỬA BÀI VIẾT</h2>
+        <button type="button" class="modal-close" data-close-modal>&times;</button>
+      </div>
+
+      <form id="form-edit-post" class="modal-body modal-edit-blog-body">
+        <!-- Tiêu đề trang -->
+        <div class="form-group">
+          <label for="edit-post-title" class="form-label-small">Tiêu đề trang</label>
+          <input type="text" id="edit-post-title" class="form-input-caps" placeholder="Nhập tiêu đề" required>
+        </div>
+
+        <!-- Tiêu đề nội dung -->
+        <div class="form-group">
+          <label for="edit-post-excerpt" class="form-label-small">Tiêu đề nội dung</label>
+          <textarea id="edit-post-excerpt" class="form-textarea-excerpt" rows="2" placeholder="Nhập tiêu đề nội dung"></textarea>
+        </div>
+
+        <!-- Nội dung bài viết -->
+        <div class="form-group">
+          <label for="edit-post-content" class="form-label-small">Nội dung bài viết</label>
+          <textarea id="edit-post-content" class="form-textarea-content" rows="10" placeholder="Nhập nội dung bài viết" required></textarea>
+        </div>
+
+        <!-- Hình ảnh bài viết -->
+        <div class="form-group">
+          <label class="form-label-small">Hình ảnh bài viết</label>
+          <input type="file" id="edit-post-image" accept="image/*" multiple style="display:none;">
+          <div class="image-gallery" id="edit-image-gallery">
+            <!-- JS sẽ render ảnh ở đây -->
+            <div class="image-upload-box" id="edit-image-upload-box">
+              <div class="upload-icon-circle">
+                <img src="/assets/icons/upload.png" alt="Upload" class="upload-icon-small">
+              </div>
+              <span class="upload-text-small">Tải ảnh lên</span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-danger" data-close-modal>
+          <span class="btn-icon"><img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;"></span>
+          <span>Hủy bỏ</span>
+        </button>
+        <button type="submit" form="form-edit-post" class="btn-primary">
+          <span class="btn-icon"><img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;"></span>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal xác nhận xóa -->
+  <div id="modal-delete-confirm" class="modal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay" data-close-delete></div>
+    <div class="modal-container modal-confirm">
+      <button type="button" class="modal-close" data-close-delete>&times;</button>
+      
+      <div class="modal-body modal-confirm-body">
+        <div class="modal-confirm-header">
+          <div class="confirm-icon">
+            <span class="icon-question">?</span>
+          </div>
+          <div class="confirm-text">
+            <h2 class="confirm-title">XÁC NHẬN XÓA BÀI VIẾT</h2>
+            <p class="confirm-message">Sau khi xóa, bạn sẽ không thể khôi phục bài viết.</p>
+          </div>
+        </div>
+        
+        <div class="confirm-actions">
+          <button type="button" class="btn btn-cancel" data-close-delete>
+            <img src="{% static 'assets/icons/delete3.png' %}" alt="" style="width:18px;height:18px;margin-right:6px;">
+            Hủy bỏ
+          </button>
+          <button type="button" class="btn btn-confirm" id="btn-confirm-delete">
+            <img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;margin-right:6px;">
+            Tiếp tục
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="modal-success" class="modal modal-success" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-container modal-success-container">
+      <div class="modal-success-content">
+        <div class="success-icon">
+          <img src="{% static 'assets/icons/tick2.png' %}" alt="Success">
+        </div>
+        <h2 class="success-title" id="success-message">THÀNH CÔNG</h2>
+        <button type="button" class="btn-close-success" id="btn-close-success">&times;</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Load header -->
+  <script>
+    (function(){
+      async function loadHeaderAdmin(){
+        try{
+          const el = document.getElementById('app-header');
+          if(!el) return;
+          const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
+          el.innerHTML = await res.text();
+          const btn = el.querySelector('#btn-logout');
+          if(btn){ btn.addEventListener('click', (e)=>{ e.preventDefault?.(); localStorage.removeItem('authAdmin'); location.href = '/login-admin/'; }); }
+        }catch(err){ console.error('Load admin header failed', err); }
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); else loadHeaderAdmin();
+    })();
+  </script>
+  <script src="{% static 'Pages/Admin/admin-blog.js' %}"></script>
+  <script>
+    (function(){
+      function setup(btnId, menuId){
+        const btn=document.getElementById(btnId); const menu=document.getElementById(menuId); const box=btn?.closest(".dropdown");
+        if(!btn||!menu||!box) return;
+        function open(){ menu.removeAttribute("hidden"); btn.setAttribute("aria-expanded","true"); box.classList.add("open"); }
+        function close(){ menu.setAttribute("hidden",""); btn.setAttribute("aria-expanded","false"); box.classList.remove("open"); }
+        btn.addEventListener("click",(e)=>{ e.stopPropagation(); (menu.hasAttribute("hidden")?open:close)(); });
+        document.addEventListener("click",(e)=>{ if(!box.contains(e.target)) close(); });
+        document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") close(); });
+      }
+      const run=()=>{ setup("ddUserBtn","ddUserMenu"); setup("ddMoreBtn","ddMoreMenu"); };
+      if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", run); else run();
+    })();
+  </script>
+</body>
+</html>
