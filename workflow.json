@@ -1,0 +1,43 @@
+{
+  "name": "Manual Batch (ALL)",
+  "nodes": [
+    {
+      "id": "list",
+      "name": "Google Drive: List (ALL)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [300, 320],
+      "credentials": {
+        "googleApi": {
+          "id": "REPLACE_DRIVE_CRED_ID",
+          "name": "Google Drive account"
+        }
+      },
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "list",
+        "options": {
+          "q": "={{\"'REPLACE_FOLDER_ID' in parents and trashed = false\"}}",
+          "fields": ["webViewLink", "name"]
+        }
+      }
+    },
+    {
+      "id": "execA",
+      "name": "Execute Workflow A",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [560, 320],
+      "parameters": {
+        "workflowId": "REPLACE_WORKFLOW_A_ID",
+        "options": {
+          "waitForResponse": true,
+          "passThroughData": false
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Drive: List (ALL)": { "main": [[{ "node": "Execute Workflow A", "type": "main", "index": 0 }]] }
+  }
+}

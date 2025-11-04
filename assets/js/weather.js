@@ -604,27 +604,36 @@ async function loadHCMCWeather() {
 
 async function getWeatherData(cityId) {
     try {
-        const apiUrl = `https://utils3.cnnd.vn/ajax/weatherinfo/${cityId}.htm`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
+        // ✅ SỬ DỤNG OPENWEATHERMAP API 
+        const API_KEY = '16a12a5b5cc7814102a4b46c03e21a5c'; 
         
-        const response = await fetch(proxyUrl);
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Ho%20Chi%20Minh&appid=${API_KEY}&units=metric&lang=vi`;
+        
+        const response = await fetch(apiUrl);
         
         if (!response.ok) {
-            throw new Error('Không thể kết nối đến API');
+            throw new Error('Failed to fetch weather data');
         }
         
-        const result = await response.json();
-        const apiData = JSON.parse(result.contents);
+        const data = await response.json();
         
-        if (!apiData.Data || !apiData.Data.data || !apiData.Data.data.datainfo) {
-            throw new Error('Dữ liệu không hợp lệ');
-        }
         
-        return apiData.Data.data.datainfo;
+        return {
+            temperature: Math.round(data.main.temp).toString(),
+            temperature_min: Math.round(data.main.temp_min).toString(),
+            temperature_max: Math.round(data.main.temp_max).toString(),
+            status: data.weather[0].description,
+            humidity: data.main.humidity.toString(),
+            wind: {
+                index: Math.round(data.wind.speed * 3.6).toString(), 
+                unit: 'km/h'
+            }
+        };
         
     } catch (error) {
         console.error('API Error:', error);
-        throw error;
+        // Fallback to mock data
+        return getMockWeatherData();
     }
 }
 
