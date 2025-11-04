@@ -100,7 +100,7 @@ const WEATHER_RECOMMENDATIONS = {
                 name: 'Hồng Trà Latte Đài Loan',
                 price: '28.000đ',
                 image: '/assets/images/products/hong-tra-latte-dai-loan.jpg',
-                reason: 'Ấm bụng, xua tan lạnh'
+                reason: 'Ấm bụng, xua tan cái lạnh'
             },
             {
                 id: 'NG10', // ✅ ID từ products.json
