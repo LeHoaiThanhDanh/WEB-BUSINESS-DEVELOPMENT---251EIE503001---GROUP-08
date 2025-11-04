@@ -141,7 +141,7 @@ function initializeWeatherPopup() {
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #0088ff 0%, #0066cc 100%); 
                 border: none;
                 cursor: pointer;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -151,24 +151,83 @@ function initializeWeatherPopup() {
                 font-size: 28px;
                 transition: all 0.3s ease;
                 position: relative;
-                animation: btnPulse 2s ease-in-out infinite;
+                animation: btnPulseStrong 1.5s ease-in-out infinite;
             }
 
-            @keyframes btnPulse {
+            @keyframes btnPulseStrong {
                 0%, 100% {
                     transform: scale(1);
                     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
                 }
+                25% {
+                    transform: scale(1.15) rotate(5deg);
+                    box-shadow: 0 8px 24px rgba(0, 136, 255, 0.8); 
+                }
                 50% {
-                    transform: scale(1.05);
-                    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+                    transform: scale(1) rotate(0deg);
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                }
+                75% {
+                    transform: scale(1.15) rotate(-5deg);
+                    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.8); 
+                }
+            }
+
+            .weather-toggle-btn::before {
+                content: '';
+                position: absolute;
+                inset: -5px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #0088ff 0%, #0066cc 100%); 
+                animation: rippleEffect 2s ease-out infinite;
+            }
+
+            @keyframes rippleEffect {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: scale(1.5);
+                    opacity: 0;
+                }
+            }
+
+            /* ✅ THÊM SPARKLE EFFECT */
+            .weather-toggle-btn::after {
+                content: '✨';
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                font-size: 16px;
+                animation: sparkle 1.5s ease-in-out infinite;
+            }
+
+            @keyframes sparkle {
+                0%, 100% {
+                    opacity: 0;
+                    transform: scale(0) rotate(0deg);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1.2) rotate(180deg);
                 }
             }
 
             .weather-toggle-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+                transform: scale(1.2) rotate(15deg);
+                box-shadow: 0 8px 32px rgba(0, 136, 255, 0.9); 
                 animation: none;
+            }
+
+            .weather-toggle-btn:hover::before {
+                animation: none;
+                opacity: 0;
+            }
+
+            .weather-toggle-btn:active {
+                transform: scale(0.95);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             }
 
             .weather-popup {
@@ -220,7 +279,7 @@ function initializeWeatherPopup() {
             }
 
             .weather-popup::-webkit-scrollbar-thumb {
-                background: #667eea;
+                background: #0088ff; 
                 border-radius: 3px;
             }
 
@@ -274,7 +333,7 @@ function initializeWeatherPopup() {
             .weather-temp {
                 font-size: 48px;
                 font-weight: 700;
-                color: #667eea;
+                color: #0088ff; 
                 margin: 10px 0;
             }
 
@@ -383,7 +442,7 @@ function initializeWeatherPopup() {
 
             .recommendation-reason {
                 font-size: 12px;
-                color: #667eea;
+                color: #0088ff; 
                 margin-bottom: 4px;
             }
 
