@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quản Lý Đơn Hàng • Hồng Trà Ngô Gia</title>
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin.css' %}">
+  <link rel="stylesheet" href="{% static 'Pages/Admin/admin-order.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  
+  <div class="admin-layout">
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <h1>ĐƠN HÀNG</h1>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Thống kê tổng quan -->
+        <section class="order-stats">
+          <div class="stat-card active" data-status="">
+            <div class="stat-info">
+              <div class="stat-label">Tất cả đơn hàng</div>
+              <div class="stat-value"><span id="statAll">0</span> đơn hàng</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-status="pending">
+            <div class="stat-info">
+              <div class="stat-label">Chờ xác nhận</div>
+              <div class="stat-value"><span id="statPending">0</span> đơn hàng</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-status="shipping">
+            <div class="stat-info">
+              <div class="stat-label">Đang giao hàng</div>
+              <div class="stat-value"><span id="statShipping">0</span> đơn hàng</div>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-status="completed">
+            <div class="stat-info">
+              <div class="stat-label">Đã giao hàng</div>
+              <div class="stat-value"><span id="statCompleted">0</span> đơn hàng</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bộ lọc và tìm kiếm -->
+        <section class="order-filters">
+          <div class="filter-left">
+          </div>
+          <div class="filter-right">
+            <input type="text" id="filter-order-id" class="filter-input-round" placeholder="Mã đơn">
+            <div class="search-wrapper">
+              <input type="text" id="search-order" class="filter-input-round" placeholder="Tìm kiếm">
+              <button type="button" class="btn-search-icon" id="btnSearch">
+                <img src="{% static 'assets/icons/search.png' %}" alt="Search" style="width:28px;height:28px;">
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bảng đơn hàng -->
+        <section class="card table" id="orders">
+          <div class="card-header-block">
+            <h2 class="card-title">Danh sách đơn hàng</h2>
+            <div class="table-info">
+              Tổng: <strong id="totalOrders">0</strong> đơn hàng
+            </div>
+          </div>
+          
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã đơn hàng</th>
+                  <th>Thời gian</th>
+                  <th>Tổng tiền</th>
+                  <th>Tình trạng</th>
+                  <th>Thanh toán</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Orders will be rendered here -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="productsPagers" id="ordersPagination">
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal chi tiết đơn hàng -->
+  <div id="modal-order-detail" class="modal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay" data-close-order></div>
+    <div class="modal-container modal-order-detail">
+      <div class="modal-header-order">
+        <h2 class="modal-title-order">CHI TIẾT ĐƠN HÀNG</h2>
+        <button type="button" class="modal-close" data-close-order aria-label="Đóng">&times;</button>
+      </div>
+
+      <div class="modal-body-order">
+        <!-- Thông tin đơn hàng -->
+        <div class="order-info-section">
+          <div class="order-info-header">
+            <img src="{% static 'assets/icons/Cart.png' %}" alt="Cart" class="section-icon">
+            <h3 class="section-title">Thông tin đơn hàng</h3>
+          </div>
+          <div class="order-info-grid">
+            <div class="info-row">
+              <span class="info-label">Mã đơn hàng:</span>
+              <span class="info-value" id="order-id">HTNGTD273</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Ngày đặt hàng:</span>
+              <span class="info-value" id="order-date">20/10/2025</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Thời gian:</span>
+              <span class="info-value" id="order-time">07:28 am</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Tình trạng đơn hàng:</span>
+              <select id="order-status-dropdown" class="status-dropdown">
+                <option value="pending">Chờ xác nhận</option>
+                <option value="processing">Đang xử lý</option>
+                <option value="shipping">Đang giao hàng</option>
+                <option value="completed">Đã giao hàng</option>
+                <option value="cancelled">Đã hủy</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Địa chỉ người nhận -->
+          <div class="order-info-divider"></div>
+          <div class="order-info-subsection">
+            <div class="subsection-header">
+              <h4 class="subsection-title">Địa chỉ người nhận:</h4>
+            </div>
+            <div class="order-info-grid">
+              <div class="info-row">
+                <span class="info-label">Họ và tên:</span>
+                <span class="info-value" id="customer-name">Nguyễn Bá Dũ</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Số điện thoại:</span>
+                <span class="info-value" id="customer-phone">0934727978</span>
+              </div>
+              <div class="info-row full-width">
+                <span class="info-label">Địa chỉ:</span>
+                <span class="info-value" id="customer-address">Bcons plaza, Thống Nhất, Dĩ An Bình Dương</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danh sách sản phẩm -->
+        <div class="order-items-section">
+          <div class="order-info-header">
+            <img src="{% static 'assets/icons/cart3.png' %}" alt="List" class="section-icon">
+            <h3 class="section-title">Danh sách sản phẩm</h3>
+          </div>
+          <div class="order-items-list" id="order-items">
+            <!-- Items will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Thông tin thanh toán -->
+        <div class="order-payment-section">
+          <h3 class="payment-title">Thông tin thanh toán</h3>
+          <div class="payment-row">
+            <span class="payment-label">Tổng tiền tạm tính</span>
+            <span class="payment-value" id="subtotal">65.000đ</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">Phí vận chuyển</span>
+            <span class="payment-value" id="shipping-fee">0đ</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">Mã giảm giá</span>
+            <span class="payment-value" id="discount">0đ</span>
+          </div>
+          <div class="payment-row payment-total">
+            <span class="payment-label-total">Tổng tiền</span>
+            <span class="payment-value-total" id="total-amount">65.000đ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nút Lưu -->
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" id="btn-save-order">
+          <span class="btn-icon"><img src="{% static 'assets/icons/tick2.png' %}" alt="" style="width:18px;height:18px;"></span>
+          <span>Lưu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Success -->
+  <div id="modal-success" class="modal modal-success" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-container modal-success-container">
+      <div class="modal-success-content">
+        <div class="success-icon">
+          <img src="{% static 'assets/icons/tick2.png' %}" alt="Success" style="width:48px;height:48px;">
+        </div>
+        <h2 class="success-title" id="success-message">CẬP NHẬT THÀNH CÔNG</h2>
+        <button type="button" class="btn-close-success" id="btn-close-success">
+          &times;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    (function(){
+      async function loadHeaderAdmin(){
+        try{
+          const el = document.getElementById('app-header');
+          if(!el) return;
+          const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
+          el.innerHTML = await res.text();
+          const btn = el.querySelector('#btn-logout');
+          if(btn){ 
+            btn.addEventListener('click', (e)=>{ 
+              e.preventDefault?.(); 
+              localStorage.removeItem('authAdmin'); 
+              localStorage.removeItem('authUser'); 
+              localStorage.removeItem('ngogia_user'); 
+              location.href = '/login-admin/'; 
+            }); 
+          }
+        }catch(err){ console.error('Load admin header failed', err); }
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); 
+      else loadHeaderAdmin();
+    })();
+  </script>
+  
+  <script src="{% static 'Pages/Admin/admin-order.js' %}" defer></script>
+</body>
+</html>

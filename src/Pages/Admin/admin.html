@@ -836,6 +836,34 @@
         
         attempts++;
       }, 100);
+      
+      // ✅ Handle hash navigation for products
+      const handleProductsScroll = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'products' || hash === 'productsPager') {
+          // Use requestAnimationFrame for immediate scroll
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const pager = document.getElementById('productsPager');
+              if (pager) {
+                console.log('📍 Scrolling to productsPager');
+                const headerHeight = 100;
+                const targetPosition = pager.offsetTop - headerHeight;
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: 'smooth'
+                });
+              }
+            });
+          });
+        }
+      };
+      
+      // Run immediately after DOM ready
+      handleProductsScroll();
+      
+      // ✅ Listen for hash changes
+      window.addEventListener('hashchange', handleProductsScroll);
     });
   </script>
 </body>

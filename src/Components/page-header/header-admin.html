@@ -26,11 +26,11 @@
       <img src="/assets/icons/Home.png" alt="">
       <span data-i18n="header.admin.overview">Tổng quan</span>
     </a>
-    <a href="/admin-dashboard#products" class="nav-item" data-action="scroll" data-target="products">
+    <a href="/admin-dashboard#productsPager" class="nav-item" data-action="scroll" data-target="productsPager">
       <img src="/assets/icons/sanpham.png" alt="">
       <span data-i18n="header.admin.products">Sản phẩm</span>
     </a>
-    <a href="/admin-dashboard#orders" class="nav-item" data-action="scroll" data-target="orders">
+    <a href="/admin-order" class="nav-item" data-action="navigate">
       <img src="/assets/icons/Cart.png" alt="">
       <span data-i18n="header.admin.orders">Đơn hàng</span>
     </a>
@@ -38,7 +38,7 @@
       <img src="/assets/icons/account.png" alt="">
       <span data-i18n="header.admin.account">Tài khoản</span>
     </a>
-    <a href="/admin-blog/" class="nav-item" data-action="scroll" data-target="forums">
+    <a href="/admin-blog/" class="nav-item" data-action="navigate">
       <img src="/assets/icons/dien_dan.png" alt="">
       <span data-i18n="header.admin.forums">Diễn đàn</span>
     </a>
@@ -50,6 +50,7 @@
   const currentPath = window.location.pathname;
   const isAdminPage = currentPath.includes('admin-dashboard') || currentPath.includes('Admin.html');
   const isAccountPage = currentPath.includes('admin-account');
+  const isOrderPage = currentPath.includes('admin-order');
 
   // Logout
   document.getElementById('btn-logout')?.addEventListener('click', function(e) {
@@ -89,7 +90,7 @@
     const href = item.getAttribute('href');
 
     item.addEventListener('click', function(e) {
-      console.log('Clicked:', item.textContent.trim(), 'Action:', action);
+      console.log('Clicked:', item.textContent.trim(), 'Action:', action, 'Target:', target);
 
       // Case 1: Navigate to another page (Tổng quan, Tài khoản)
       if (action === 'navigate') {
@@ -103,7 +104,7 @@
 
         // If not on Admin page, navigate to dashboard with hash
         if (!isAdminPage) {
-          console.log('→ Navigate to admin-dashboard and scroll to:', target);
+          console.log('→ Navigate to admin-dashboard with hash:', target);
           window.location.href = `/admin-dashboard#${target}`;
           return;
         }
@@ -112,7 +113,26 @@
         const targetSection = document.getElementById(target);
         if (targetSection) {
           console.log('→ Scroll to section:', target);
-          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // For productsPager, scroll to it directly
+          if (target === 'productsPager' || target === 'products') {
+            const headerHeight = 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          } else {
+            // For other sections, scroll to top of section
+            const headerHeight = 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
           
           // Update active state
           document.querySelectorAll('.nav-bar .nav-item').forEach(i => i.classList.remove('active'));
@@ -132,6 +152,11 @@
 
     // Active for account page
     if (isAccountPage && href && href.includes('admin-account')) {
+      item.classList.add('active');
+    }
+    
+    // Active for order page
+    if (isOrderPage && href && href.includes('admin-order')) {
       item.classList.add('active');
     }
     
@@ -157,7 +182,25 @@
       const targetSection = document.getElementById(hash);
       
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // For productsPager or products, scroll to it
+        if (hash === 'productsPager' || hash === 'products') {
+          const headerHeight = 80;
+          const targetPosition = targetSection.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        } else {
+          // For other sections, scroll to top of section
+          const headerHeight = 80;
+          const targetPosition = targetSection.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
         
         // Update active state
         document.querySelectorAll('.nav-bar .nav-item').forEach(item => {
@@ -177,7 +220,23 @@
       setTimeout(() => {
         const targetSection = document.getElementById(initialHash);
         if (targetSection) {
-          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (initialHash === 'productsPager' || initialHash === 'products') {
+            const headerHeight = 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          } else {
+            const headerHeight = 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
         }
       }, 500);
     }
@@ -198,7 +257,7 @@
   }
 
   console.log('Header navigation initialized');
-  console.log('Current page:', isAdminPage ? 'Admin Dashboard' : 'Other');
+  console.log('Current page:', isAdminPage ? 'Admin Dashboard' : isOrderPage ? 'Order Page' : 'Other');
 })();
 </script>
 

@@ -6,7 +6,8 @@
     "customerPhone": "0934727978",
     "customerAddress": "Bcons plaza, Thống Nhất, Dĩ An Bình Dương",
     "date": "2025-10-30T07:28:00",
-    "status": "Hoàn tất",
+    "status": "completed",
+    "paymentMethod": "Tiền mặt",
     "subtotal": 65000,
     "shippingFee": 0,
     "discount": 0,
@@ -14,17 +15,19 @@
     "items": [
       {
         "productId": "NG07",
-        "productName": "Hồng trà đài loan",
-        "specs": "Kích cỡ: L, Độ ngọt: Vừa, 2x Thạch dứa nguyên vị",
-        "price": 25000,
-        "quantity": 1
+        "name": "Hồng trà đài loan",
+        "image": "/assets/images/products/hong-tra-dai-loan.jpg",
+        "size": "L",
+        "quantity": 1,
+        "price": 25000
       },
       {
         "productId": "NG15",
-        "productName": "Trà sữa Đài Loan",
-        "specs": "Kích cỡ: M, Độ ngọt: Ít, Trân châu hoàng kim, 2x pudding trứng",
-        "price": 40000,
-        "quantity": 1
+        "name": "Trà sữa Đài Loan",
+        "image": "/assets/images/products/tra-sua-dai-loan.jpg",
+        "size": "M",
+        "quantity": 1,
+        "price": 40000
       }
     ]
   },
@@ -35,13 +38,14 @@
     "customerPhone": "0912345678",
     "customerAddress": "123 Lê Lợi, Phường 4, Quận Gò Vấp, TP.HCM",
     "date": "2025-10-28T10:30:00",
-    "status": "Hoàn tất",
+    "status": "completed",
+    "paymentMethod": "Momo",
     "subtotal": 76000,
     "shippingFee": 10000,
     "discount": 0,
     "total": 86000,
     "items": [
-      {"productId": "NG01", "productName": "Trà sữa truyền thống", "quantity": 2, "price": 76000}
+      {"productId": "NG01", "name": "Trà sữa truyền thống", "image": "/assets/images/products/tra-o-long-moc-huong.png", "size": "M", "quantity": 2, "price": 38000}
     ]
   },
   {
@@ -51,14 +55,15 @@
     "customerPhone": "0923456789",
     "customerAddress": "456 Nguyễn Văn Linh, Phường Tân Phú, Quận 7, TP.HCM",
     "date": "2025-10-30T11:15:00",
-    "status": "Đang xử lý",
+    "status": "processing",
+    "paymentMethod": "Zalo pay",
     "subtotal": 49000,
     "shippingFee": 15000,
     "discount": 10000,
     "total": 54000,
     "items": [
-      {"productId": "NG10", "productName": "Trà đào cam sả", "quantity": 1, "price": 28000},
-      {"productId": "NG15", "productName": "Trà sữa Đài Loan", "quantity": 1, "price": 21000}
+      {"productId": "NG10", "name": "Trà đào cam sả", "image": "/assets/images/products/tra-sua-socola.png", "size": "M", "quantity": 1, "price": 28000},
+      {"productId": "NG15", "name": "Trà sữa Đài Loan", "image": "/assets/images/products/tra-sua-dai-loan.jpg", "size": "M", "quantity": 1, "price": 21000}
     ]
   },
   {
@@ -68,13 +73,14 @@
     "customerPhone": "0934567890",
     "customerAddress": "789 Võ Văn Kiệt, Phường 5, Quận 5, TP.HCM",
     "date": "2025-10-30T13:45:00",
-    "status": "Chờ xác nhận",
+    "status": "pending",
+    "paymentMethod": "Tiền mặt",
     "subtotal": 65000,
     "shippingFee": 20000,
     "discount": 5000,
     "total": 80000,
     "items": [
-      {"productId": "NG08", "productName": "Trà vải", "quantity": 1, "price": 21000}
+      {"productId": "NG08", "name": "Trà vải", "image": "/assets/images/products/tra-sua-uyen-uong.png", "size": "L", "quantity": 1, "price": 65000}
     ]
   },
   {
@@ -84,13 +90,14 @@
     "customerPhone": "0945678901",
     "customerAddress": "321 Hoàng Văn Thụ, Phường 8, Quận Phú Nhuận, TP.HCM",
     "date": "2025-10-27T16:20:00",
-    "status": "Hoàn tất",
+    "status": "completed",
+    "paymentMethod": "Tiền mặt",
     "subtotal": 132000,
     "shippingFee": 0,
     "discount": 0,
     "total": 132000,
     "items": [
-      {"productId": "NG18", "productName": "Trà sữa thạch phô mai", "quantity": 3, "price": 132000}
+      {"productId": "NG18", "name": "Trà sữa thạch phô mai", "image": "/assets/images/products/sua-tuoi-tran-chau-duong-den.png", "size": "M", "quantity": 3, "price": 44000}
     ]
   },
   {
@@ -100,13 +107,14 @@
     "customerPhone": "0956789012",
     "customerAddress": "654 Phan Văn Trị, Phường 10, Quận Gò Vấp, TP.HCM",
     "date": "2025-10-27T09:10:00",
-    "status": "Đang giao hàng",
+    "status": "shipping",
+    "paymentMethod": "Ví điện tử",
     "subtotal": 19000,
     "shippingFee": 25000,
     "discount": 0,
     "total": 44000,
     "items": [
-      {"productId": "NG02", "productName": "Trà sữa socola", "quantity": 1, "price": 19000}
+      {"productId": "NG02", "name": "Trà sữa socola", "image": "/assets/images/products/hong-tra-bi-dao.jpg", "size": "M", "quantity": 1, "price": 19000}
     ]
   }
 ]

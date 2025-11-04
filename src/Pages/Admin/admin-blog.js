@@ -13,9 +13,9 @@
 
   let POSTS_ALL = [];
   let currentDeleteId = null;
-  let uploadedImages = []; // ✅ LƯU HÌNH ẢNH ĐÃ TẢI LÊN
+  let uploadedImages = []; 
 
-  // ✅ LOAD DỮ LIỆU TỪ FILE JSON VỚI LOGGING
+  // LOAD DỮ LIỆU TỪ FILE JSON VỚI LOGGING
   async function loadDefaultPosts() {
     try {
       console.log('🔄 Đang tải blogs.json...');
@@ -36,7 +36,7 @@
     }
   }
 
-  // ✅ KIỂM TRA DỮ LIỆU TRONG fetchPosts
+  // KIỂM TRA DỮ LIỆU TRONG fetchPosts
   async function fetchPosts() {
     try {
       const stored = localStorage.getItem('blog_posts');
@@ -144,7 +144,7 @@
     if (excerptInput) excerptInput.value = '';
     if (contentInput) contentInput.value = '';
     
-    // ✅ RESET UPLOADED IMAGES
+    // RESET UPLOADED IMAGES
     uploadedImages = [];
 
     const gallery = $('#add-image-gallery');
@@ -283,7 +283,7 @@
     }
   }
 
-  // ✅ HIỂN THỊ THÔNG BÁO LỖI
+  // HIỂN THỊ THÔNG BÁO LỖI
   function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = `
@@ -317,13 +317,13 @@
       const excerptInput = $('#add-post-excerpt');
       const contentInput = $('#add-post-content');
 
-      // ✅ KIỂM TRA BẮT BUỘC PHẢI CÓ HÌNH ẢNH
+      //  KIỂM TRA BẮT BUỘC PHẢI CÓ HÌNH ẢNH
       if (uploadedImages.length === 0) {
         showError('❌ Vui lòng tải lên ít nhất 1 hình ảnh!');
         return;
       }
 
-      // ✅ KIỂM TRA CÁC TRƯỜNG BẮT BUỘC KHÁC
+      //  KIỂM TRA CÁC TRƯỜNG BẮT BUỘC KHÁC
       if (!titleInput?.value.trim()) {
         showError('❌ Vui lòng nhập tiêu đề!');
         return;
@@ -358,11 +358,11 @@
       closeAddPostModal();
       showSuccess('THÊM BÀI VIẾT THÀNH CÔNG');
       
-      // ✅ RESET UPLOADED IMAGES
+      //  RESET UPLOADED IMAGES
       uploadedImages = [];
     });
 
-    // ✅ XỬ LÝ TẢI HÌNH ẢNH LÊN
+    //  XỬ LÝ TẢI HÌNH ẢNH LÊN
     const imageInput = $('#add-post-image');
     if (imageInput) {
       imageInput.addEventListener('change', (e) => {
@@ -372,7 +372,7 @@
         const gallery = $('#add-image-gallery');
         if (!gallery) return;
 
-        // ✅ XÓA ẢNH CŨ
+        // XÓA ẢNH CŨ
         const existingImages = gallery.querySelectorAll('.image-item');
         existingImages.forEach(item => item.remove());
         uploadedImages = [];
