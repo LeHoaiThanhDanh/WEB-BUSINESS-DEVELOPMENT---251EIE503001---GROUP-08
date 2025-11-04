@@ -30,6 +30,12 @@ body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#
 .card{border:1px solid var(--line);border-radius:14px;padding:16px}
 .card .card-title{font-weight:700;margin:0 0 10px;color:#0088ff}
 
+/* Stat Cards - Flexbox để ghim stat-desc xuống đáy */
+.card.stat {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
 
 .card.stat.revenue{background:#1596D5} 
 
@@ -62,6 +68,8 @@ body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#
 }
 
 .stat .stat-value{font-size:32px;font-weight:800;margin:10px 0;letter-spacing:-0.5px}
+
+/* Ghim stat-desc xuống đáy */
 .stat .stat-desc {
   display: flex;
   align-items: center;
@@ -69,6 +77,7 @@ body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#
   color: #ffffff;
   font-size: 20px;
   opacity: 0.9;
+  margin-top: auto;
 }
 
 .stat-desc-icon {

@@ -40,7 +40,7 @@
   };
 
   // ============================================================
-  // ✅ SUCCESS MODAL - THAY THẾ TOAST
+  //  SUCCESS MODAL - THAY THẾ TOAST
   // ============================================================
   
   function showSuccess(message = 'CHỈNH SỬA THÀNH CÔNG') {
@@ -120,7 +120,7 @@
             {
               label: 'Chi Phí',
               data: [32, 22, 28, 35, 25, 38, 18, 60, 58, 50, 45, 30, 45, 48, 18],
-              borderColor: '#0088ff',
+              borderColor: '#00eeffff',
               backgroundColor: 'rgba(59, 130, 246, 0.1)',
               borderWidth: 3,
               tension: 0.4,

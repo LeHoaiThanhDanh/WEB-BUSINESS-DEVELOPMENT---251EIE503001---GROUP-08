@@ -226,31 +226,7 @@
   </div>
 
   <!-- Scripts -->
-  <script>
-    (function(){
-      async function loadHeaderAdmin(){
-        try{
-          const el = document.getElementById('app-header');
-          if(!el) return;
-          const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
-          el.innerHTML = await res.text();
-          const btn = el.querySelector('#btn-logout');
-          if(btn){ 
-            btn.addEventListener('click', (e)=>{ 
-              e.preventDefault?.(); 
-              localStorage.removeItem('authAdmin'); 
-              localStorage.removeItem('authUser'); 
-              localStorage.removeItem('ngogia_user'); 
-              location.href = '/login-admin/'; 
-            }); 
-          }
-        }catch(err){ console.error('Load admin header failed', err); }
-      }
-      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); 
-      else loadHeaderAdmin();
-    })();
-  </script>
-  
+  <script src="{% static 'Pages/Admin/admin-header-loader.js' %}"></script>
   <script src="{% static 'Pages/Admin/admin-order.js' %}" defer></script>
 </body>
 </html>

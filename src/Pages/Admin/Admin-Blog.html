@@ -17,7 +17,7 @@
         <section class="cards" id="overview">
           <div class="card stat revenue">
             <div class="stat-title">
-              <img src="{% static 'assets/icons/blog.png' %}" alt="Blog icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <img src="{% static 'assets/icons/tongbaiviet.png' %}" alt="Blog icon" style="width: 24px; height: 24px; margin-right: 8px;">
               <span data-i18n="admin.blog.totalPosts">TỔNG BÀI VIẾT</span>
             </div>
             <div class="stat-value" id="sTotalPosts">0</div>
@@ -29,10 +29,10 @@
           
           <div class="card stat orders">
             <div class="stat-title">
-              <img src="{% static 'assets/icons/eye.png' %}" alt="Views icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <img src="{% static 'assets/icons/luotxem.png' %}" alt="Views icon" style="width: 24px; height: 24px; margin-right: 8px;">
               <span data-i18n="admin.blog.totalViews">LƯỢT XEM</span>
             </div>
-            <div class="stat-value" id="sTotalViews">0</div>
+            <div class="stat-value" id="sTotalViews">127</div>
             <div class="stat-desc">
               <img src="/assets/icons/grow.png" alt="Growth icon" class="stat-desc-icon">
               <span data-i18n="admin.blog.thisWeek">Tuần này</span>
@@ -41,7 +41,7 @@
           
           <div class="card stat bestseller">
             <div class="stat-title">
-              <img src="{% static 'assets/icons/tick2.png' %}" alt="Published icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <img src="{% static 'assets/icons/daxuatban.png' %}" alt="Published icon" style="width: 24px; height: 24px; margin-right: 8px;">
               <span data-i18n="admin.blog.published">ĐÃ XUẤT BẢN</span>
             </div>
             <div class="stat-value" id="sPublished">0</div>
@@ -50,7 +50,7 @@
           
           <div class="card stat products">
             <div class="stat-title">
-              <img src="{% static 'assets/icons/clock.png' %}" alt="Draft icon" style="width: 24px; height: 24px; margin-right: 8px;">
+              <img src="{% static 'assets/icons/bannhap.png' %}" alt="Draft icon" style="width: 24px; height: 24px; margin-right: 8px;">
               <span data-i18n="admin.blog.draft">BẢN NHÁP</span>
             </div>
             <div class="stat-value" id="sDraft">0</div>
@@ -269,36 +269,7 @@
   </div>
   
   <!-- Load header -->
-  <script>
-    (function(){
-      async function loadHeaderAdmin(){
-        try{
-          const el = document.getElementById('app-header');
-          if(!el) return;
-          const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
-          el.innerHTML = await res.text();
-          const btn = el.querySelector('#btn-logout');
-          if(btn){ btn.addEventListener('click', (e)=>{ e.preventDefault?.(); localStorage.removeItem('authAdmin'); location.href = '/login-admin/'; }); }
-        }catch(err){ console.error('Load admin header failed', err); }
-      }
-      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); else loadHeaderAdmin();
-    })();
-  </script>
+  <script src="{% static 'Pages/Admin/admin-header-loader.js' %}"></script>
   <script src="{% static 'Pages/Admin/admin-blog.js' %}"></script>
-  <script>
-    (function(){
-      function setup(btnId, menuId){
-        const btn=document.getElementById(btnId); const menu=document.getElementById(menuId); const box=btn?.closest(".dropdown");
-        if(!btn||!menu||!box) return;
-        function open(){ menu.removeAttribute("hidden"); btn.setAttribute("aria-expanded","true"); box.classList.add("open"); }
-        function close(){ menu.setAttribute("hidden",""); btn.setAttribute("aria-expanded","false"); box.classList.remove("open"); }
-        btn.addEventListener("click",(e)=>{ e.stopPropagation(); (menu.hasAttribute("hidden")?open:close)(); });
-        document.addEventListener("click",(e)=>{ if(!box.contains(e.target)) close(); });
-        document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") close(); });
-      }
-      const run=()=>{ setup("ddUserBtn","ddUserMenu"); setup("ddMoreBtn","ddMoreMenu"); };
-      if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", run); else run();
-    })();
-  </script>
 </body>
 </html>

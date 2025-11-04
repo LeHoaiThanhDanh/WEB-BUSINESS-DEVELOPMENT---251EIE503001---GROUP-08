@@ -204,27 +204,10 @@
     </div>
   </div>
 
+  <!-- Load Admin Header -->
+  <script src="{% static 'Pages/Admin/admin-header-loader.js' %}"></script>
+  
   <script>
-    // Load header
-    async function loadHeader() {
-      try {
-        const response = await fetch('/src/Components/page-header/header-admin.html');
-        const html = await response.text();
-        document.getElementById('admin-header').innerHTML = html;
-        
-        // Initialize sidebar toggle after header loaded
-        initSidebar();
-        
-        // Set active menu
-        const accountMenuItem = document.querySelector('a[href*="admin-account"]');
-        if (accountMenuItem) {
-          accountMenuItem.classList.add('active');
-        }
-      } catch (error) {
-        console.error('Error loading header:', error);
-      }
-    }
-
     // Initialize sidebar
     function initSidebar() {
       const sidebar = document.getElementById('sidebar');
@@ -241,9 +224,27 @@
 
     // Load header on page load
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadHeader);
+      document.addEventListener('DOMContentLoaded', function() {
+        // Wait for header to load
+        setTimeout(() => {
+          initSidebar();
+          
+          // Set active menu
+          const accountMenuItem = document.querySelector('a[href*="admin-account"]');
+          if (accountMenuItem) {
+            accountMenuItem.classList.add('active');
+          }
+        }, 200);
+      });
     } else {
-      loadHeader();
+      setTimeout(() => {
+        initSidebar();
+        
+        const accountMenuItem = document.querySelector('a[href*="admin-account"]');
+        if (accountMenuItem) {
+          accountMenuItem.classList.add('active');
+        }
+      }, 200);
     }
   </script>
   
