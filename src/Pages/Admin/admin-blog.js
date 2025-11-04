@@ -345,8 +345,8 @@
         excerpt: excerptInput.value.trim(),
         content: contentInput.value.trim(),
         date: new Date().toISOString().split('T')[0],
-        image: uploadedImages[0], // ✅ ẢNH ĐẦU TIÊN LÀM ẢNH ĐẠI DIỆN
-        images: uploadedImages, // ✅ TẤT CẢ ẢNH
+        image: uploadedImages[0], // 
+        images: uploadedImages, // 
         status: 'published',
         views: 0
       };
@@ -381,7 +381,7 @@
           const reader = new FileReader();
           reader.onload = (event) => {
             const imageData = event.target.result;
-            uploadedImages.push(imageData); // ✅ LƯU VÀO MẢNG
+            uploadedImages.push(imageData); 
 
             const item = document.createElement('div');
             item.className = 'image-item';
