@@ -389,44 +389,44 @@ body {
 /* Table column widths - căn đều hợp lý */
 #orders table th:nth-child(1),
 #orders table td:nth-child(1) {
-  width: 70px;
+  width: 60px;
   text-align: center;
 }
 
 #orders table th:nth-child(2),
 #orders table td:nth-child(2) {
-  width: 150px;
+  width: 140px;
   text-align: left;
 }
 
 #orders table th:nth-child(3),
 #orders table td:nth-child(3) {
-  width: 160px;
+  width: 180px;
   text-align: left;
 }
 
 #orders table th:nth-child(4),
 #orders table td:nth-child(4) {
-  width: 130px;
+  width: 120px;
   text-align: right;
-  padding-right: 24px;
+  padding-right: 20px;
 }
 
 #orders table th:nth-child(5),
 #orders table td:nth-child(5) {
-  width: 160px;
+  width: 150px;
   text-align: center;
 }
 
 #orders table th:nth-child(6),
 #orders table td:nth-child(6) {
-  width: 130px;
+  width: 120px;
   text-align: left;
 }
 
 #orders table th:nth-child(7),
 #orders table td:nth-child(7) {
-  width: 100px;
+  width: 90px;
   text-align: center;
 }
 

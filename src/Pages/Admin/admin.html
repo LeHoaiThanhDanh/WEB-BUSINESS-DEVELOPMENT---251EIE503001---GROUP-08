@@ -42,7 +42,7 @@
           <div class="card stat orders">
             <div class="stat-title">
               <img src="{% static 'assets/icons/order.png' %}" alt="Order icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
-              <span data-i18n="admin.dashboard.ordersToday">Đơn hàng hôm nay</span>
+              <span data-i18n="admin.dashboard.ordersToday">ĐƠN HÀNG TUẦN NÀY</span>
             </div>
             <div class="stat-value" id="sOrders">0</div>
             <div class="stat-desc">
@@ -54,7 +54,7 @@
           <div class="card stat bestseller">
             <div class="stat-title">
               <img src="{% static 'assets/icons/bestseller.png' %}" alt="Best seller icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
-              <span data-i18n="admin.dashboard.productsSold">Sản phẩm đã bán</span>
+              <span data-i18n="admin.dashboard.productsSold">SẢN PHẨM ĐÃ BÁN</span>
             </div>
             <div class="stat-value" id="sCustomers">327 SẢN PHẨM</div>
             <div class="stat-desc">
@@ -66,7 +66,7 @@
           <div class="card stat products">
             <div class="stat-title">
               <img src="{% static 'assets/icons/product.png' %}" alt="Product icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
-              <span data-i18n="admin.dashboard.products">Sản phẩm</span>
+              <span data-i18n="admin.dashboard.products">SẢN PHẨM</span>
             </div>
             <div class="stat-value" id="sProducts">0</div>
             <div class="stat-desc" data-i18n="admin.dashboard.inBusiness">Đang kinh doanh</div>
@@ -683,43 +683,54 @@
           if(!el) return;
           const res = await fetch('/src/Components/page-header/header-admin.html', { cache: 'no-cache' });
           el.innerHTML = await res.text();
-          try{
-            const raw = localStorage.getItem('authUser') || localStorage.getItem('ngogia_user');
-            if(raw){ const u = JSON.parse(raw); const nm = u?.fullName||u?.name||u?.username||u?.email; if(nm){ const chip = el.querySelector('[data-user-chip]'); if(chip) chip.textContent = nm; } }
-          }catch{}
-          try {
-            const chip = el.querySelector('[data-user_chip]');
-            if (chip) {
-              const current = (chip.textContent || '').trim();
-              if (!current || current === 'Tài khoản' || current === 'Tai khoan') {
-                let name = '';
-                try {
-                  const u1 = JSON.parse(localStorage.getItem('authUser') || 'null');
-                  const u2 = JSON.parse(localStorage.getItem('ngogia_user') || 'null');
-                  name = u1?.fullName || u1?.name || u1?.username || u1?.email ||
-                         u2?.fullName || u2?.name || u2?.username || u2?.email || '';
-                } catch {}
-                if (!name) {
-                  name = localStorage.getItem('authAdminName') ||
-                         document.getElementById('adminName')?.textContent?.trim() ||
-                         'Admin';
+          
+          // Setup user menu dropdown after header loaded
+          setTimeout(() => {
+            const userBtn = document.getElementById('user-btn');
+            const userMenu = document.getElementById('user-menu');
+            const userBox = document.getElementById('user-box');
+            
+            if (userBtn && userMenu) {
+              // Close menu initially
+              userMenu.setAttribute('hidden', '');
+              userBtn.setAttribute('aria-expanded', 'false');
+              
+              // Toggle menu on button click
+              userBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = userBtn.getAttribute('aria-expanded') === 'true';
+                userBtn.setAttribute('aria-expanded', String(!isExpanded));
+                if (isExpanded) {
+                  userMenu.setAttribute('hidden', '');
+                } else {
+                  userMenu.removeAttribute('hidden');
                 }
-                chip.textContent = name;
+              });
+              
+              // Close menu when clicking outside
+              document.addEventListener('click', function(e) {
+                if (userBox && !userBox.contains(e.target)) {
+                  userBtn.setAttribute('aria-expanded', 'false');
+                  userMenu.setAttribute('hidden', '');
+                }
+              });
+              
+              // Handle logout
+              const btnLogout = document.getElementById('btn-logout');
+              if (btnLogout) {
+                btnLogout.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                    localStorage.removeItem('admin_token');
+                    localStorage.removeItem('authAdmin');
+                    localStorage.removeItem('authUser');
+                    localStorage.removeItem('ngogia_user');
+                    window.location.href = '/login-admin/';
+                  }
+                });
               }
             }
-          } catch {}
-          const btn = el.querySelector('#btn-logout');
-          if(btn){ btn.addEventListener('click', (e)=>{ e.preventDefault?.(); localStorage.removeItem('authAdmin'); localStorage.removeItem('authUser'); localStorage.removeItem('ngogia_user'); location.href = '/login-admin/'; }); }
-          const userBox = el.querySelector('#user-box');
-          const userBtn = el.querySelector('#user-btn');
-          const menu = el.querySelector('#user-menu');
-          function openM(){ if(menu){ menu.removeAttribute('hidden'); userBox?.classList.add('open'); userBtn?.setAttribute('aria-expanded','true'); } }
-          function closeM(){ if(menu){ menu.setAttribute('hidden',''); userBox?.classList.remove('open'); userBtn?.setAttribute('aria-expanded','false'); } }
-          if(userBtn){
-            userBtn.addEventListener('click',(ev)=>{ ev.stopPropagation(); menu?.hasAttribute('hidden')?openM():closeM(); });
-            document.addEventListener('click',(ev)=>{ if(menu && userBox && !userBox.contains(ev.target)) closeM(); });
-            document.addEventListener('keydown',(ev)=>{ if(ev.key==='Escape') closeM(); });
-          }
+          }, 150);
         }catch(err){ console.error('Load admin header failed', err); }
       }
       if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', loadHeaderAdmin); else loadHeaderAdmin();
@@ -819,7 +830,7 @@
     })();
   </script>
 
-  <!-- ✅ GIỮ: Wait for header -->
+  <!-- GIỮ: Wait for header -->
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
       const savedLang = localStorage.getItem('app.lang') || 'vi';

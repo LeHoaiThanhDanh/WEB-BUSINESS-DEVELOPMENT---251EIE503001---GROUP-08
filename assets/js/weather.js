@@ -614,7 +614,7 @@ function initializeWeatherPopup() {
         }
     });
 
-    // ✅ TỰ ĐỘNG MỞ POPUP KHI VÀO TRANG (CHỈ 1 LẦN)
+    //  TỰ ĐỘNG MỞ POPUP KHI VÀO TRANG (CHỈ 1 LẦN)
     const hasShownPopup = sessionStorage.getItem('weatherPopupShown');
     
     if (!hasShownPopup) {
@@ -660,27 +660,35 @@ async function loadHCMCWeather() {
 
 async function getWeatherData(cityId) {
     try {
-        const apiUrl = `https://utils3.cnnd.vn/ajax/weatherinfo/${cityId}.htm`;
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
+
+        const API_KEY = 'e91754b654bb6c142234886aa68a1563'; 
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Ho%20Chi%20Minh&appid=${API_KEY}&units=metric&lang=vi`;
         
-        const response = await fetch(proxyUrl);
+        const response = await fetch(apiUrl);
         
         if (!response.ok) {
-            throw new Error('Không thể kết nối đến API');
+            throw new Error('Failed to fetch weather data');
         }
         
-        const result = await response.json();
-        const apiData = JSON.parse(result.contents);
+        const data = await response.json();
         
-        if (!apiData.Data || !apiData.Data.data || !apiData.Data.data.datainfo) {
-            throw new Error('Dữ liệu không hợp lệ');
-        }
-        
-        return apiData.Data.data.datainfo;
+        // ✅ CHUYỂN ĐỔI FORMAT
+        return {
+            temperature: Math.round(data.main.temp).toString(),
+            temperature_min: Math.round(data.main.temp_min).toString(),
+            temperature_max: Math.round(data.main.temp_max).toString(),
+            status: data.weather[0].description,
+            humidity: data.main.humidity.toString(),
+            wind: {
+                index: Math.round(data.wind.speed * 3.6).toString(), // m/s to km/h
+                unit: 'km/h'
+            }
+        };
         
     } catch (error) {
         console.error('API Error:', error);
-        throw error;
+        // Fallback to mock data
+        return getMockWeatherData();
     }
 }
 
@@ -766,11 +774,11 @@ function displayWeather(data) {
     contentDiv.innerHTML = html;
 }
 
-// ✅ HÀM CHUYỂN ĐÕI TRANG SẢN PHẨM (DÙNG ID CHÍNH XÁC)
+//  HÀM CHUYỂN ĐÕI TRANG SẢN PHẨM (DÙNG ID CHÍNH XÁC)
 function viewProduct(productId, productName) {
     console.log('View product:', productId, productName);
     
-    // ✅ SỬ DỤNG CẤU TRÚC ROUTING GIỐNG Home.js
+    //  SỬ DỤNG CẤU TRÚC ROUTING GIỐNG Home.js
     const qs = new URLSearchParams({
         pid: productId,
         name: productName
