@@ -9,6 +9,13 @@ const WEATHER_RECOMMENDATIONS = {
         title: 'Trời nóng - Giải nhiệt ngay!',
         products: [
             {
+                id: 'NG02', // ✅ ID từ products.json
+                name: 'Hồng Trà Bí Đao',
+                price: '19.000đ',
+                image: '/assets/images/products/hong-tra-bi-dao.jpg',
+                reason: 'Ngọt thanh, giải nhiệt tốt'
+            },
+            {
                 id: 'NG03', // ✅ ID từ products.json
                 name: 'Trà Xanh Bí Đao',
                 price: '19.000đ',
@@ -21,6 +28,13 @@ const WEATHER_RECOMMENDATIONS = {
                 price: '24.000đ',
                 image: '/assets/images/products/tra-xanh-chanh.jpg',
                 reason: 'Chua ngọt sảng khoái'
+            },
+            {
+                id: 'NG30', // ✅ ID từ products.json
+                name: 'Hồng Trà Chanh Vải Thiều',
+                price: '24.000đ',
+                image: '/assets/images/products/hong-tra-chanh-vai-thieu.jpg',
+                reason: 'Chua ngọt, giải khát'
             },
             {
                 id: 'NG31', // ✅ ID từ products.json
@@ -52,6 +66,20 @@ const WEATHER_RECOMMENDATIONS = {
                 reason: 'Béo ngậy, đậm đà'
             },
             {
+                id: 'NG18', // ✅ ID từ products.json
+                name: 'Sữa Tươi Trân Châu Đường Đen',
+                price: '44.000đ',
+                image: '/assets/images/products/sua-tuoi-tran-chau-duong-den.png',
+                reason: 'Ngọt thanh, béo ngậy'
+            },
+            {
+                id: 'NG42', // ✅ ID từ products.json
+                name: 'Ô Long Kem Cheese',
+                price: '26.000đ',
+                image: '/assets/images/products/o-long-kem-cheese.png',
+                reason: 'Béo mịn, mặn ngọt hài hòa'
+            },
+            {
                 id: 'NG01', // ✅ ID từ products.json
                 name: 'Trà Ô Long Mộc Hương',
                 price: '19.000đ',
@@ -81,6 +109,20 @@ const WEATHER_RECOMMENDATIONS = {
                 reason: 'Thơm nồng, ấm áp'
             },
             {
+                id: 'NG11', // ✅ ID từ products.json
+                name: 'Trà Sữa Trân Châu Đường Đen',
+                price: '26.000đ',
+                image: '/assets/images/products/tra-sua-tran-chau-duong-den.jpg',
+                reason: 'Béo ngậy, dai mềm'
+            },
+            {
+                id: 'NG14', // ✅ ID từ products.json
+                name: 'Trà Sữa Bí Đao',
+                price: '24.000đ',
+                image: '/assets/images/products/tra-sua-bi-dao.jpg',
+                reason: 'Ngọt thanh, mát lành'
+            },
+            {
                 id: 'NG10', // ✅ ID từ products.json
                 name: 'Trà Sữa Socola',
                 price: '28.000đ',
@@ -108,6 +150,20 @@ const WEATHER_RECOMMENDATIONS = {
                 price: '28.000đ',
                 image: '/assets/images/products/tra-sua-socola.png',
                 reason: 'Ngọt ngào, ấm áp'
+            },
+            {
+                id: 'NG16', // ✅ ID từ products.json
+                name: 'Sữa Tươi Khoai Môn Nghiền',
+                price: '41.000đ',
+                image: '/assets/images/products/sua-tuoi-khoai-mon-nghien.png',
+                reason: 'Béo ngậy, thơm bùi'
+            },
+            {
+                id: 'NG19', // ✅ ID từ products.json
+                name: 'Trân Châu Đường Đen Latte',
+                price: '33.000đ',
+                image: '/assets/images/products/tran-chau-duong-den-latte.jpg',
+                reason: 'Nóng ấm, thơm béo'
             },
             {
                 id: 'NG17', // ✅ ID từ products.json
