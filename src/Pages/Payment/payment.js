@@ -113,6 +113,160 @@
   function boot(){
     loadFooter();
     applyConfig();
+    setupOrderTracking();
+  }
+
+  function setupOrderTracking() {
+    // Kiểm tra xem đã có orderId trong sessionStorage chưa (từ lần vào payment này)
+    let orderId = sessionStorage.getItem('current_payment_order_id');
+    
+    if (orderId) {
+      // Đã có order rồi, chỉ cần set link
+      console.log('📌 Using existing order:', orderId);
+      const link = document.getElementById('checkOrderLink');
+      if (link) {
+        link.href = '/order-tracking/?orderId=' + orderId;
+      }
+      return;
+    }
+
+    // Lấy thông tin từ giỏ hàng - thử cả NGCart và localStorage
+    let items = [];
+    
+    // Thử lấy từ NGCart nếu có
+    if (window.NGCart && typeof window.NGCart.getItems === 'function') {
+      items = window.NGCart.getItems();
+      console.log('🛒 Items from NGCart:', items.length);
+    }
+    
+    // Nếu NGCart không có, thử lấy trực tiếp từ localStorage
+    if (!items.length) {
+      try {
+        const cartJSON = localStorage.getItem('cart_items');
+        if (cartJSON) {
+          items = JSON.parse(cartJSON);
+          console.log('🛒 Items from localStorage:', items.length);
+        }
+      } catch (err) {
+        console.error('Error parsing cart_items:', err);
+      }
+    }
+    
+    if (!items.length) {
+      // Nếu không có items, link về cart để thêm sản phẩm
+      console.warn('⚠️ Giỏ hàng trống, không thể tạo order mới');
+      const link = document.getElementById('checkOrderLink');
+      if (link) {
+        link.href = '/cart/';
+        link.textContent = 'Quay về giỏ hàng';
+      }
+      return;
+    }
+
+    // Lấy user hiện tại
+    function getCurrentUser() {
+      try {
+        const raw = localStorage.getItem('ngogia_user');
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object' && parsed.username) return parsed;
+      } catch (err) {
+        console.warn('Cannot parse ngogia_user', err);
+      }
+      return null;
+    }
+
+    // Lấy thông tin shipping
+    function getShippingInfo() {
+      try {
+        const raw = localStorage.getItem('ngogia_shipping');
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (err) {
+        return null;
+      }
+    }
+
+    const user = getCurrentUser();
+    const shipping = getShippingInfo() || {
+      receiver: user ? user.username : 'Khách hàng',
+      phone: '0123456789',
+      address: '76C Luy 198C 3B, khu pho 3, Thu Duc, TP. Ho Chi Minh',
+      deliveryDate: '',
+      deliveryTime: '',
+      note: ''
+    };
+
+    // Tính tổng tiền
+    const subtotal = window.NGCart ? window.NGCart.subtotal(items) : 0;
+    const coupon = window.NGCart ? window.NGCart.coupon.resolve(subtotal) : { code: '', amount: 0 };
+    const totals = window.NGCart ? window.NGCart.totals(items, coupon.amount) : { subtotal: 0, shipping: 0, discount: 0, grand: 0 };
+
+    // Tạo order ID duy nhất
+    orderId = 'HTNGTD' + Date.now().toString().slice(-6);
+
+    // Xác định phương thức thanh toán
+    const method = getMethod();
+    console.log('🔍 URL method:', method);
+    console.log('🌐 Full URL:', window.location.href);
+    
+    const paymentMethodMap = {
+      momo: 'MoMo',
+      zalopay: 'ZaloPay',
+      payoo: 'Ví điện tử'
+    };
+    const paymentMethod = paymentMethodMap[method] || 'MoMo';
+    console.log('💳 Mapped payment method:', paymentMethod);
+
+    // Tạo đối tượng đơn hàng
+    const order = {
+      id: orderId,
+      orderId: orderId,
+      date: new Date().toISOString(),
+      customerName: shipping.receiver || (user ? user.username : 'Khách hàng'),
+      customerPhone: shipping.phone || '0123456789',
+      customerAddress: shipping.address || '',
+      paymentMethod: paymentMethod,
+      status: 'pending',
+      subtotal: totals.subtotal,
+      shipping: totals.shipping,
+      discount: totals.discount,
+      total: totals.grand,
+      items: items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        qty: item.qty,
+        size: item.size || '',
+        image: item.image || '',
+        options: item.options || [],
+      })),
+      deliveryDate: shipping.deliveryDate || '',
+      deliveryTime: shipping.deliveryTime || '',
+      note: shipping.note || '',
+      couponCode: coupon.code || '',
+    };
+
+    // Lưu đơn hàng vào localStorage
+    try {
+      const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      existingOrders.push(order);
+      localStorage.setItem('orders', JSON.stringify(existingOrders));
+      
+      console.log('✅ Order saved:', orderId, 'Payment:', order.paymentMethod);
+      
+      // Lưu orderId vào sessionStorage để lần sau không tạo lại
+      sessionStorage.setItem('current_payment_order_id', orderId);
+    } catch (err) {
+      console.error('Error saving order:', err);
+    }
+
+    // Set link kiểm tra đơn hàng
+    const link = document.getElementById('checkOrderLink');
+    if (link) {
+      link.href = '/order-tracking/?orderId=' + orderId;
+      console.log('🔗 Check order link set:', link.href);
+    }
   }
 
   if (document.readyState === 'loading') {

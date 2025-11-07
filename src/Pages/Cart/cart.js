@@ -1015,9 +1015,70 @@
         );
         return;
       }
-      // Chuyen sang trang thanh toan theo phuong thuc da chon
+      
+      // Kiểm tra phương thức thanh toán
       const pm = document.querySelector('input[name="payment"]:checked');
       const val = (pm && pm.value) || '';
+      
+      // ✅ NẾU CHỌN TIỀN MẶT -> TẠO ĐỠN HÀNG VÀ CHUYỂN ĐẾN ORDER-TRACKING
+      if (val === 'cash') {
+        const user = getCurrentUser();
+        const shipping = getShippingInfo() || defaultShipping;
+        const subtotal = window.NGCart.subtotal(items);
+        const coupon = window.NGCart.coupon.resolve(subtotal);
+        const totals = window.NGCart.totals(items, coupon.amount);
+        
+        // Tạo order ID duy nhất
+        const orderId = 'HTNGTD' + Date.now().toString().slice(-6);
+        
+        // Tạo đối tượng đơn hàng
+        const order = {
+          id: orderId,
+          orderId: orderId,
+          date: new Date().toISOString(),
+          customerName: shipping.receiver || (user ? user.username : 'Khách hàng'),
+          customerPhone: shipping.phone || '0123456789',
+          customerAddress: shipping.address || '',
+          paymentMethod: 'Tiền mặt',
+          status: 'pending',
+          subtotal: totals.subtotal,
+          shipping: totals.shipping,
+          discount: totals.discount,
+          total: totals.grand,
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            qty: item.qty,
+            size: item.size || '',
+            image: item.image || '',
+            options: item.options || [],
+          })),
+          deliveryDate: shipping.deliveryDate || '',
+          deliveryTime: shipping.deliveryTime || '',
+          note: shipping.note || '',
+          couponCode: coupon.code || '',
+        };
+        
+        // Lưu đơn hàng vào localStorage
+        try {
+          const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+          existingOrders.push(order);
+          localStorage.setItem('orders', JSON.stringify(existingOrders));
+        } catch (err) {
+          console.error('Error saving order:', err);
+        }
+        
+        // Chuyển đến trang order-tracking
+        try { 
+          window.location.href = '/order-tracking/?orderId=' + orderId; 
+        } catch { 
+          location.assign('/order-tracking/?orderId=' + orderId); 
+        }
+        return;
+      }
+      
+      // CÁC PHƯƠNG THỨC KHÁC -> CHUYỂN ĐẾN PAYMENT PAGE
       const map = { momo: 'momo', zalopay: 'zalopay', ewallet: 'payoo' };
       const method = map[val] || 'momo';
       try { window.location.href = '/payment/?method=' + method; }

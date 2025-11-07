@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theo Dõi Đơn Hàng - Hồng Trà Ngô Gia</title>
+  <link rel="icon" type="image/png" href="{% static 'assets/images/logo-divider.png' %}">
+  <link rel="stylesheet" href="{% static 'Pages/OrderTracking/order-tracking.css' %}">
+</head>
+<body>
+  <div id="app-header"></div>
+  <div class="account-breadcrumb">
+      <div class="account-breadcrumb-container">
+        <h2>Đơn hàng</h2>
+        <p>Theo dõi đơn hàng</p>
+      </div>
+    </div>
+  <main class="order-tracking-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="success-icon-large">
+          <img src="{% static 'assets/icons/tick.png' %}" alt="Success" />
+        </div>
+        <h1 class="hero-title">Đặt Hàng Thành Công!</h1>
+        <p class="hero-subtitle">Cảm ơn bạn đã tin tưởng Hồng Trà Ngô Gia</p>
+      </div>
+    </section>
+
+    <!-- Order Info Card -->
+    <section class="order-info-section">
+      <div class="container">
+        <div class="order-info-card">
+          <div class="order-header">
+            <div class="order-id-box">
+              <span class="label">Mã đơn hàng</span>
+              <span class="order-id" id="orderId">HTNGTD273</span>
+            </div>
+            <div class="order-date-box">
+              <span class="label">Ngày đặt</span>
+              <span class="order-date" id="orderDate">07/11/2025 14:30</span>
+            </div>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="order-details">
+            <div class="detail-row">
+              <span class="detail-label">Người nhận:</span>
+              <span class="detail-value" id="customerName">Nguyễn Văn A</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Thời gian nhận hàng:</span>
+              <span class="detail-value" id="deliveryTime">19h30, 29/10/2025</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Địa chỉ nhận hàng:</span>
+              <span class="detail-value" id="customerAddress">123 Đường ABC, Quận 1, TP.HCM</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ghi chú:</span>
+              <span class="detail-value" id="orderNote">Ghi chú: Quán để 2 ly vào 2 bịch riêng giúp nhé!</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Phương thức thanh toán:</span>
+              <span class="detail-value" id="paymentMethod">Tiền mặt</span>
+            </div>
+            <div class="detail-row total">
+              <span class="detail-label">Tổng tiền:</span>
+              <span class="detail-value" id="totalAmount">150.000đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Status Timeline -->
+    <section class="timeline-section">
+      <div class="container">
+        <h2 class="section-title">Trạng Thái Đơn Hàng</h2>
+        
+        <div class="timeline-horizontal">
+          <div class="timeline-item active completed" id="timeline-pending">
+            <img src="{% static 'assets/icons/1.png' %}" alt="1" class="timeline-number" />
+            <div class="timeline-marker">
+              <div class="marker-inner">
+                <img src="{% static 'assets/icons/tick2.png' %}" alt="Confirmed" />
+              </div>
+            </div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Xác nhận đơn hàng</h3>
+              <span class="timeline-time" id="time-pending">07/11/2025 14:30</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="timeline-processing">
+            <img src="{% static 'assets/icons/2.png' %}" alt="2" class="timeline-number" />
+            <div class="timeline-marker">
+              <div class="marker-inner">
+                <img src="{% static 'assets/icons/tick2.png' %}" alt="Processing" />
+              </div>
+            </div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Chuẩn bị đơn hàng</h3>
+              <span class="timeline-time" id="time-processing">Đang xử lý...</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="timeline-ready">
+            <img src="{% static 'assets/icons/3.png' %}" alt="3" class="timeline-number" />
+            <div class="timeline-marker">
+              <div class="marker-inner">
+                <img src="{% static 'assets/icons/tick2.png' %}" alt="Ready" />
+              </div>
+            </div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Chờ lấy hàng</h3>
+              <span class="timeline-time" id="time-ready">Chờ xử lý</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="timeline-shipping">
+            <img src="{% static 'assets/icons/4.png' %}" alt="4" class="timeline-number" />
+            <div class="timeline-marker">
+              <div class="marker-inner">
+                <img src="{% static 'assets/icons/tick2.png' %}" alt="Shipping" />
+              </div>
+            </div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Đang giao hàng</h3>
+              <span class="timeline-time" id="time-shipping">Chờ xử lý</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="timeline-completed">
+            <img src="{% static 'assets/icons/5.png' %}" alt="5" class="timeline-number" />
+            <div class="timeline-marker">
+              <div class="marker-inner">
+                <img src="{% static 'assets/icons/tick2.png' %}" alt="Delivered" />
+              </div>
+            </div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Giao thành công</h3>
+              <span class="timeline-time" id="time-completed">Chờ xử lý</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Items -->
+    <section class="order-items-section">
+      <div class="container">
+        <h2 class="section-title">Sản Phẩm Đã Đặt</h2>
+        
+        <div class="items-list" id="orderItemsList">
+          <!-- Items will be rendered here by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="action-section">
+      <div class="container">
+        <div class="action-buttons">
+          <a href="#" id="btnWriteReview" class="btn btn-primary">
+            <img src="{% static 'assets/icons/tick2.png' %}" alt="Review" />
+            Viết Đánh Giá
+          </a>
+          <a href="/menu/" class="btn btn-secondary">
+            <img src="{% static 'assets/icons/Cart.png' %}" alt="Shop" />
+            Tiếp Tục Mua Sắm
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notification -->
+    <div class="notification-box">
+      <div class="notification-icon">
+        <img src="{% static 'assets/icons/tick.png' %}" alt="Info" />
+      </div>
+      <div class="notification-content">
+        <h4>Thông báo quan trọng</h4>
+        <p>Đơn hàng sẽ được giao trong vòng 15-30 phút. Vui lòng để ý điện thoại!</p>
+      </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Viết Đánh Giá</h2>
+          <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="reviewForm">
+            <!-- Rating Stars -->
+            <div class="form-group">
+              <label>Đánh giá của bạn:</label>
+              <div class="star-rating">
+                <input type="radio" name="rating" value="5" id="star5" required />
+                <label for="star5" title="5 sao">★</label>
+                <input type="radio" name="rating" value="4" id="star4" />
+                <label for="star4" title="4 sao">★</label>
+                <input type="radio" name="rating" value="3" id="star3" />
+                <label for="star3" title="3 sao">★</label>
+                <input type="radio" name="rating" value="2" id="star2" />
+                <label for="star2" title="2 sao">★</label>
+                <input type="radio" name="rating" value="1" id="star1" />
+                <label for="star1" title="1 sao">★</label>
+              </div>
+              <span class="rating-text" id="ratingText">Chưa chọn</span>
+            </div>
+
+            <!-- Review Text -->
+            <div class="form-group">
+              <label for="reviewText">Nhận xét của bạn:</label>
+              <textarea 
+                id="reviewText" 
+                name="reviewText" 
+                rows="5" 
+                placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm và dịch vụ..."
+                required
+              ></textarea>
+            </div>
+
+            <!-- Customer Name (optional) -->
+            <div class="form-group">
+              <label for="reviewerName">Tên của bạn (tùy chọn):</label>
+              <input 
+                type="text" 
+                id="reviewerName" 
+                name="reviewerName" 
+                placeholder="Nhập tên của bạn"
+              />
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="cancelReview">Hủy</button>
+              <button type="submit" class="btn btn-primary">Gửi Đánh Giá</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Demo Button (Floating) -->
+  <button id="btnNextStatus" class="btn-demo-float" title="Chuyển trạng thái đơn hàng (Demo)">
+    ⏭️
+  </button>
+
+  <div id="app-footer"></div>
+
+  <script src="{% static 'assets/js/app.js' %}" defer></script>
+  <script src="{% static 'Pages/OrderTracking/order-tracking.js' %}" defer></script>
+</body>
+</html>

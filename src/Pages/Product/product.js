@@ -318,51 +318,77 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     activateTab('desc');
 
+    // Helper function to collect product data for cart
+    const collectProductData = () => {
+      const qtyInput = document.getElementById('qty-input');
+      const qty = Math.max(1, Math.min(99, Number(qtyInput ? qtyInput.value : 1) || 1));
+      if (qtyInput) qtyInput.value = String(qty);
+      
+      const sizeBtn = document.querySelector('.pill-group[aria-label="Chọn kích cỡ"] .pill.active');
+      const size = sizeBtn ? (sizeBtn.dataset.size || sizeBtn.textContent.trim()) : '';
+      
+      const options = [];
+      document.querySelectorAll('.pill-group[data-field]').forEach((group) => {
+        const active = group.querySelector('.pill.active');
+        if (active) {
+          const label = group.dataset.field || group.getAttribute('aria-label') || '';
+          options.push(`${label}: ${active.textContent.trim()}`);
+        }
+      });
+      
+      const toppings = [];
+      document.querySelectorAll('.topping-qty').forEach((wrapper) => {
+        const qtyEl = wrapper.querySelector('.qty-value');
+        const qtyValue = Number(qtyEl ? qtyEl.textContent : 0) || 0;
+        if (!qtyValue) return;
+        const row = wrapper.closest('.topping-row');
+        const nameEl = row ? row.querySelector('.topping-name') : null;
+        const toppingName = nameEl ? nameEl.textContent.trim() : '';
+        const toppingPrice = Number(row ? row.dataset.price : 0) || 0;
+        toppings.push({ name: toppingName, qty: qtyValue, price: toppingPrice });
+      });
+      
+      if (toppings.length) {
+        const desc = toppings.map(item => `${item.name} x${item.qty}`).join(', ');
+        options.push(`Topping: ${desc}`);
+      }
+      
+      const basePrice = Number(product.price) || 0;
+      const toppingTotal = toppings.reduce((sum, item) => sum + item.qty * item.price, 0);
+      const price = (size === 'L' ? basePrice + 3000 : basePrice) + toppingTotal;
+      
+      return {
+        id: product.id,
+        name: product.name,
+        price,
+        image: product.image || '',
+        size,
+        qty,
+        options,
+      };
+    };
+
+    // Add to Cart button
     const addBtn = document.getElementById('btn-add-cart');
     if (addBtn && window.NGCart && product) {
       addBtn.addEventListener('click', () => {
-        const qtyInput = document.getElementById('qty-input');
-        const qty = Math.max(1, Math.min(99, Number(qtyInput ? qtyInput.value : 1) || 1));
-        if (qtyInput) qtyInput.value = String(qty);
-        const sizeBtn = document.querySelector('.pill-group[aria-label="Chọn kích cỡ"] .pill.active');
-        const size = sizeBtn ? (sizeBtn.dataset.size || sizeBtn.textContent.trim()) : '';
-        const options = [];
-        document.querySelectorAll('.pill-group[data-field]').forEach((group) => {
-          const active = group.querySelector('.pill.active');
-          if (active) {
-            const label = group.dataset.field || group.getAttribute('aria-label') || '';
-            options.push(`${label}: ${active.textContent.trim()}`);
-          }
-        });
-        const toppings = [];
-        document.querySelectorAll('.topping-qty').forEach((wrapper) => {
-          const qtyEl = wrapper.querySelector('.qty-value');
-          const qtyValue = Number(qtyEl ? qtyEl.textContent : 0) || 0;
-          if (!qtyValue) return;
-          const row = wrapper.closest('.topping-row');
-          const nameEl = row ? row.querySelector('.topping-name') : null;
-          const toppingName = nameEl ? nameEl.textContent.trim() : '';
-          const toppingPrice = Number(row ? row.dataset.price : 0) || 0;
-          toppings.push({ name: toppingName, qty: qtyValue, price: toppingPrice });
-        });
-        if (toppings.length) {
-          const desc = toppings.map(item => `${item.name} x${item.qty}`).join(', ');
-          options.push(`Topping: ${desc}`);
-        }
-        const basePrice = Number(product.price) || 0;
-        const toppingTotal = toppings.reduce((sum, item) => sum + item.qty * item.price, 0);
-        const price = (size === 'L' ? basePrice + 3000 : basePrice) + toppingTotal;
-        window.NGCart.addItem({
-          id: product.id,
-          name: product.name,
-          price,
-          image: product.image || '',
-          size,
-          qty,
-          options,
-        });
+        const productData = collectProductData();
+        window.NGCart.addItem(productData);
         window.dispatchEvent(new CustomEvent('cart:updated'));
         alert('Đã thêm sản phẩm vào giỏ hàng!');
+      });
+    }
+
+    // Buy Now button
+    const buyNowBtn = document.getElementById('btn-buy-now');
+    if (buyNowBtn && window.NGCart && product) {
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const productData = collectProductData();
+        window.NGCart.addItem(productData);
+        window.dispatchEvent(new CustomEvent('cart:updated'));
+        // Redirect to cart page
+        window.location.href = '/cart/';
       });
     }
   } catch (e) {

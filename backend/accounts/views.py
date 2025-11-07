@@ -6,6 +6,7 @@ from django.core.cache import cache
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import (
     api_view,
