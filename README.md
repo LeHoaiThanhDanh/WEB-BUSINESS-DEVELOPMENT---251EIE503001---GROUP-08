@@ -1,6 +1,6 @@
 # 🍵 Hồng Trà Ngô Gia - Website Thương Mại Điện Tử
 
-> Website bán hàng trực tuyến chuyên về trà và thức uống, xây dựng bằng Django và HTML/CSS/JavaScript thuần.
+> Website bán hàng trực tuyến cho thương hiệu Hồng Trà Ngô Gia, xây dựng bằng Django và HTML/CSS/JavaScript thuần.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
@@ -23,14 +23,14 @@
 
 ## 🎯 Giới Thiệu
 
-**Hồng Trà Ngô Gia** là một nền tảng thương mại điện tử được thiết kế để cung cấp trải nghiệm mua sắm trực tuyến tối ưu cho các sản phẩm trà và thức uống. Website được xây dựng với giao diện thân thiện, dễ sử dụng và tích hợp đầy đủ các tính năng cần thiết cho một website bán hàng chuyên nghiệp.
+**Hồng Trà Ngô Gia** là một nền tảng thương mại điện tử được thiết kế để cung cấp trải nghiệm đặt đồ uống trực tuyến tối ưu cho các sản phẩm trà và thức uống của thương hiệu Hồng Trà Ngô Gia. Website được xây dựng với giao diện thân thiện, dễ sử dụng và tích hợp đầy đủ các tính năng cần thiết cho một website bán hàng chuyên nghiệp.
 
 ### 🎓 Thông Tin Dự Án
 
 - **Môn học:** WEB BUSINESS DEVELOPMENT
 - **Mã môn:** 251EIE503001
 - **Nhóm:** GROUP-08
-- **Học kỳ:** 2024-2025
+- **Học kỳ:** I Năm học 2025-2026
 
 ---
 
@@ -71,7 +71,7 @@
 ### Backend
 - **Python 3.8+** - Ngôn ngữ lập trình chính
 - **Django 4.x** - Web framework
-- **SQLite3** - Cơ sở dữ liệu
+- **LocalStorage** - Cơ sở dữ liệu
 
 ### Frontend
 - **HTML5** - Cấu trúc trang web
@@ -125,17 +125,6 @@ source .venv/bin/activate
 # Cài đặt các package cần thiết
 pip install -r requirements.txt
 ```
-
-### 5. Cấu Hình Database
-
-```bash
-# Chạy migrations để tạo database
-python manage.py migrate
-
-# (Tùy chọn) Tạo superuser để truy cập admin
-python manage.py createsuperuser
-```
-
 ---
 
 ## 🚀 Cách Chạy Dự Án
@@ -202,7 +191,6 @@ Website-Hồng-Trà-Ngô-Gia-FrontEnd/
 │   │   └── wsgi.py
 │   │
 │   ├── .venv/                        # Virtual environment
-│   ├── db.sqlite3                    # SQLite database
 │   ├── manage.py                     # Django management script
 │   └── requirements.txt              # Python dependencies
 │
@@ -274,10 +262,6 @@ STATICFILES_DIRS = [
 ]
 ```
 
-### Database
-
-Dự án sử dụng SQLite3 mặc định. File database: `backend/db.sqlite3`
-
 ### Environment Variables
 
 Tạo file `.env` trong thư mục `backend/` nếu cần:
@@ -335,14 +319,6 @@ python manage.py runserver 8080
 python manage.py collectstatic
 ```
 
-### Database bị lỗi
-
-```bash
-# Xóa database và tạo lại
-rm db.sqlite3
-python manage.py migrate
-```
-
 ---
 
 ## 🤝 Đóng Góp
@@ -368,6 +344,9 @@ Dự án này được phát hành dưới [MIT License](LICENSE).
 **GROUP-08 - WEB BUSINESS DEVELOPMENT**
 
 - 👤 **Lê Hoài Thanh Danh** - [GitHub](https://github.com/LeHoaiThanhDanh)
+- 👤 **Nguyễn Thị Hồng Hạnh** - [GitHub](https://github.com/honghanh1431)
+- 👤 **Nguyễn Thanh Thanh** - [GitHub](https://github.com/ThanhThanh-263)
+- 👤 **Trần Khánh Linh** - [GitHub](https://github.com/trankhanhlinh1372005)
 - 🔗 **Repository:** [WEB-BUSINESS-DEVELOPMENT---251EIE503001---GROUP-08](https://github.com/LeHoaiThanhDanh/WEB-BUSINESS-DEVELOPMENT---251EIE503001---GROUP-08)
 
 ---
