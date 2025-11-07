@@ -35,4 +35,3 @@ urlpatterns = [
 urlpatterns += static('/assets/', document_root=(settings.BASE_DIR.parent / 'assets'))
 urlpatterns += static('/src/', document_root=(settings.BASE_DIR.parent / 'src'))
 urlpatterns += static('/public/', document_root=(settings.BASE_DIR.parent / 'public'))
-urlpatterns += static('/lang/', document_root=(settings.BASE_DIR.parent / 'lang'))

@@ -1,7 +1,7 @@
 (() => {
   const STORAGE_KEY = "app.lang";
   const SUPPORTED = ["vi", "en"];
-  const LANG_PATH = (code) => `/lang/${code}.json`;
+  const LANG_PATH = (code) => `/public/lang/${code}.json`;
 
   // Load JSON file
   async function loadDict(lang) {
