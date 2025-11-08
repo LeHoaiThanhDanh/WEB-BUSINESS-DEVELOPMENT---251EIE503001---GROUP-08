@@ -16,7 +16,6 @@
 - [Cài Đặt](#-cài-đặt)
 - [Cách Chạy](#-cách-chạy-dự-án)
 - [Cấu Trúc Dự Án](#-cấu-trúc-dự-án)
-- [Đóng Góp](#-đóng-góp)
 - [Tác Giả](#-tác-giả)
 
 ---
@@ -321,18 +320,6 @@ python manage.py collectstatic
 
 ---
 
-## 🤝 Đóng Góp
-
-Chúng tôi hoan nghênh mọi đóng góp! Để đóng góp:
-
-1. Fork repository
-2. Tạo branch mới (`git checkout -b feature/TenTinhNang`)
-3. Commit changes (`git commit -m 'Thêm tính năng X'`)
-4. Push to branch (`git push origin feature/TenTinhNang`)
-5. Tạo Pull Request
-
----
-
 ## 📄 License
 
 Dự án này được phát hành dưới [MIT License](LICENSE).
@@ -356,19 +343,6 @@ Dự án này được phát hành dưới [MIT License](LICENSE).
 - **Email:** support@hongtrangogia.com
 - **Website:** [Hồng Trà Ngô Gia](http://127.0.0.1:8000/)
 - **Facebook:** [Hồng Trà Ngô Gia](https://facebook.com/hongtrangogia)
-
----
-
-## 🎉 Acknowledgments
-
-- Django Documentation
-- MDN Web Docs
-- Stack Overflow Community
-- Các thư viện và công cụ mã nguồn mở
-
----
-
-**⭐ Nếu thấy dự án hữu ích, hãy cho chúng tôi một star trên GitHub!**
 
 ---
 
