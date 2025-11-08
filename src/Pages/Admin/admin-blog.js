@@ -19,7 +19,7 @@
   async function loadDefaultPosts() {
     try {
       console.log('🔄 Đang tải blogs.json...');
-      const response = await fetch('/data/blogs.json');
+      const response = await fetch('/public/data/blogs.json');
       
       if (!response.ok) {
         console.error('❌ HTTP Error:', response.status, response.statusText);
