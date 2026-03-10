@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,13 +74,18 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Allow Django to serve static assets from the frontend source during development
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'src',           # frontend source
     BASE_DIR.parent / 'assets',        # shared assets (images, icons, js)
+    BASE_DIR.parent / 'public',        # public data files
     BASE_DIR.parent,                   # allow root-level files like style.css during dev
 ]
+
+# Whitenoise configuration for Vercel
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

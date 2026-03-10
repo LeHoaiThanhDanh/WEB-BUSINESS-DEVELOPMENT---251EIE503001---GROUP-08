@@ -5,12 +5,28 @@
       "src": "wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb" }
+    },
+    {
+      "src": "assets/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "style.css",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "src": "/style.css",
+      "dest": "/style.css"
     },
     {
       "src": "/assets/(.*)",
@@ -25,10 +41,12 @@
       "dest": "/src/$1"
     },
     {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|json))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/wsgi.py"
     }
-  ],
-  "outputDirectory": ".",
-  "framework": null
+  ]
 }
