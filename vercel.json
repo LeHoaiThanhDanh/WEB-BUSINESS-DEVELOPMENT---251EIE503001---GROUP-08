@@ -25,8 +25,28 @@
   ],
   "routes": [
     {
-      "src": "/style.css",
+      "src": "/static/style.css",
       "dest": "/style.css"
+    },
+    {
+      "src": "/static/Pages/(.*)",
+      "dest": "/src/Pages/$1"
+    },
+    {
+      "src": "/static/Components/(.*)",
+      "dest": "/src/Components/$1"
+    },
+    {
+      "src": "/static/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/static/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/$1"
     },
     {
       "src": "/assets/(.*)",
@@ -39,6 +59,10 @@
     {
       "src": "/src/(.*)",
       "dest": "/src/$1"
+    },
+    {
+      "src": "/style.css",
+      "dest": "/style.css"
     },
     {
       "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|json))",
