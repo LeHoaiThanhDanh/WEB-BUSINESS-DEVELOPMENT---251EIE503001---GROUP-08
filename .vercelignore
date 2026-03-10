@@ -1,0 +1,14 @@
+.venv/
+venv/
+backend/.venv/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.vscode/
+*.sqlite3
+db.sqlite3
+.git/
+.gitignore
+README.md
+*.md
